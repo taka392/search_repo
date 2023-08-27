@@ -1,0 +1,24 @@
+name: Check and analyze the source code
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  test:
+    name: Check the source code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2.3.0
+        with:
+          flutter-version: '3.13.0'
+          channel: "stable"
+      # テストの確認
+      - name: test
+        run: flutter test
+      # 依存関係の確認
+      - name: get dependencies
+        run: flutter pub get
+      # 静的解析の確認
+      - name: flutter analyze
+        run: flutter analyze
