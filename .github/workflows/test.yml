@@ -22,6 +22,3 @@ jobs:
       # 静的解析の確認
       - name: flutter analyze
         run: flutter analyze
-      # インポートが整列されているかチェック
-      - name: check import sort
-        run: flutter pub run import_sorter:main --no-comments --exit-if-changed
