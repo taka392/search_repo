@@ -1,4 +1,9 @@
+//flutter pub run import_sorter:main　コマンドで整形↓
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
+import 'package:search_repo/custom_text.dart';
 
 void main() {
   runApp(const MyApp());
@@ -105,6 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            const CustomText(),
             const Text(
               'You have pushed the button this many times:',
             ),
