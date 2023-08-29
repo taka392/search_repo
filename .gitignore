@@ -46,3 +46,7 @@ app.*.map.json
 #fvmをgit管理下から除外
 .fvm/flutter_sdk
 .pubspec.lock
+
+#freezedを除外
+*.freezed.dart
+*.g.dart
