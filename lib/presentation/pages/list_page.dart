@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -19,6 +21,21 @@ class ListPage extends HookConsumerWidget {
       return null;
     }, const []);
 
+    Widget _buildListView(RepoModel data) {
+      return ListView.builder(
+        itemCount: data.items.length,
+        itemBuilder: (_, index) {
+          final item = data.items[index];
+          return Card(
+            child: ListTile(
+              title: Text(item.name), //
+              subtitle: Text(item.description ?? ''),
+            ),
+          );
+        },
+      );
+    }
+
 
     Widget repoList = repo.when(
       loading: () => const Text('準備中...'),
@@ -32,24 +49,12 @@ class ListPage extends HookConsumerWidget {
       }
     );
 
+
     return Scaffold(
       appBar: AppBar(title: Text('List Page')),
       body: repoList,
     );
   }
 
-  Widget _buildListView(RepoModel data) {
-    return ListView.builder(
-      itemCount: data.items.length,
-      itemBuilder: (_, index) {
-        final item = data.items[index];
-        return Card(
-          child: ListTile(
-            title: Text(item.name), // 例: リポジトリ名を表示
-            subtitle: Text(item.description ?? ''), // 例: 説明を表示
-          ),
-        );
-      },
-    );
-  }
+
 }
