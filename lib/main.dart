@@ -1,32 +1,29 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:search_repo/application/di/post_repo_imt.dart';
-import 'package:search_repo/domain/types/repo_abstract.dart';
-import 'package:search_repo/domain/types/repo_model.dart';
-import 'package:search_repo/infrastructure/repo/post_api.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:search_repo/presentation/router/app.dart';
 
-// プレゼンテーション層の実装
-class PostListScreen extends StatelessWidget {
-  final RepoModel postRepository;
-
-  const PostListScreen(this.postRepository, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-
-
-    return Scaffold(
-      appBar: AppBar(title: const Text('Posts')),
-      body: Text(postRepository.toString()),
-    );
-  }
-}
 
 void main() async {
-  PostRepository postRepository = PostRepositoryImpl(ApiPostDataSource());
 
-  // You need to use await to wait for the Future<RepoModel> to complete
-  RepoModel repoModel = await postRepository.getPosts();
 
-  runApp(MaterialApp(home: PostListScreen(repoModel)));
+  const app = App();
+  const scope = ProviderScope(child: app);
+
+  // Device Preview
+  Widget window = scope;
+
+  //Web上で実行されている時のみDevicePreview
+  if (kIsWeb) {
+    window = DevicePreview(
+      builder: (context) => scope,
+    );
+  }
+  runApp(window);
 }
+
+
+// プレゼンテーション層の実装
+
 
