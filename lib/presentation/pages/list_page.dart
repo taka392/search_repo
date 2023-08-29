@@ -3,12 +3,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/useusecase.dart';
 import 'package:search_repo/application/state/repo.dart';
-
-// 例: StateProviderを使用した状態管理
-final counterProvider = StateProvider<int>((ref) => 0);
+import 'package:search_repo/domain/types/repo_model.dart';
 
 class ListPage extends HookConsumerWidget {
-  const ListPage({super.key});
+  const ListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,21 +19,37 @@ class ListPage extends HookConsumerWidget {
       return null;
     }, const []);
 
-    final s3Text = repo.when(
+
+    Widget repoList = repo.when(
       loading: () => const Text('準備中...'),
       error: (e, s) => Text('エラー $e'),
-      data: (d) => Text(d.toString()),
+      data: (data){
+        if (data.totalCount == 0) {
+          return const Text("ヒットするものがありません");
+        }else {
+          return _buildListView(data);
+        }
+      }
     );
 
+    return Scaffold(
+      appBar: AppBar(title: Text('List Page')),
+      body: repoList,
+    );
+  }
 
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        s3Text,
-      ],
+  Widget _buildListView(RepoModel data) {
+    return ListView.builder(
+      itemCount: data.items.length,
+      itemBuilder: (_, index) {
+        final item = data.items[index];
+        return Card(
+          child: ListTile(
+            title: Text(item.name), // 例: リポジトリ名を表示
+            subtitle: Text(item.description ?? ''), // 例: 説明を表示
+          ),
+        );
+      },
     );
   }
 }
-
-
