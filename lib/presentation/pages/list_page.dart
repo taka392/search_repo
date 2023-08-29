@@ -29,7 +29,7 @@ class ListPage extends HookConsumerWidget {
           return Card(
             child: ListTile(
               title: Text(item.name), //
-              subtitle: Text(item.description ?? ''),
+              subtitle: Text(item.description),
             ),
           );
         },
@@ -51,7 +51,7 @@ class ListPage extends HookConsumerWidget {
 
 
     return Scaffold(
-      appBar: AppBar(title: Text('List Page')),
+      appBar: AppBar(title: const Text('List Page')),
       body: repoList,
     );
   }
