@@ -13,6 +13,9 @@ jobs:
         with:
           flutter-version: '3.13.1'
           channel: "stable"
+      #freezedの生成
+      - name: freezed
+        run: flutter pub run build_runner build --delete-conflicting-outputs
       # テストの確認
       - name: test
         run: flutter test
