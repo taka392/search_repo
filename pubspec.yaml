@@ -17,6 +17,7 @@ dependencies:
   lottie:
   hooks_riverpod: ^2.3.8
   device_preview:
+  go_router:
 
 
 dev_dependencies:
