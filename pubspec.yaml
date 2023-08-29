@@ -27,6 +27,7 @@ dev_dependencies:
   flutter_lints:
   riverpod_generator:
   envied_generator:
+  mockito:
 
 
 flutter:
