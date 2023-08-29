@@ -4,7 +4,7 @@ part 'repo_model.freezed.dart';
 
 @freezed
 class RepoModel with _$RepoModel {
-  const factory RepoDataModel({
+  const factory RepoModel({
     required int totalCount,
     required List<ItemModel> items,
   }) = _RepoModel;
@@ -18,3 +18,7 @@ class RepoModel with _$RepoModel {
     );
   }
 }
+
+
+/*下記コマンドを実行
+flutter pub run build_runner build --delete-conflicting-outputs*/
