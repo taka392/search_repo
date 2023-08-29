@@ -1,5 +1,5 @@
-import 'package:github_code/domain/types/owner.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:search_repo/domain/types/owner_model.dart';
 part 'item_model.freezed.dart';
 
 
@@ -10,14 +10,14 @@ class ItemModel with _$ItemModel {
     required String nodeId,
     required String name,
     required String fullName,
-    required Owner owner,
+    required OwnerModel owner,
     required String description,
     required int stargazersCount,
     required int forksCount,
 
   }) = _ItemModel;
   factory ItemModel.fromJson(Map<String, dynamic> json) {
-    Owner owner = Owner.fromJson(json['owner']); // Owner オブジェクトとして解析
+    OwnerModel owner = OwnerModel.fromJson(json['owner']); // Owner オブジェクトとして解析
     return ItemModel(
       id: json['id'] ?? 0,
       nodeId: json['node_id'] ?? 'NO_node_id',
