@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:search_repo/domain/types/repo_model.dart';
 // データソースの実装
-class ApiPostDataSource implements PostRepository {
+class initialFetch implements PostRepository {
 
   @override
   Future<RepoModel> getPosts() async {
