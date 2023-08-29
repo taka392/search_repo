@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:search_repo/application/di/use_usecase.dart';
+import 'package:search_repo/application/di/post_repo_imt.dart';
+import 'package:search_repo/domain/types/repo_abstract.dart';
+import 'package:search_repo/infrastructure/repo/post_api.dart';
+import 'package:http/http.dart' as http;
 
-void main() {
-  runApp(const ProviderScope(child: MyWidget4()));
-}
+// プレゼンテーション層の実装
+class PostListScreen extends StatelessWidget {
+  final PostRepository postRepository;
 
-class MyWidget4 extends ConsumerWidget {
-  const MyWidget4({
-    super.key,
-  });
+  const PostListScreen(this.postRepository, {super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // S4 watch
-    final s4 = ref.watch(initAppProvider).execute();
+  Widget build(BuildContext context) {
 
-    // 縦に並べる
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        // 横に並べる
-        Text(s4.toString()),
-      ],
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Posts')),
+      body: Text(postRepository.toString()),
     );
   }
+}
+
+void main() {
+  final postRepository = PostRepositoryImpl(ApiPostDataSource(http.Client()).getPosts() as ApiPostDataSource);
+  runApp(MaterialApp(home: PostListScreen(postRepository)));
 }
