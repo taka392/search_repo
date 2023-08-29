@@ -8,7 +8,7 @@ class ApiPostDataSource implements PostRepository {
   ApiPostDataSource(this.httpClient);
 
   @override
-  Future<List<RepoModel>> getPosts() async {
+  Future<RepoModel> getPosts() async {
     final response = await http.get(Uri.parse(
         'https://api.github.com/search/repositories?q=Flutter&per_page=20'));
     if (response.statusCode == 200) {
