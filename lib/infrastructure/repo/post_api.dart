@@ -4,8 +4,6 @@ import 'dart:convert';
 import 'package:search_repo/domain/types/repo_model.dart';
 // データソースの実装
 class ApiPostDataSource implements PostRepository {
-  final http.Client httpClient;
-  ApiPostDataSource(this.httpClient);
 
   @override
   Future<RepoModel> getPosts() async {

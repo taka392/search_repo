@@ -10,8 +10,7 @@ class PostRepositoryImpl implements PostRepository {
 
   @override
   Future<RepoModel> getPosts() async {
-    PostRepositoryImpl postRepository = PostRepositoryImpl(apiDataSource);
-    return await postRepository.getPosts();
+    return await apiDataSource.getPosts();
   }
 }
 
