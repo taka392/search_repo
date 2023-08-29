@@ -1,18 +1,17 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:github_code/domain/types/item.dart';
-part 'api.freezed.dart';
+part 'repo_data_model.freezed.dart';
 
 @freezed
-class Api with _$Api {
-  const factory Api({
+class RepoDataModel with _$RepoDataModel {
+  const factory RepoDataModel({
     required int totalCount,
     required List<Item> items,
-  }) = _Api;
+  }) = _RepoDataModel;
 
-  factory Api.fromJson(Map<String, dynamic> json) {
+  factory RepoDataModel.fromJson(Map<String, dynamic> json) {
     List<dynamic> itemsJson = json['items'];
     List<Item> items = itemsJson.map((json) => Item.fromJson(json)).toList();
-    return Api(
+    return RepoDataModel(
       totalCount: json['total_count'] ?? 0,
       items: items,
     );
