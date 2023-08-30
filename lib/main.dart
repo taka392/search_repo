@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   // インスタンスを非同期で取得
+  WidgetsFlutterBinding.ensureInitialized();
   final sharedPreferences = await SharedPreferences.getInstance();
 
   const app = App();
