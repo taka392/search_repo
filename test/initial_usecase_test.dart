@@ -33,26 +33,12 @@ void main() {
     var server = MockHttpServer();
     var uri = Uri.parse('http://localhost:8080');
     when(RepoModel.fromJson(server as Map<String, dynamic>)).thenReturn(uri);
-
-
-
-
-
-
-
-
-
     SharedPreferences.setMockInitialValues({});
     const data = MockData.jsonMock;
-
-
-
-
     final mockClient = MockClient((request) {});
     repoNotifierProvider.client = MockClient((request) {});
     when(mockClient.get(any as Uri))
         .thenAnswer((_) async => http.Response(data, 200));
-
     await tester.pumpWidget(
       ProviderScope(overrides: [
         //mock clientでDI
