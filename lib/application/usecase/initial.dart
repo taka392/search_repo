@@ -1,5 +1,5 @@
 import 'package:search_repo/application/state/repo.dart';
-import 'package:search_repo/domain/types/repo_abstract.dart';
+import 'package:search_repo/infrastructure/repo/post_api.dart';
 
 /// アプリの初期準備をする
 class InitAppUsecase {
@@ -7,7 +7,7 @@ class InitAppUsecase {
     required this.postRepositoryImpl,
     required this.repoProviderNotifier,
   });
-  final PostRepository postRepositoryImpl;
+  final InitialFetch postRepositoryImpl;
   final RepoNotifier repoProviderNotifier;
 
   /// 一連の流れをまとめて実施する
