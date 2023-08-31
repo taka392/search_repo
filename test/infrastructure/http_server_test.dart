@@ -6,7 +6,7 @@ import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/infrastructure/repo/post_api.dart';
 
 import 'http_server_test.mocks.dart';
-import 'mock_data.dart';
+import '../domain/mock_data.dart';
 
 @GenerateMocks([http.Client])
 void main() {
