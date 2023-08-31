@@ -9,13 +9,12 @@ import 'package:search_repo/presentation/widget/custom_animation.dart';
 import 'package:search_repo/presentation/widget/custom_gesture_detector.dart';
 
 class ListPage extends HookConsumerWidget {
-  final VoidCallback repoData;
-  const ListPage({Key? key,required this.repoData}) : super(key: key);
+  const ListPage({Key? key}) : super(key: key);
 
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final repo = ref.watch(repoNotifierProvider);
+
 
     useEffect(() {
       final usecase = ref.read(initAppProvider);
