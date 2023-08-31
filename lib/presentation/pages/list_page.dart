@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
 import 'package:search_repo/application/state/repo.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
+import 'package:search_repo/presentation/widget/custom_gesture_detector.dart';
 
 class ListPage extends HookConsumerWidget {
   const ListPage({Key? key}) : super(key: key);
@@ -22,22 +23,6 @@ class ListPage extends HookConsumerWidget {
       return null;
     }, const []);
 
-    Widget _buildListView(RepoModel data) {
-      return ListView.builder(
-        itemCount: data.items.length,
-        itemBuilder: (_, index) {
-          final item = data.items[index];
-          return Card(
-            child: ListTile(
-              title: Text(item.name,key: userName), //
-              subtitle: Text(item.description,key: userDescription),
-            ),
-          );
-        },
-      );
-    }
-
-
     Widget repoList = repo.when(
       loading: () => const Text('準備中...'),
       error: (e, s) => Text('エラー $e'),
@@ -45,7 +30,7 @@ class ListPage extends HookConsumerWidget {
         if (data.totalCount == 0) {
           return const Text("ヒットするものがありません");
         }else {
-          return _buildListView(data);
+          return CustomGestureDetector( item: data);
         }
       }
     );

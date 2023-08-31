@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:github_code/domain/types/item.dart';
-import 'package:github_code/presentation/components/custom_text.dart';
+import 'package:search_repo/presentation/widget/custom_text.dart';
 
 class CustomGestureDetector extends StatelessWidget {
 
