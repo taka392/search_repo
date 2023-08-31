@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:lottie/lottie.dart';
-class CustomError extends ConsumerWidget {
+class CustomAnimation extends ConsumerWidget {
   final String imageUrl;
   final String text;
 
-  const CustomError({Key? key, required this.imageUrl, required this.text})
+  const CustomAnimation({Key? key, required this.imageUrl, required this.text})
       : super(key: key);
 
   @override
