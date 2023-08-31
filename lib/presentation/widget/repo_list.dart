@@ -23,7 +23,7 @@ class RepoList extends StatelessWidget {
     }
 
     Widget repoList = repoData.when(
-        loading: () =>const Text('ローディング'),
+        loading: () =>const Text('ローディング',key: ,),
         error: (e, s) => Text('エラー $e'),
         data: (data){
           if (data.totalCount == 0) {
@@ -32,6 +32,8 @@ class RepoList extends StatelessWidget {
             return buildListView(data);
           }
         }
+
+        //hasData使えそうね
     );
     return Scaffold(
       body: repoList,
