@@ -10,17 +10,26 @@ import '../domain/mock_data.dart';
 import 'package:http/http.dart' as http;
 void main() {
   group('usecaseテスト', () {
-    test('initUsecaseのテスト', () async {
+    testWidgets('initUsecaseのテスト', (WidgetTester tester) async {
+      //Mockを作成
       final client = MockClient();
+      //faceJSONを設定
       const data = MockData.jsonMock;
+      //clientにアクセスした際に、dataを返す
       when(client.get(any)).thenAnswer((_) async => http.Response(data, 200));
+      //Providerを使用するためのコード
       final container = ProviderContainer();
-
+      //faceDataを元に、リポジトリDIをセット
       final initialFetch = RepositoryImpl(apiDataSource: InitialFetch(client));
-      final repoProviderNotifier = container.read(repoNotifierProvider.notifier);
-      final init = InitAppUsecase(initialFetch: initialFetch, repoProviderNotifier: repoProviderNotifier);
+      //containerを使用してnotifierを取得
+      final repoProviderNotifier = container.read(
+          repoNotifierProvider.notifier);
+      //initUsecaseを発動
+      final init = InitAppUsecase(initialFetch: initialFetch,
+          repoProviderNotifier: repoProviderNotifier);
+      //値の取得〜stateに保存までが実行されることが期待される。
       await init.fetch();
-
+      //更新されたStateを取得する
       final state = container.read(repoNotifierProvider);
 
       // 非同期データへのアクセス方法を修正
@@ -29,10 +38,11 @@ void main() {
         loading: () => null,
         error: (_, __) => null,
       );
+      //疑似データが取得できる
       expect(repoModel?.totalCount, 573491);
       expect(repoModel?.items[0].fullName, "flutter/flutter");
-      expect(repoModel?.items[0].owner.avatarUrl, "https://avatars.githubusercontent.com/u/14101776?v=4");
+      expect(repoModel?.items[0].owner.avatarUrl,
+          "https://avatars.githubusercontent.com/u/14101776?v=4");
     });
   });
 }
-
