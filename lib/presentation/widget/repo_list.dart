@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
+import 'package:search_repo/presentation/widget/custom_animation.dart';
 import 'package:search_repo/presentation/widget/custom_gesture_detector.dart';
 class RepoList extends StatelessWidget {
   final AsyncValue<RepoModel> repoData;
@@ -28,7 +29,8 @@ class RepoList extends StatelessWidget {
     }
 
     Widget repoList = repoData.when(
-        loading: () =>Text('ローディング',key: loadingKey),
+        /*loading: () =>Text('ローディング',key: loadingKey),*/
+        loading: () => CustomAnimation(imageUrl: imageUrl, text: text, onPressed: (){}, key: errorKey,)
         error: (e, s) => Text('エラー $e',key: errorKey),
         data: (data){
           if (data.totalCount == 0) {
@@ -37,7 +39,6 @@ class RepoList extends StatelessWidget {
             return buildListView(data);
           }
         }
-        //hasData使えそうね
     );
     return Scaffold(
       body: repoList,

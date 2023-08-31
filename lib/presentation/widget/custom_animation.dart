@@ -5,16 +5,19 @@ import 'package:lottie/lottie.dart';
 class CustomAnimation extends ConsumerWidget {
   final String imageUrl;
   final String text;
-  final VoidCallback onPressed;
+  final Future<void>Function() onRefresh;
+  @override
+  // ignore: overridden_fields
+  final Key? key;
 
-  const CustomAnimation({Key? key, required this.imageUrl, required this.text,required this.onPressed})
+  const CustomAnimation({required this.key, required this.imageUrl, required this.text, required this.onRefresh})
       : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return RefreshIndicator(
       color: Colors.grey,
-      onRefresh: () async {},
+      onRefresh: onRefresh,
       child: ListView(
         children: [
           const SizedBox(height: 80),
@@ -25,4 +28,5 @@ class CustomAnimation extends ConsumerWidget {
     );
   }
 }
+
 

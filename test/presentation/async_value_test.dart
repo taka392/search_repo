@@ -1,14 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/widget/repo_list.dart';
-import 'package:http/http.dart' as http;
 import '../domain/mock_data.dart';
-import '../infrastructure/http_server_test.mocks.dart';
 
 void main() {
   group('AsyncValue型のエラーハンドリングテスト', () {
