@@ -5,8 +5,9 @@ import 'package:lottie/lottie.dart';
 class CustomAnimation extends ConsumerWidget {
   final String imageUrl;
   final String text;
+  final VoidCallback onPressed;
 
-  const CustomAnimation({Key? key, required this.imageUrl, required this.text})
+  const CustomAnimation({Key? key, required this.imageUrl, required this.text,required this.onPressed,})
       : super(key: key);
 
   @override

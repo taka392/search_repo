@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
 import 'package:search_repo/application/state/repo.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
+import 'package:search_repo/presentation/widget/custom_animation.dart';
 import 'package:search_repo/presentation/widget/custom_gesture_detector.dart';
 
 class ListPage extends HookConsumerWidget {
@@ -33,8 +34,8 @@ class ListPage extends HookConsumerWidget {
     }
 
 
-    Widget repoList = repo.when(
-      loading: () => const Text('準備中...'),
+/*    Widget repoList = repo.when(
+      loading: () =>
       error: (e, s) => Text('エラー $e'),
       data: (data){
         if (data.totalCount == 0) {
@@ -43,11 +44,13 @@ class ListPage extends HookConsumerWidget {
           return _buildListView(data);
         }
       }
-    );
+    );*/
 
     return Scaffold(
       appBar: AppBar(title: const Text('List Page')),
-      body: repoList,
+      body: CustomAnimation(imageUrl: 'assets/lottie/loading.json', text: 'ローディング中...', onPressed: () {}),
+
+  /*  repoList,*/
     );
   }
 }
