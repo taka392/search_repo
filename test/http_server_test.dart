@@ -1,17 +1,9 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:search_repo/application/di/usecase_di.dart';
-import 'package:search_repo/application/state/repo.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
-import 'package:search_repo/infrastructure/repo/http_client.dart';
 import 'package:search_repo/infrastructure/repo/post_api.dart';
-import 'package:search_repo/presentation/pages/list_page.dart';
 
 import 'http_server_test.mocks.dart';
 import 'mock_data.dart';
