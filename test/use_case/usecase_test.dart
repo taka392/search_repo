@@ -43,6 +43,10 @@ void main() {
       expect(repoModel?.items[0].fullName, "flutter/flutter");
       expect(repoModel?.items[0].owner.avatarUrl,
           "https://avatars.githubusercontent.com/u/14101776?v=4");
+
+      // テストランナーがまだ実行中の非同期処理を完了するようにする
+      await tester.pumpAndSettle();
+      await tester.runAsync(() async{});
     });
   });
 }
