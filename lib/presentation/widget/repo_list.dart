@@ -10,7 +10,7 @@ class RepoList extends StatelessWidget {
   @visibleForTesting
   static final errorKey = UniqueKey();
   @visibleForTesting
-  static final hasDataKey = UniqueKey();
+  static final noHitKey = UniqueKey();
   @override
   Widget build(BuildContext context) {
 
@@ -30,9 +30,12 @@ class RepoList extends StatelessWidget {
     Widget repoList = repoData.when(
         loading: () =>Text('ローディング',key: loadingKey),
         error: (e, s) => Text('エラー $e',key: errorKey),
-        hasNoData: () =>Text('ローディング',key: loadingKey),
         data: (data){
+          if (data.totalCount == 0) {
+            return Text("ヒットするものがありません",key: noHitKey);
+          }else {
             return buildListView(data);
+          }
         }
         //hasData使えそうね
     );
