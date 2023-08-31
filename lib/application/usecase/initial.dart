@@ -1,6 +1,5 @@
 import 'package:search_repo/application/di/repo_di.dart';
 import 'package:search_repo/application/state/repo.dart';
-import 'package:search_repo/infrastructure/repo/post_api.dart';
 
 /// アプリの初期準備をする
 class InitAppUsecase {
