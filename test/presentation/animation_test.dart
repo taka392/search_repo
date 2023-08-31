@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -16,11 +17,13 @@ void main() {
       //repoModelの状態をloadingに設定
       const status = AsyncValue<RepoModel>.loading();
       await tester.pumpWidget(
-         const ProviderScope(overrides: [
-        ], child: RepoList(repoData: status)),
+        const MaterialApp( // MaterialAppでDirectionalityを提供
+          home: Scaffold(
+            body: RepoList(repoData: status),
+          ),
+        ),
       );
-
-
+      expect(find.byKey(RepoList.loadingKey), findsOneWidget);
     });
   });
 }
