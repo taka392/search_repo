@@ -6,7 +6,7 @@ part 'repo.g.dart';
 class RepoNotifier extends _$RepoNotifier {
   @override
   Future<RepoModel> build() async {
-    const initialApi = RepoModel(totalCount: 0, items: []);
+    const initialApi = RepoModel(totalCount: 1, items: []);
     return initialApi;
   }
 
