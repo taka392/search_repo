@@ -12,7 +12,7 @@ import '../infrastructure/http_server_test.mocks.dart';
 import '../domain/mock_data.dart';
 import 'package:http/http.dart' as http;
 void main() {
-  group('AsyncValue型のテスト', () {
+  group('AsyncValue型のエラーハンドリングテスト', () {
     testWidgets('loadingのテスト', (WidgetTester tester) async {
       //repoModelの状態をloadingに設定
       const status = AsyncValue<RepoModel>.loading();
@@ -24,6 +24,19 @@ void main() {
         ),
       );
       expect(find.byKey(RepoList.loadingKey), findsOneWidget);
+    });
+
+    testWidgets('errorのテスト', (WidgetTester tester) async {
+      //repoModelの状態をloadingに設定
+      status = AsyncValue<RepoModel>.error;
+      await tester.pumpWidget(
+        const MaterialApp( // MaterialAppでDirectionalityを提供
+          home: Scaffold(
+            body: RepoList(repoData: status),
+          ),
+        ),
+      );
+      expect(find.byKey(RepoList.errorKey), findsOneWidget);
     });
   });
 }

@@ -29,7 +29,7 @@ class RepoList extends StatelessWidget {
 
     Widget repoList = repoData.when(
         loading: () =>Text('ローディング',key: loadingKey),
-        error: (e, s) => Text('エラー $e'),
+        error: (e, s) => Text('エラー $e',key: errorKey),
         data: (data){
           if (data.totalCount == 0) {
             return const Text("ヒットするものがありません");
