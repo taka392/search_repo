@@ -5,6 +5,7 @@ import 'package:search_repo/presentation/widget/custom_animation.dart';
 import 'package:search_repo/presentation/widget/custom_gesture_detector.dart';
 class RepoList extends StatelessWidget {
   final AsyncValue<RepoModel> repoData;
+
   const RepoList({super.key,required this.repoData});
   @visibleForTesting
   static final loadingKey = UniqueKey();
@@ -29,11 +30,11 @@ class RepoList extends StatelessWidget {
     }
     Widget repoList = repoData.when(
 
-        loading: () => CustomAnimation(imageUrl: 'loading.json', text: 'ローディング', onRefresh: ()async{}, key: loadingKey),
-        error: (e, s) => Text('エラー $e',key: errorKey),
+        loading: () => CustomAnimation(imageUrl: 'assets/lottie/loading.json', text: 'ローディング', onRefresh: ()async{}, key: loadingKey),
+        error: (e, s) => CustomAnimation(imageUrl: 'assets/lottie/error.json', text: 'エラー $e', onRefresh: ()async{}, key: errorKey),
         data: (data){
           if (data.totalCount == 0) {
-            return Text("ヒットするものがありません",key: noHitKey);
+            return CustomAnimation(imageUrl: 'assets/lottie/not_found.json', text: 'ヒットがありません', onRefresh: ()async{}, key: noHitKey);
           }else {
             return buildListView(data);
           }
