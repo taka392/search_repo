@@ -27,10 +27,9 @@ class RepoList extends StatelessWidget {
         },
       );
     }
-
     Widget repoList = repoData.when(
-        /*loading: () =>Text('ローディング',key: loadingKey),*/
-        loading: () => CustomAnimation(imageUrl: imageUrl, text: text, onPressed: (){}, key: errorKey,)
+
+        loading: () => CustomAnimation(imageUrl: 'loading.json', text: 'ローディング', onRefresh: ()async{}, key: loadingKey),
         error: (e, s) => Text('エラー $e',key: errorKey),
         data: (data){
           if (data.totalCount == 0) {
@@ -40,8 +39,6 @@ class RepoList extends StatelessWidget {
           }
         }
     );
-    return Scaffold(
-      body: repoList,
-    );
+    return repoList;
   }
 }

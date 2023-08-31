@@ -25,7 +25,7 @@ class ListPage extends HookConsumerWidget {
       appBar: AppBar(title: const Text('List Page')),
       body: Column(
         children: [
-          RepoList(repoData: repoData),
+          Expanded(child: RepoList(repoData: repoData)),
         ],
       ),
     );

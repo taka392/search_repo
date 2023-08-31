@@ -5,7 +5,7 @@ import 'package:lottie/lottie.dart';
 class CustomAnimation extends ConsumerWidget {
   final String imageUrl;
   final String text;
-  final Future<void>Function() onRefresh;
+  final Future<void> Function() onRefresh;
   @override
   // ignore: overridden_fields
   final Key? key;
@@ -28,5 +28,6 @@ class CustomAnimation extends ConsumerWidget {
     );
   }
 }
+
 
 
