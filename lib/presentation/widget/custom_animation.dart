@@ -7,7 +7,7 @@ class CustomAnimation extends ConsumerWidget {
   final String text;
   final VoidCallback onPressed;
 
-  const CustomAnimation({Key? key, required this.imageUrl, required this.text,required this.onPressed,})
+  const CustomAnimation({Key? key, required this.imageUrl, required this.text,required this.onPressed})
       : super(key: key);
 
   @override

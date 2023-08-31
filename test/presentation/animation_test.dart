@@ -5,12 +5,12 @@ import 'package:search_repo/application/di/repo_di.dart';
 import 'package:search_repo/application/state/repo.dart';
 import 'package:search_repo/application/usecase/initial.dart';
 import 'package:search_repo/infrastructure/repo/post_api.dart';
-import 'http_server_test.mocks.dart';
-import 'mock_data.dart';
+import '../infrastructure/http_server_test.mocks.dart';
+import '../domain/mock_data.dart';
 import 'package:http/http.dart' as http;
 void main() {
   group('usecaseテスト', () {
-    test('initUsecaseのテスト', () async {
+    testWidgets('initUsecaseのテスト', (WidgetTester tester) async {
       final client = MockClient();
       const data = MockData.jsonMock;
       when(client.get(any)).thenAnswer((_) async => http.Response(data, 200));

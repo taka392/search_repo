@@ -9,7 +9,10 @@ import 'package:search_repo/presentation/widget/custom_animation.dart';
 import 'package:search_repo/presentation/widget/custom_gesture_detector.dart';
 
 class ListPage extends HookConsumerWidget {
-  const ListPage({Key? key}) : super(key: key);
+  final VoidCallback repoData;
+  const ListPage({Key? key,required this.repoData}) : super(key: key);
+
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final repo = ref.watch(repoNotifierProvider);
