@@ -46,7 +46,7 @@ class ListPage extends HookConsumerWidget {
         if (data.totalCount == 0) {
           return const Text("ヒットするものがありません");
         }else {
-          return CustomGestureDetector(data: data);
+          return CustomGestureDetector(data: data.items);
         }
       }
     );
