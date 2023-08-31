@@ -6,7 +6,6 @@ import 'package:search_repo/presentation/router/page_path.dart';
 /// Provide GoRouter
 final goRouterProvider = Provider(
   (ref) {
-
     final routes = [
       GoRoute(
         path: PageId.list.path,
