@@ -23,6 +23,22 @@ class ListPage extends HookConsumerWidget {
       return null;
     }, const []);
 
+    Widget _buildListView(RepoModel data) {
+      return ListView.builder(
+        itemCount: data.items.length,
+        itemBuilder: (_, index) {
+          final item = data.items[index];
+          return Card(
+            child: ListTile(
+              title: Text(item.name,key: userName), //
+              subtitle: Text(item.description,key: userDescription),
+            ),
+          );
+        },
+      );
+    }
+
+
     Widget repoList = repo.when(
       loading: () => const Text('準備中...'),
       error: (e, s) => Text('エラー $e'),
@@ -30,7 +46,7 @@ class ListPage extends HookConsumerWidget {
         if (data.totalCount == 0) {
           return const Text("ヒットするものがありません");
         }else {
-          return CustomGestureDetector( item: data);
+          return CustomGestureDetector(data: data);
         }
       }
     );

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/widget/custom_text.dart';
 
 class CustomGestureDetector extends StatelessWidget {
 
   const CustomGestureDetector({
     super.key,
-    required this.item,
+    required this.data,
   });
-  final Item item;
+  final RepoModel data;
 
   @override
   Widget build(BuildContext context) {
