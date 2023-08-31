@@ -127,4 +127,10 @@ class MockData{
   ]
 }
   ''';
+  static const String noJsonData = '''
+  {
+  "total_count": 0,
+  "items": []
+}
+  ''';
 }

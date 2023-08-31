@@ -11,25 +11,25 @@ dependencies:
     sdk: flutter
   flutter_hooks:
   flutter_riverpod:
-  http:
+  http: ^1.1.0
   riverpod_annotation: ^2.1.2
   intl:
   lottie:
   hooks_riverpod: ^2.3.8
   device_preview:
   go_router:
-
+  shared_preferences:
 
 dev_dependencies:
   freezed:
-  build_runner:
+  build_runner: ^2.4.6
   json_serializable:
   flutter_test:
     sdk: flutter
   flutter_lints:
   riverpod_generator:
   envied_generator:
-  mockito:
+  mockito: ^5.4.2
 
 
 flutter:

@@ -2,13 +2,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:search_repo/application/di/useusecase.dart';
+import 'package:search_repo/application/di/usecase_di.dart';
 import 'package:search_repo/application/state/repo.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 
 class ListPage extends HookConsumerWidget {
   const ListPage({Key? key}) : super(key: key);
-
+  @visibleForTesting
+  static final userDescription = UniqueKey();
+  static final userName = UniqueKey();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final repo = ref.watch(repoNotifierProvider); // StateProviderから状態を取得
@@ -27,8 +29,8 @@ class ListPage extends HookConsumerWidget {
           final item = data.items[index];
           return Card(
             child: ListTile(
-              title: Text(item.name), //
-              subtitle: Text(item.description),
+              title: Text(item.name,key: userName), //
+              subtitle: Text(item.description,key: userDescription),
             ),
           );
         },
