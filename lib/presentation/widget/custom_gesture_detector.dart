@@ -7,13 +7,15 @@ class CustomGestureDetector extends StatelessWidget {
   const CustomGestureDetector({
     super.key,
     required this.data,
+    required this.onPressed,
   });
   final ItemModel data;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onPressed,
       child: ListTile(
         leading: CircleAvatar(
           radius: 40.0, // サークルアバターの大きさを調整するための半径の値

@@ -9,15 +9,11 @@ import 'package:search_repo/presentation/widget/custom_gesture_detector.dart';
 
 class ListPage extends HookConsumerWidget {
   const ListPage({Key? key}) : super(key: key);
-  @visibleForTesting
-  static final userDescription = UniqueKey();
-  static final userName = UniqueKey();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final repo = ref.watch(repoNotifierProvider); // StateProviderから状態を取得
+    final repo = ref.watch(repoNotifierProvider);
 
     useEffect(() {
-      // スプラッシュ画面がないのでここで初期化
       final usecase = ref.read(initAppProvider);
       usecase.fetch();
       return null;
@@ -28,11 +24,9 @@ class ListPage extends HookConsumerWidget {
         itemCount: data.items.length,
         itemBuilder: (_, index) {
           final item = data.items[index];
-          return Card(
-            child: ListTile(
-              title: Text(item.name,key: userName), //
-              subtitle: Text(item.description,key: userDescription),
-            ),
+          return CustomGestureDetector(
+            data: item,
+            onPressed: () {},
           );
         },
       );
@@ -46,7 +40,7 @@ class ListPage extends HookConsumerWidget {
         if (data.totalCount == 0) {
           return const Text("ヒットするものがありません");
         }else {
-          return CustomGestureDetector(data: data.items);
+          return _buildListView(data);
         }
       }
     );
