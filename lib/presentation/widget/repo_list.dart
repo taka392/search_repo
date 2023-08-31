@@ -5,7 +5,12 @@ import 'package:search_repo/presentation/widget/custom_gesture_detector.dart';
 class RepoList extends StatelessWidget {
   final AsyncValue<RepoModel> repoData;
   const RepoList({super.key,required this.repoData});
-
+  @visibleForTesting
+  static final loadingKey = UniqueKey();
+  @visibleForTesting
+  static final errorKey = UniqueKey();
+  @visibleForTesting
+  static final hasDataKey = UniqueKey();
   @override
   Widget build(BuildContext context) {
 
@@ -23,7 +28,7 @@ class RepoList extends StatelessWidget {
     }
 
     Widget repoList = repoData.when(
-        loading: () =>const Text('ローディング',key: ,),
+        loading: () =>Text('ローディング',key: loadingKey),
         error: (e, s) => Text('エラー $e'),
         data: (data){
           if (data.totalCount == 0) {

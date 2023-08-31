@@ -14,13 +14,6 @@ final goRouterProvider = Provider(
           return const ListPage();
         },
       ),
-      GoRoute(
-        path: PageId.init.path,
-        name: PageId.init.routeName,
-        builder: (context, state) {
-          return const ListPage();
-        },
-      ),
     ];
 
     return GoRouter(
