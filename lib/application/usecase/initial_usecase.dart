@@ -4,17 +4,17 @@ import 'package:search_repo/application/state/repo/repo.dart';
 /// アプリの初期準備をする
 class InitUsecase {
   InitUsecase({
-    required this.initRepo,
+    required this.repo,
     required this.repoProviderNotifier,
   });
-  final RepositoryImpl initRepo;
+  final RepositoryImpl repo;
   final RepoNotifier repoProviderNotifier;
 
   /// 一連の流れをまとめて実施する
   Future<void> fetch() async {
     //初期値を取得
-    final repo = await initRepo.getRepo();
+    final data = await repo.getRepo();
     //Riverpodに保存
-    repoProviderNotifier.save(repo);
+    repoProviderNotifier.save(data);
   }
 }

@@ -3,13 +3,13 @@ import 'package:search_repo/application/di/repo_di.dart';
 import 'dart:convert';
 import 'package:search_repo/domain/types/repo_model.dart';
 // データソースの実装
-class GetRepo implements Repository {
+class Repo implements Repository {
   http.Client httpClient;
   int page;
   String search;
   String sort;
 
-  GetRepo(this.httpClient, this.page,this.search, this.sort, );
+  Repo(this.httpClient, this.page,this.search, this.sort, );
 
   @override
   Future<RepoModel> getRepo() async {

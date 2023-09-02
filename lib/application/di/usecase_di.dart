@@ -5,10 +5,9 @@ import 'package:search_repo/application/state/repo/repo.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/usecase/add_usecase.dart';
 import 'package:search_repo/application/usecase/initial_usecase.dart';
-import 'package:search_repo/infrastructure/repo/add_repo.dart';
-
+import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/infrastructure/repo/http_client.dart';
-import 'package:search_repo/infrastructure/repo/init_repo.dart';
+import 'package:search_repo/infrastructure/repo/repo.dart';
 
 
 /// Init App
@@ -18,30 +17,29 @@ final initAppProvider = Provider<InitUsecase>(
     final page = ref.watch(pageNotifierProvider);
     final search = ref.watch(searchNotifierProvider);
     final sort = ref.watch(searchNotifierProvider);
-    final initRepo = RepositoryImpl(repository: InitRepo(http,page,search,sort));
+    final repo = RepositoryImpl(repository: Repo(http,page,search,sort));
     final repoProviderNotifier = ref.read(repoNotifierProvider.notifier);
     return InitUsecase(
-      initRepo: initRepo,
+      repo: repo,
       repoProviderNotifier: repoProviderNotifier,
     );
   },
 );
-final addAppProvider = Provider<AddUsecase>(
-      (ref) {
+final addAppProvider = Provider.family<AddUsecase,RepoModel>(
+      (ref,oldRepo) {
     final http = ref.watch(httpClientProvider);
     final page = ref.watch(pageNotifierProvider);
     final search = ref.watch(searchNotifierProvider);
     final sort = ref.watch(searchNotifierProvider);
-    final repository = AddRepo(http,page,search,sort);
-    final addRepo = RepositoryImpl(repository: repository);
-    final repoProviderNotifier = ref.read(repoNotifierProvider.notifier);
-    final repo = ref.read(repoNotifierProvider);
-    final pageNotifier = ref.watch(pageNotifierProvider);
+    final repository = Repo(http,page,search,sort);
+    final repo = RepositoryImpl(repository: repository);
+    final repoNotifier = ref.read(repoNotifierProvider.notifier);
+    final pageNotifier = ref.read(pageNotifierProvider.notifier);
     return AddUsecase(
-      repoProviderNotifier: repoProviderNotifier,
-      newRepo: newRepo,
       oldRepo: oldRepo,
       pageNotifier: pageNotifier,
+      repo: repo,
+      repoNotifier: repoNotifier,
     );
   },
 );

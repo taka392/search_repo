@@ -13,6 +13,10 @@ class RepoNotifier extends _$RepoNotifier {
   Future<void> save(RepoModel data) async {
     state=AsyncValue.data(data);
   }
+  Future<void> add(RepoModel data) async {
+    state = [...state, data] as AsyncValue<RepoModel>;
+  }
+
 }
 
 //flutter pub run build_runner build --delete-conflicting-outputs
