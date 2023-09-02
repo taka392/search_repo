@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/domain/types/item_model.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
@@ -12,7 +11,8 @@ class RepoList extends HookConsumerWidget {
   final AsyncValue<RepoModel> repoData;
   final VoidCallback onPressed;
 
-  RepoList({super.key,required this.repoData,required this.onPressed});
+  const RepoList({Key? key, required this.repoData, required this.onPressed}) : super(key: key);
+
   @visibleForTesting
   static final loadingKey = UniqueKey();
   @visibleForTesting
@@ -23,26 +23,8 @@ class RepoList extends HookConsumerWidget {
 
 
 
+  @override
   Widget build(BuildContext context,WidgetRef ref) {
-
-    useEffect(() {
-      void scrollListener() {
-        if (scrollController.position.pixels >=
-            scrollController.position.maxScrollExtent * 0.95) {
-          onScrolledToBottom();
-        }
-      }
-
-      scrollController.addListener(scrollListener);
-
-      return () {
-        scrollController.dispose();
-      };
-    }, [scrollController, onScrolledToBottom]);
-  }
-
-
-
 
     Widget listView(RepoModel data) {
       return Column(
@@ -50,7 +32,6 @@ class RepoList extends HookConsumerWidget {
         children: [
           Row(
             children: [
-
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: CustomTextWidget(

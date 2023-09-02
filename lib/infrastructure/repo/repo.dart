@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:search_repo/domain/types/repo_model.dart';
 // データソースの実装
-class Repo{
+class Repo implements Repository{
   http.Client httpClient;
   int page;
   String search;
@@ -21,6 +21,9 @@ class Repo{
       throw Exception('Invalid JSON response structure');
     }
   }
+}
+
+class Repository {
 }
 
 
