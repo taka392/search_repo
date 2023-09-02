@@ -2,8 +2,8 @@ import 'package:search_repo/application/di/repo_di.dart';
 import 'package:search_repo/application/state/repo.dart';
 
 /// アプリの初期準備をする
-class InitAppUsecase {
-  InitAppUsecase({
+class InitUsecase {
+  InitUsecase({
     required this.initialFetch,
     required this.repoProviderNotifier,
   });
