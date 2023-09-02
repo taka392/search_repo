@@ -1,7 +1,7 @@
-import 'package:search_repo/application/di/repo_di.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
+import 'package:search_repo/infrastructure/repo/repo.dart';
 
 
 
@@ -14,13 +14,13 @@ class AddUsecase {
     //以前のページ
   });
   final PageNotifier pageNotifier;
-  final RepositoryImpl repo;
+  final Repo repo;
   final RepoNotifier repoNotifier;
 
 
   /// 一連の流れをまとめて実施する
   Future<void> add() async {
-    //ページを更新
+    //ページ番号を更新
     pageNotifier.update();
     //新しいリポジトリを取得
     RepoModel data = await repo.getRepo();
