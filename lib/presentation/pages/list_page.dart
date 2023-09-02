@@ -20,17 +20,12 @@ class ListPage extends HookConsumerWidget {
     }, const []);
     return Scaffold(
       appBar: AppBar(title: const Text('List Page')),
-      body: Column(
-        children: [
-          Expanded(
-              child: RepoList(
-                  repoData: repoData,
-                  onPressed: () async {
-                    final usecase = ref.read(addAppProvider);
-                    usecase.add();
-                  },
-          ),
-          )],
+      body: RepoList(
+        repoData: repoData,
+        onPressed: () async {
+          final usecase = ref.read(addAppProvider);
+          usecase.add();
+        },
       ),
     );
   }

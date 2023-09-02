@@ -1,14 +1,6 @@
-import 'package:flutter/foundation.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'page.g.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:search_repo/application/state/page/page_notifier.dart';
 
-@Riverpod(keepAlive: true)
-class PageNotifier extends _$PageNotifier {
-  @override
-  int build(){
-    return  1;
-  }
-  void update() {
-    state=state+1;
-  }
-}
+final pageProvider = StateNotifierProvider.autoDispose<PageNotifier,int>((ref) {
+  return PageNotifier(1);
+});

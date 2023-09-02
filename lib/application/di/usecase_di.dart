@@ -13,7 +13,7 @@ import 'package:search_repo/infrastructure/repo/repo.dart';
 final initAppProvider = Provider<InitUsecase>(
       (ref) {
     final http = ref.watch(httpClientProvider);
-    final page = ref.watch(pageNotifierProvider);
+    final int page = ref.read(pageProvider);
     final search = ref.watch(searchNotifierProvider);
     final sort = ref.watch(sortNotifierProvider);
     final repo = Repo(http,page,search,sort);
