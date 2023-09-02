@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'search.g.dart';
-@riverpod
+@Riverpod(keepAlive: true)
 class SearchNotifier extends _$SearchNotifier {
   @override
   String build() {

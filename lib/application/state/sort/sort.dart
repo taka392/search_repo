@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'sort.g.dart';
-@riverpod
+@Riverpod(keepAlive: true)
 class SortNotifier extends _$SortNotifier {
   @override
   String build() {
