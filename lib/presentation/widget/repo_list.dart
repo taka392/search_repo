@@ -33,7 +33,7 @@ class RepoList extends HookConsumerWidget {
         isLoading = true;
         final usecase = ref.read(addAppProvider);
         usecase.add();
-        final page = ref.watch(pageNotifierProvider);
+        final page = ref.watch(pageProvider);
         debugPrint(page.toString());
         scrollController.animateTo(
           scrollController.position.maxScrollExtent * 0.94,
