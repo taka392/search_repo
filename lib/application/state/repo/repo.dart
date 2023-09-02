@@ -15,11 +15,12 @@ class RepoNotifier extends _$RepoNotifier {
   }
 
   Future<void> add(RepoModel data) async {
-    state = AsyncValue.data({
-      'items': [...state.value!.items, ...data.items],
-      'totalCount': data.totalCount,
-    } as RepoModel);
+    state = AsyncValue.data(RepoModel(
+      items: [...state.value!.items, ...data.items],
+      totalCount: data.totalCount,
+    ));
   }
+
 
 
 

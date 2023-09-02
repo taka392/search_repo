@@ -24,6 +24,8 @@ final initAppProvider = Provider<InitUsecase>(
     );
   },
 );
+
+/// Add App
 final addAppProvider = Provider<AddUsecase>(
       (ref) {
     final http = ref.watch(httpClientProvider);
