@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -5,6 +6,7 @@ import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
+import 'package:search_repo/application/usecase/add_usecase.dart';
 import 'package:search_repo/application/usecase/initial_usecase.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
@@ -67,27 +69,24 @@ void main() {
       final search = container.read(searchNotifierProvider);
       final sort = container.read(sortNotifierProvider);
       final repo = Repo(client,page,search,sort);
+      final pageNotifier = container.read(pageNotifierProvider.notifier);
+      final controller = ScrollController();
       //containerを使用してnotifierを取得
       final repoNotifier = container.read(
           repoNotifierProvider.notifier);
       //initUsecaseを発動
-      final usecase = InitUsecase(
+      final usecase = AddUsecase(
+        pageNotifier: pageNotifier,
         repo: repo,
         repoNotifier: repoNotifier,
+        controller: controller,
       );
       //値の取得〜stateに保存までが実行されることが期待される。
-      await usecase.init();
+      await usecase.add();
       //更新されたStateを取得する
-      final state = container.read(repoNotifierProvider);
-
-      // 非同期データへのアクセス方法を修正
-      final result = state.when(
-        data: (repoModel) => repoModel,
-        loading: () => null,
-        error: (_, __) => null,
-      );
+      final state = container.read(pageNotifierProvider);
       //疑似データが取得できる
-      expect(result, isA<RepoModel>());
+      expect(state, page+1);
       // テストランナーがまだ実行中の非同期処理を完了するようにする
       await tester.pumpAndSettle();
       await tester.runAsync(() async{});
