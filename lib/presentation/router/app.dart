@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/presentation/router/go_router.dart';
 
 

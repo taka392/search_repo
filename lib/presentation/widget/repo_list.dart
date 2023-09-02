@@ -14,8 +14,9 @@ import 'package:search_repo/presentation/widget/custom_text.dart';
 class RepoList extends HookConsumerWidget {
   final AsyncValue<RepoModel> repoData;
   final VoidCallback onPressed;
+  final ScrollController controller;
 
-  const RepoList({Key? key, required this.repoData, required this.onPressed}) : super(key: key);
+  const RepoList({Key? key, required this.repoData, required this.onPressed,required this.controller}) : super(key: key);
 
   @visibleForTesting
   static final loadingKey = UniqueKey();
@@ -27,7 +28,6 @@ class RepoList extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    final controller = useScrollController();
     final isLoading = useState(false);
 
     void scroll()async{
@@ -35,6 +35,8 @@ class RepoList extends HookConsumerWidget {
         isLoading.value = true;
         final usecase = ref.read(addAppProvider(controller));
         await usecase.add();
+        final page = ref.read(pageNotifierProvider);
+        debugPrint(page.toString());
         isLoading.value = false;
       }
     }

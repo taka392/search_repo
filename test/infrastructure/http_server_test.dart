@@ -24,8 +24,8 @@ void main() {
       final search = container.read(searchNotifierProvider);
       final sort = container.read(sortNotifierProvider);
       final repo = Repo(client,page,search,sort);
-      final result = await repo.getRepo();
-      expect(result, isA<RepoModel>());
+      RepoModel repoModel = await repo.getRepo();
+      expect(repoModel, isA<RepoModel>());
     });
     test('失敗時throwsExceptionが実行されるかのテスト', () async {
       final client = MockClient();

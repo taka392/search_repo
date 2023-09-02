@@ -11,10 +11,11 @@ void main() {
     testWidgets('loadingのテスト', (WidgetTester tester) async {
       //repoModelの状態をloadingに設定
       const status = AsyncValue<RepoModel>.loading();
+      final controller = ScrollController();
       await tester.pumpWidget(
         MaterialApp( // MaterialAppでDirectionalityを提供
           home: Scaffold(
-            body: RepoList(repoData: status, onPressed: (){}),
+            body: RepoList(repoData: status, onPressed: (){}, controller: controller),
           ),
         ),
       );
@@ -24,10 +25,11 @@ void main() {
     testWidgets('errorのテスト', (WidgetTester tester) async {
       //repoModelの状態をloadingに設定
       final status = AsyncValue<RepoModel>.error('エラーが発生しました', StackTrace.fromString('疑似スタックトレース'));
+      final controller = ScrollController();
       await tester.pumpWidget(
         MaterialApp( // MaterialAppでDirectionalityを提供
           home: Scaffold(
-            body: RepoList(repoData: status, onPressed: () {  },),
+            body: RepoList(repoData: status, onPressed: () {},controller: controller),
           ),
         ),
       );
@@ -36,10 +38,11 @@ void main() {
     testWidgets('data.totalCount == 0のテスト', (WidgetTester tester) async {
       final data = json.decode(MockData.noJsonData);
       final AsyncValue<RepoModel> noMatch = AsyncValue.data(RepoModel.fromJson(data));
+      final controller = ScrollController();
       await tester.pumpWidget(
         MaterialApp( // MaterialAppでDirectionalityを提供
           home: Scaffold(
-            body: RepoList(repoData: noMatch, onPressed: () {  },),
+            body: RepoList(repoData: noMatch, onPressed: () {  }, controller: controller),
           ),
         ),
       );
