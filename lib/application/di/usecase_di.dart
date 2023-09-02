@@ -17,10 +17,10 @@ final initAppProvider = Provider<InitUsecase>(
     final search = ref.watch(searchNotifierProvider);
     final sort = ref.watch(sortNotifierProvider);
     final repo = Repo(http,page,search,sort);
-    final repoProviderNotifier = ref.read(repoNotifierProvider.notifier);
+    final repoNotifier = ref.read(repoNotifierProvider.notifier);
     return InitUsecase(
       repo: repo,
-      repoProviderNotifier: repoProviderNotifier,
+      repoNotifier: repoNotifier,
     );
   },
 );

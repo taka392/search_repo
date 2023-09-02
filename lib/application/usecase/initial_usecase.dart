@@ -5,16 +5,16 @@ import 'package:search_repo/infrastructure/repo/repo.dart';
 class InitUsecase {
   InitUsecase({
     required this.repo,
-    required this.repoProviderNotifier,
+    required this.repoNotifier,
   });
   final Repo repo;
-  final RepoNotifier repoProviderNotifier;
+  final RepoNotifier repoNotifier;
 
   /// 一連の流れをまとめて実施する
   Future<void> fetch() async {
     //初期値を取得
     final data = await repo.getRepo();
     //Riverpodに保存
-    repoProviderNotifier.save(data);
+    repoNotifier.save(data);
   }
 }

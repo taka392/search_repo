@@ -8,13 +8,13 @@ import 'package:search_repo/infrastructure/repo/repo.dart';
 /// アプリの初期準備をする
 class AddUsecase {
   AddUsecase({
-    required this.pageNotifier,
     required this.repo,
+    required this.pageNotifier,
     required this.repoNotifier,
     //以前のページ
   });
-  final PageNotifier pageNotifier;
   final Repo repo;
+  final PageNotifier pageNotifier;
   final RepoNotifier repoNotifier;
 
 

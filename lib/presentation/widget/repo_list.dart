@@ -5,6 +5,7 @@ import 'package:search_repo/presentation/widget/custom_animation.dart';
 import 'package:search_repo/presentation/widget/custom_gesture_detector.dart';
 class RepoList extends StatelessWidget {
   final AsyncValue<RepoModel> repoData;
+  final VoidCallback onPressed;
 
   const RepoList({super.key,required this.repoData});
   @visibleForTesting
@@ -17,17 +18,26 @@ class RepoList extends StatelessWidget {
   Widget build(BuildContext context) {
 
     Widget buildListView(RepoModel data) {
-      return ListView.builder(
-        itemCount: data.items.length,
-        itemBuilder: (_, index) {
-          final item = data.items[index];
-          return CustomGestureDetector(
-            data: item,
-            onPressed: () {},
-          );
+      return NotificationListener<ScrollNotification>(
+        onNotification: (notification) {
+          if (notification.metrics.pixels == notification.metrics.maxScrollExtent) {
+
+          }
+          return false;
         },
+        child: ListView.builder(
+          itemCount: data.items.length,
+          itemBuilder: (_, index) {
+            final item = data.items[index];
+            return CustomGestureDetector(
+              data: item,
+              onPressed: () {},
+            );
+          },
+        ),
       );
     }
+
     Widget repoList = repoData.when(
 
         loading: () => CustomAnimation(imageUrl: 'assets/lottie/loading.json', text: 'ローディング', onRefresh: ()async{}, key: loadingKey),

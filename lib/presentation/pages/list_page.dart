@@ -26,15 +26,6 @@ class ListPage extends HookConsumerWidget {
           Expanded(child: RepoList(repoData: repoData)),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          final usecase = ref.read(addAppProvider);
-          usecase.add();
-          final page = ref.watch(pageNotifierProvider);
-          debugPrint(page.toString());
-        },
-        child: const Icon(Icons.add),
-      ),
     );
   }
 }
