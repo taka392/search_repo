@@ -25,8 +25,8 @@ final initAppProvider = Provider<InitUsecase>(
     );
   },
 );
-final addAppProvider = Provider.family<AddUsecase,RepoModel>(
-      (ref,oldRepo) {
+final addAppProvider = Provider<AddUsecase>(
+      (ref) {
     final http = ref.watch(httpClientProvider);
     final page = ref.watch(pageNotifierProvider);
     final search = ref.watch(searchNotifierProvider);
@@ -36,7 +36,6 @@ final addAppProvider = Provider.family<AddUsecase,RepoModel>(
     final repoNotifier = ref.read(repoNotifierProvider.notifier);
     final pageNotifier = ref.read(pageNotifierProvider.notifier);
     return AddUsecase(
-      oldRepo: oldRepo,
       pageNotifier: pageNotifier,
       repo: repo,
       repoNotifier: repoNotifier,
