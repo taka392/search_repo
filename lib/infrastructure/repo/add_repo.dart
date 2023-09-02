@@ -6,6 +6,7 @@ import 'package:search_repo/domain/types/repo_model.dart';
 class AddRepo implements Repository {
   http.Client httpClient; // Providerで提供されるHttpClient
 
+
   AddRepo(this.httpClient);
 
   @override
@@ -21,3 +22,5 @@ class AddRepo implements Repository {
     }
   }
 }
+
+

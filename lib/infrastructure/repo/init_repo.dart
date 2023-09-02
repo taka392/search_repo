@@ -11,7 +11,7 @@ class InitRepo implements Repository {
   @override
   Future<RepoModel> getRepo() async {
     final response = await httpClient.get(Uri.parse(
-        'https://api.github.com/search/repositories?q=Flutter&per_page=20'));
+        'https://api.github.com/search/repositories?q=stars:>0&per_page=20'));
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       final RepoModel repo = RepoModel.fromJson(data);
