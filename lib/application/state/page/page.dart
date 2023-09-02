@@ -7,4 +7,5 @@ class PageNotifier extends _$PageNotifier {
   int build(){
     return  1;
   }
+
 }

@@ -15,7 +15,10 @@ import 'package:search_repo/infrastructure/repo/init_repo.dart';
 final initAppProvider = Provider<InitUsecase>(
       (ref) {
     final http = ref.watch(httpClientProvider);
-    final initRepo = RepositoryImpl(repository: InitRepo(http));
+    final page = ref.watch(pageNotifierProvider);
+    final search = ref.watch(searchNotifierProvider);
+    final sort = ref.watch(searchNotifierProvider);
+    final initRepo = RepositoryImpl(repository: InitRepo(http,page,search,sort));
     final repoProviderNotifier = ref.read(repoNotifierProvider.notifier);
     return InitUsecase(
       initRepo: initRepo,
@@ -27,12 +30,18 @@ final addAppProvider = Provider<AddUsecase>(
       (ref) {
     final http = ref.watch(httpClientProvider);
     final page = ref.watch(pageNotifierProvider);
-    final sea = ref.watch(searchNotifierProvider);
-    final addRepo = RepositoryImpl(repository: AddRepo(http,page));
+    final search = ref.watch(searchNotifierProvider);
+    final sort = ref.watch(searchNotifierProvider);
+    final repository = AddRepo(http,page,search,sort);
+    final addRepo = RepositoryImpl(repository: repository);
     final repoProviderNotifier = ref.read(repoNotifierProvider.notifier);
+    final repo = ref.read(repoNotifierProvider);
+    final pageNotifier = ref.watch(pageNotifierProvider);
     return AddUsecase(
-      addRepo: addRepo,
       repoProviderNotifier: repoProviderNotifier,
+      newRepo: newRepo,
+      oldRepo: oldRepo,
+      pageNotifier: pageNotifier,
     );
   },
 );
