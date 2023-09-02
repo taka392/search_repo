@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:search_repo/application/di/repo_di.dart';
-import 'package:search_repo/application/state/repo.dart';
+import 'package:search_repo/application/state/repo/repo.dart';
 import 'package:search_repo/application/usecase/initial_usecase.dart';
 import 'package:search_repo/infrastructure/repo/init_repo.dart';
 

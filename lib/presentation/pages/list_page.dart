@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
-import 'package:search_repo/application/state/repo.dart';
+import 'package:search_repo/application/state/repo/repo.dart';
 import 'package:search_repo/presentation/widget/repo_list.dart';
 
 class ListPage extends HookConsumerWidget {

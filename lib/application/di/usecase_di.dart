@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/repo_di.dart';
-import 'package:search_repo/application/state/repo.dart';
+import 'package:search_repo/application/state/repo/repo.dart';
 import 'package:search_repo/application/usecase/initial_usecase.dart';
 
 import 'package:search_repo/infrastructure/repo/http_client.dart';
