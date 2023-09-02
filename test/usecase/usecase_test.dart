@@ -4,20 +4,18 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo.dart';
-
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/application/usecase/initial_usecase.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
-import '../infrastructure/http_server_test.mocks.dart';
-import '../domain/mock_data.dart';
 import 'package:http/http.dart' as http;
-
+import '../domain/mock_data.dart';
+import '../infrastructure/http_server_test.mocks.dart';
 
 void main() {
-  group('usecaseテスト', () {
-    testWidgets('initUsecaseのテスト', (WidgetTester tester) async {
+  group('テスト', () {
+    test('aaのテスト', () async {
       final client = MockClient();
       const data = MockData.jsonMock;
       when(client.get(any)).thenAnswer((_) async => http.Response(data, 200));
