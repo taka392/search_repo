@@ -10,7 +10,7 @@ import 'package:search_repo/infrastructure/repo/post_api.dart';
 final initAppProvider = Provider<InitUsecase>(
       (ref) {
     final http = ref.watch(httpClientProvider);
-    final initialFetch = RepositoryImpl(apiDataSource: InitialFetch(http));
+    final initialFetch = RepositoryImpl(repository: InitialFetch(http));
     final repoProviderNotifier = ref.read(repoNotifierProvider.notifier);
     return InitUsecase(
       initialFetch: initialFetch,
