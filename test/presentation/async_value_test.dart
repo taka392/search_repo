@@ -12,9 +12,9 @@ void main() {
       //repoModelの状態をloadingに設定
       const status = AsyncValue<RepoModel>.loading();
       await tester.pumpWidget(
-        const MaterialApp( // MaterialAppでDirectionalityを提供
+        MaterialApp( // MaterialAppでDirectionalityを提供
           home: Scaffold(
-            body: RepoList(repoData: status),
+            body: RepoList(repoData: status, onPressed: (){}),
           ),
         ),
       );
@@ -27,7 +27,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp( // MaterialAppでDirectionalityを提供
           home: Scaffold(
-            body: RepoList(repoData: status),
+            body: RepoList(repoData: status, onPressed: () {  },),
           ),
         ),
       );
@@ -39,7 +39,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp( // MaterialAppでDirectionalityを提供
           home: Scaffold(
-            body: RepoList(repoData: noMatch),
+            body: RepoList(repoData: noMatch, onPressed: () {  },),
           ),
         ),
       );

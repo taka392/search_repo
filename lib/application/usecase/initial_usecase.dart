@@ -11,7 +11,7 @@ class InitUsecase {
   final RepoNotifier repoNotifier;
 
   /// 一連の流れをまとめて実施する
-  Future<void> fetch() async {
+  Future<void> init() async {
     //初期値を取得
     final data = await repo.getRepo();
     //Riverpodに保存

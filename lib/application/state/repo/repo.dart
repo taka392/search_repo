@@ -6,7 +6,7 @@ part 'repo.g.dart';
 class RepoNotifier extends _$RepoNotifier {
   @override
   Future<RepoModel> build() async {
-    const initialApi = RepoModel(totalCount: 1, items: []);
+    const initialApi = RepoModel(totalCount: 0, items: []);
     return initialApi;
   }
 
@@ -20,10 +20,6 @@ class RepoNotifier extends _$RepoNotifier {
       totalCount: data.totalCount,
     ));
   }
-
-
-
-
 }
 
 //flutter pub run build_runner build --delete-conflicting-outputs
