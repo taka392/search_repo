@@ -4,7 +4,8 @@ import 'package:mockito/mockito.dart';
 import 'package:search_repo/application/di/repo_di.dart';
 import 'package:search_repo/application/state/repo.dart';
 import 'package:search_repo/application/usecase/initial_usecase.dart';
-import 'package:search_repo/infrastructure/repo/post_api.dart';
+import 'package:search_repo/infrastructure/repo/init_repo.dart';
+
 import '../infrastructure/http_server_test.mocks.dart';
 import '../domain/mock_data.dart';
 import 'package:http/http.dart' as http;
@@ -20,7 +21,7 @@ void main() {
       //Providerを使用するためのコード
       final container = ProviderContainer();
       //faceDataを元に、リポジトリDIをセット
-      final initialFetch = RepositoryImpl(apiDataSource: InitialFetch(client));
+      final initialFetch = RepositoryImpl(repository: InitRepo(client));
       //containerを使用してnotifierを取得
       final repoProviderNotifier = container.read(
           repoNotifierProvider.notifier);

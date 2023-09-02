@@ -3,20 +3,19 @@ import 'package:search_repo/domain/types/repo_model.dart';
 
 
 abstract class Repository {
-  Future<RepoModel> initRepo();
-  Future<RepoModel> addRepo();
+  Future<RepoModel> getRepo();
 }
 
-class RepositoryImpl {
+class RepositoryImpl implements Repository {
   final Repository repository;
   RepositoryImpl({
     required this.repository,
   });
-  Future<RepoModel> init() async {
-    return await repository.initRepo();
-  }
-  Future<RepoModel> add() async {
-    return await repository.addRepo();
+
+  @override
+  Future<RepoModel> getRepo() async {
+    return await repository.getRepo();
   }
 }
+
 
