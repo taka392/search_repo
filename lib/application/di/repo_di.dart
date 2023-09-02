@@ -1,16 +1,13 @@
 // リポジトリの実装
 import 'package:search_repo/domain/types/repo_model.dart';
-import 'package:search_repo/infrastructure/repo/post_api.dart';
 
 
-/*abstract class PostRepository {
-  Future<void> init();
-  Future<void> add(Post post);
-  Future<List<Post>> fetch();
-}*/
+abstract class PostRepository {
+  Future<RepoModel> initRepo();
+}
 
 class RepositoryImpl {
-  final InitialFetch apiDataSource;
+  final PostRepository apiDataSource;
   RepositoryImpl({
     required this.apiDataSource,
   });
