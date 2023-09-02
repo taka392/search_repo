@@ -25,7 +25,6 @@ class ListPage extends HookConsumerWidget {
         onPressed: () async {
           final usecase = ref.read(addAppProvider);
           usecase.add();
-
         },
       ),
     );

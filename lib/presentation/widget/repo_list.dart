@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
-import 'package:search_repo/application/state/page/page_provider.dart';
+import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/domain/types/item_model.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/widget/custom_animation.dart';
@@ -27,20 +27,21 @@ class RepoList extends HookConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     final scrollController = useScrollController();
-    bool isLoading = false;
-    void scroll(){
-      if (!isLoading && scrollController.position.pixels >= scrollController.position.maxScrollExtent * 0.95) {
-        isLoading = true;
+    final isLoading = useState(false);
+
+    void scroll()async{
+      if (!isLoading.value && scrollController.position.pixels >= scrollController.position.maxScrollExtent * 0.95) {
+        isLoading.value = true;
         final usecase = ref.read(addAppProvider);
-        usecase.add();
-        final page = ref.read(pageProvider);
+        await usecase.add();
+        final page = ref.watch(pageNotifierProvider);
         debugPrint(page.toString());
         scrollController.animateTo(
           scrollController.position.maxScrollExtent * 0.94,
           duration: const Duration(milliseconds: 500), // アニメーションの時間
           curve: Curves.easeInOut, // アニメーションのカーブ
         );
-        isLoading = false;
+        isLoading.value = false;
       }
     }
 

@@ -18,3 +18,4 @@ class InitUsecase {
     repoNotifier.save(data);
   }
 }
+
