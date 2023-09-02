@@ -7,7 +7,7 @@ class InitialFetch {
 
   InitialFetch(this.httpClient);
 
-  Future<RepoModel> getPosts() async {
+  Future<RepoModel> initRepo() async {
     final response = await httpClient.get(Uri.parse(
         'https://api.github.com/search/repositories?q=Flutter&per_page=20'));
     if (response.statusCode == 200) {
@@ -18,4 +18,5 @@ class InitialFetch {
       throw Exception('Invalid JSON response structure');
     }
   }
+
 }

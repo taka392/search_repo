@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:search_repo/application/di/repo_di.dart';
 import 'package:search_repo/application/state/repo.dart';
-import 'package:search_repo/application/usecase/initial.dart';
+import 'package:search_repo/application/usecase/initial_usecase.dart';
 import 'package:search_repo/infrastructure/repo/post_api.dart';
 import '../infrastructure/http_server_test.mocks.dart';
 import '../domain/mock_data.dart';
@@ -25,7 +25,7 @@ void main() {
       final repoProviderNotifier = container.read(
           repoNotifierProvider.notifier);
       //initUsecaseを発動
-      final init = InitAppUsecase(initialFetch: initialFetch,
+      final init = InitUsecase(initialFetch: initialFetch,
           repoProviderNotifier: repoProviderNotifier);
       //値の取得〜stateに保存までが実行されることが期待される。
       await init.fetch();

@@ -2,8 +2,8 @@ import 'package:search_repo/application/di/repo_di.dart';
 import 'package:search_repo/application/state/repo.dart';
 
 /// アプリの初期準備をする
-class InitUsecase {
-  InitUsecase({
+class AddUsecase {
+  AddUsecase({
     required this.initialFetch,
     required this.repoProviderNotifier,
   });
@@ -11,7 +11,7 @@ class InitUsecase {
   final RepoNotifier repoProviderNotifier;
 
   /// 一連の流れをまとめて実施する
-  Future<void> fetch() async {
+  Future<void> add() async {
     //初期値を取得
     final repo = await initialFetch.init();
     //Riverpodに保存

@@ -15,15 +15,15 @@ void main() {
       final client = MockClient();
       const data = MockData.jsonMock;
       when(client.get(any)).thenAnswer((_) async => http.Response(data, 200));
-      final init = InitialFetch(client);
-      final repo = await init.getPosts();
+      final initClass = InitialFetch(client);
+      final repo = await initClass.initRepo();
       expect(repo, isA<RepoModel>());
     });
     test('失敗時throwsExceptionが実行されるかのテスト', () async {
       final client = MockClient();
       when(client.get(any)).thenAnswer((_) async => http.Response('Not Found', 404));
-      final init = InitialFetch(client);
-      expect(() async => await init.getPosts(), throwsException);
+      final initClass = InitialFetch(client);
+      expect(() async => await initClass.initRepo(), throwsException);
     });
   });
 }
