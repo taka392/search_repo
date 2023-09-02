@@ -22,10 +22,7 @@ class ListPage extends HookConsumerWidget {
       appBar: AppBar(title: const Text('List Page')),
       body: RepoList(
         repoData: repoData,
-        onPressed: () async {
-          final usecase = ref.read(addAppProvider);
-          usecase.add();
-        },
+        onPressed: () async {},
       ),
     );
   }

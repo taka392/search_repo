@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -26,33 +27,25 @@ class RepoList extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    final scrollController = useScrollController();
+    final controller = useScrollController();
     final isLoading = useState(false);
 
     void scroll()async{
-      if (!isLoading.value && scrollController.position.pixels >= scrollController.position.maxScrollExtent * 0.95) {
+      if (!isLoading.value && controller.position.pixels >= controller.position.maxScrollExtent * 0.95) {
         isLoading.value = true;
-        final usecase = ref.read(addAppProvider);
+        final usecase = ref.read(addAppProvider(controller));
         await usecase.add();
-        final page = ref.watch(pageNotifierProvider);
-        debugPrint(page.toString());
-        scrollController.animateTo(
-          scrollController.position.maxScrollExtent * 0.94,
-          duration: const Duration(milliseconds: 500), // アニメーションの時間
-          curve: Curves.easeInOut, // アニメーションのカーブ
-        );
         isLoading.value = false;
       }
     }
 
     useEffect(() {
-      scrollController.addListener(scroll);
+      controller.addListener(scroll);
       return (){
-        scrollController.removeListener(scroll);
-        scrollController.dispose();
+        controller.removeListener(scroll);
+        controller.dispose();
       };
     }, const []);
-
 
 
     Widget listView(RepoModel data) {
@@ -81,7 +74,7 @@ class RepoList extends HookConsumerWidget {
           ),
           Expanded(
             child: ListView.separated(
-              controller: scrollController,
+              controller: controller,
               shrinkWrap: true,
               itemCount: data.items.length+1,
               separatorBuilder: (BuildContext context, int index) => const Divider(

@@ -16,6 +16,7 @@ class InitUsecase {
     final data = await repo.getRepo();
     //Riverpodに保存
     repoNotifier.save(data);
+
   }
 }
 

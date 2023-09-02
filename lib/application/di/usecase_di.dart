@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo.dart';
@@ -27,8 +28,8 @@ final initAppProvider = Provider<InitUsecase>(
 );
 
 /// Add App
-final addAppProvider = Provider<AddUsecase>(
-      (ref) {
+final addAppProvider = Provider.family<AddUsecase, ScrollController>(
+      (ref,controller) {
     final http = ref.watch(httpClientProvider);
     final page = ref.watch(pageNotifierProvider);
     final search = ref.watch(searchNotifierProvider);
@@ -40,6 +41,7 @@ final addAppProvider = Provider<AddUsecase>(
       pageNotifier: pageNotifier,
       repo: repo,
       repoNotifier: repoNotifier,
+      controller: controller,
     );
   },
 );
