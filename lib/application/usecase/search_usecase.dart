@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo.dart';
+import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
 
@@ -10,22 +9,24 @@ import 'package:search_repo/infrastructure/repo/repo.dart';
 class SearchUsecase {
   SearchUsecase({
     required this.repo,
-    required this.search,
+    required this.searchText,
     required this.searchNotifier,
     required this.repoNotifier,
     //以前のページ
   });
   final Repo repo;
-  final String search;
-  final PageNotifier searchNotifier;
+  final String searchText;
+  final SearchNotifier searchNotifier;
   final RepoNotifier repoNotifier;
 
 
   /// 一連の流れをまとめて実施する
   Future<void> search() async {
-    //検索結果を保存
-    //検索結果を元にRepoを取得
-    //検索結果を保存する
-    //Stateに保存する。
+    //SearchのStateを更新
+    searchNotifier.update(searchText);
+    //新しくRepoを取得
+    RepoModel data = await repo.getRepo();
+    //検索結果をStateに保存
+    repoNotifier.add(data);
   }
 }

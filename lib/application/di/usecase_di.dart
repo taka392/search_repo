@@ -7,6 +7,7 @@ import 'package:search_repo/application/state/sort/sort.dart';
 
 import 'package:search_repo/application/usecase/add_usecase.dart';
 import 'package:search_repo/application/usecase/initial_usecase.dart';
+import 'package:search_repo/application/usecase/search_usecase.dart';
 import 'package:search_repo/infrastructure/repo/http_client.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
 
@@ -42,6 +43,25 @@ final addAppProvider = Provider.family<AddUsecase, ScrollController>(
       repo: repo,
       repoNotifier: repoNotifier,
       controller: controller,
+    );
+  },
+);
+
+/// Search App
+final searchProvider = Provider.family<SearchUsecase, String>(
+      (ref,searchText) {
+    final http = ref.watch(httpClientProvider);
+    final page = ref.watch(pageNotifierProvider);
+    final search = ref.watch(searchNotifierProvider);
+    final sort = ref.watch(sortNotifierProvider);
+    final repo = Repo(http,page,search,sort);
+    final searchNotifier = ref.read(searchNotifierProvider.notifier);
+    final repoNotifier = ref.read(repoNotifierProvider.notifier);
+    return SearchUsecase(
+        repo: repo,
+        searchText: searchText,
+        searchNotifier: searchNotifier,
+        repoNotifier: repoNotifier,
     );
   },
 );

@@ -7,7 +7,7 @@ class SearchNotifier extends _$SearchNotifier {
     return "stars:>0";
   }
 
-  void updateSerch(String data) {
+  void update(String data) {
     state = data;
   }
 
