@@ -1,14 +1,12 @@
-// ignore_for_file: invalid_use_of_protected_member
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:search_repo/application/di/usecase_di.dart';
 
 class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
   final TextEditingController controller;
   final VoidCallback onPressed;
-  final VoidCallback onFieldSubmitted;
 
-  const SearchAppBar({Key? key,required this.onPressed,required this.onFieldSubmitted,required this.controller}) : super(key: key);
+  const SearchAppBar({Key? key,required this.onPressed,required this.controller}) : super(key: key);
 //
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight + 10);
@@ -59,8 +57,9 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
                     borderSide: BorderSide.none,
                   ),
                 ),
-                onFieldSubmitted: (anySearch)async{
-                  onFieldSubmitted;
+                onFieldSubmitted: (searchText)async{
+                  final usecase = ref.watch(searchProvider(searchText));
+                  await usecase.search();
                 }
             ),
           ),

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:search_repo/application/state/repo/repo.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
@@ -26,7 +27,7 @@ class SearchUsecase {
     searchNotifier.update(searchText);
     //新しくRepoを取得
     RepoModel data = await repo.getRepo();
-    //検索結果をStateに保存
-    repoNotifier.add(data);
+    debugPrint(data.toString());
+    repoNotifier.save(data);
   }
 }

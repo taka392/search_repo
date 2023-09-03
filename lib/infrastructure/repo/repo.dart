@@ -8,7 +8,7 @@ class Repo{
   String search;
   String sort;
 
-  Repo(this.httpClient, this.page,this.search, this.sort, );
+  Repo(this.httpClient, this.page,this.search, this.sort);
 
   Future<RepoModel> getRepo() async {
     final response = await httpClient.get(Uri.parse(

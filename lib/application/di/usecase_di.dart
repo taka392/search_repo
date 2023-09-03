@@ -55,8 +55,8 @@ final searchProvider = Provider.family<SearchUsecase, String>(
     final search = ref.watch(searchNotifierProvider);
     final sort = ref.watch(sortNotifierProvider);
     final repo = Repo(http,page,search,sort);
-    final searchNotifier = ref.read(searchNotifierProvider.notifier);
-    final repoNotifier = ref.read(repoNotifierProvider.notifier);
+    final searchNotifier = ref.watch(searchNotifierProvider.notifier);
+    final repoNotifier = ref.watch(repoNotifierProvider.notifier);
     return SearchUsecase(
         repo: repo,
         searchText: searchText,
