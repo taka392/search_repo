@@ -1,7 +1,7 @@
 
 /// 画面ID
 enum PageId {
-  list,
+  list,init
 }
 
 /// 設計上の画面パス
@@ -10,6 +10,8 @@ extension PagePath on PageId {
     switch (this) {
       case PageId.list:
         return '/list';
+      case PageId.init:
+        return '/init';
     }
   }
 }
@@ -20,6 +22,8 @@ extension PageName on PageId {
     switch (this) {
       case PageId.list:
         return 'list';
+      case PageId.init:
+        return 'init';
     }
   }
 }
