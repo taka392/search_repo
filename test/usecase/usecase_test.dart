@@ -120,7 +120,6 @@ void main() {
     final containsFlutter = result?.items.any((item) =>
     item.name.toLowerCase().contains(flutterText.toLowerCase())
     );
-
     expect(containsFlutter, isTrue);
   });
   });

@@ -6,4 +6,7 @@ class SortNotifier extends _$SortNotifier {
   String build() {
     return '';
   }
+  void refresh() {
+    state = "";
+  }
 }

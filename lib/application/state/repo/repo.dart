@@ -23,6 +23,9 @@ class RepoNotifier extends _$RepoNotifier {
       totalCount: data.totalCount,
     ));
   }
+  void refresh(){
+    state= const AsyncValue.data(RepoModel(items: [],totalCount: 1));
+  }
 }
 
 //flutter pub run build_runner build --delete-conflicting-outputs

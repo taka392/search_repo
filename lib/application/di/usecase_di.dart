@@ -65,3 +65,20 @@ final searchProvider = Provider.family<SearchUsecase, String>(
     );
   },
 );
+final searchProvider = Provider.family<SearchUsecase, String>(
+      (ref,searchText) {
+    final http = ref.watch(httpClientProvider);
+    final page = ref.watch(pageNotifierProvider);
+    final search = ref.watch(searchNotifierProvider);
+    final sort = ref.watch(sortNotifierProvider);
+    final repo = Repo(http,page,search,sort);
+    final searchNotifier = ref.watch(searchNotifierProvider.notifier);
+    final repoNotifier = ref.watch(repoNotifierProvider.notifier);
+    return SearchUsecase(
+      repo: repo,
+      searchText: searchText,
+      searchNotifier: searchNotifier,
+      repoNotifier: repoNotifier,
+    );
+  },
+);
