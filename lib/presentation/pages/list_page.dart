@@ -20,7 +20,7 @@ class ListPage extends HookConsumerWidget {
       return null;
     }, const []);
     return Scaffold(
-      appBar: AppBar(title: const Text('List Page')),
+      appBar: AppBar(title: const Text('List Page'),automaticallyImplyLeading: false,),
       body: RepoList(
         repoData: repoData,
         onPressed: () async {},
