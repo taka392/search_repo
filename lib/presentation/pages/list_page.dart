@@ -22,7 +22,8 @@ class ListPage extends HookConsumerWidget {
     }, const []);
     return Scaffold(
       appBar: SearchAppBar(
-        onPressed: () {},
+        onPressed: () {
+        },
         controller: textController,
       ),
       body: RepoList(
