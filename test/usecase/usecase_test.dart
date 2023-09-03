@@ -132,15 +132,16 @@ void main() {
     const data = MockData.jsonMock;
     when(client.get(any)).thenAnswer((_) async => http.Response(data, 200));
 
-
-    final page = container.read(pageNotifierProvider);
-    final search = container.read(searchNotifierProvider);
-    final sort = container.read(sortNotifierProvider);
-    RepoModel oldRepo = Repo(client, 4, "Rails", sort) as RepoModel;
+    //偽のデータを入れておく。
+    final oldRepo = await Repo(client, 4, "Rails", "forks").getRepo();
     final repoNotifier = container.read(repoNotifierProvider.notifier);
     repoNotifier.save(oldRepo);
-
-
+    //refresh処理に必要なデータを用意する
+    final pageNotifier = container.read(pageNotifierProvider.notifier);
+    final searchNotifier = container.read(searchNotifierProvider.notifier);
+    final sortNotifier = container.read(sortNotifierProvider.notifier);
+    final repo = Repo(client,1,'stars:>0','');
+    //クラスを呼び出す
     final usecase = RefreshUsecase(
       pageNotifier: pageNotifier,
       repoNotifier: repoNotifier,
@@ -148,21 +149,17 @@ void main() {
       sortNotifier: sortNotifier,
       repo: repo,
     );
-    await usecase.search();
-    final state = container.read(repoNotifierProvider);
+    //実行
+    await usecase.refresh();
 
-    final result = state.when(
-      data: (repoModel) => repoModel,
-      loading: () => null,
-      error: (_, __) => null,
-    );
+    final page = container.read(pageNotifierProvider);
+    final search = container.read(searchNotifierProvider);
+    final sort = container.read(sortNotifierProvider);
 
-    const flutterText = 'Flutter'; // テストしたいテキスト
-    final containsFlutter = result?.items.any((item) =>
-        item.name.toLowerCase().contains(flutterText.toLowerCase())
-    );
-    expect(containsFlutter, isTrue);
+
+    expect(page, 1);
+    expect(search, 'stars:>0');
+    expect(sort,'');
   });
-
   });
 }
