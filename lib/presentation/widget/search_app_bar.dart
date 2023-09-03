@@ -43,7 +43,7 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
                         color:Colors.grey,
                       ),
                       onPressed: () {
-                        onPressed;
+                        controller.clear();
                       }
                   ),
                   filled: true,

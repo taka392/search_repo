@@ -8,6 +8,7 @@ import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/application/usecase/add_usecase.dart';
 import 'package:search_repo/application/usecase/initial_usecase.dart';
+import 'package:search_repo/application/usecase/search_usecase.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
 import 'package:http/http.dart' as http;
@@ -18,6 +19,7 @@ void main() {
   group('UseCaseのテスト', () {
   test('InitialUseCaseのテスト', () async {
     // ProviderContainerを作成し、Providerを初期化
+    WidgetsFlutterBinding.ensureInitialized();
     final container = ProviderContainer();
     final repoNotifier = container.read(repoNotifierProvider.notifier);
     debugPrint(repoNotifier.toString());
@@ -50,6 +52,7 @@ void main() {
   });
   test('AddUseCaseのテスト', () async {
     // ProviderContainerを作成し、Providerを初期化
+    WidgetsFlutterBinding.ensureInitialized();
     final container = ProviderContainer();
 
     final client = MockClient();
@@ -78,6 +81,47 @@ void main() {
     final result = container.read(repoNotifierProvider);
     expect(pageNumber, 2);
     expect(result.value!.items.length, 40);
+  });
+
+  test('SearchUseCaseのテスト', () async {
+    // ProviderContainerを作成し、Providerを初期化
+    WidgetsFlutterBinding.ensureInitialized();
+    final container = ProviderContainer();
+
+    final client = MockClient();
+    const data = MockData.jsonMock;
+    when(client.get(any)).thenAnswer((_) async => http.Response(data, 200));
+
+
+    final page = container.read(pageNotifierProvider);
+    final search = container.read(searchNotifierProvider);
+    final sort = container.read(sortNotifierProvider);
+    final repo = Repo(client, page, search, sort);
+    final searchNotifier = container.read(searchNotifierProvider.notifier);
+    final repoNotifier = container.read(repoNotifierProvider.notifier);
+
+
+    final usecase = SearchUsecase(
+      repo: repo,
+      searchText: "Flutter",
+      searchNotifier: searchNotifier,
+      repoNotifier: repoNotifier,
+    );
+    await usecase.search();
+    final state = container.read(repoNotifierProvider);
+
+    final result = state.when(
+    data: (repoModel) => repoModel,
+    loading: () => null,
+    error: (_, __) => null,
+    );
+
+    const flutterText = 'Flutter'; // テストしたいテキスト
+    final containsFlutter = result?.items.any((item) =>
+    item.name.toLowerCase().contains(flutterText.toLowerCase())
+    );
+
+    expect(containsFlutter, isTrue);
   });
   });
 }
