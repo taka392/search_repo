@@ -21,7 +21,11 @@ class ListPage extends HookConsumerWidget {
       return null;
     }, const []);
     return Scaffold(
-      appBar: SearchAppBar(),
+      appBar: SearchAppBar(
+        onPressed: () {},
+        onFieldSubmitted: () {},
+        controller: null,
+      ),
       body: RepoList(
         repoData: repoData,
         onPressed: () async {},
