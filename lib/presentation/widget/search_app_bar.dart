@@ -51,7 +51,7 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
                     Icons.search,
                     color:Colors.grey,
                   ),
-                  /*hintText: ,*/
+                  hintText: 'Enter your username',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide.none,

@@ -22,11 +22,13 @@ class SearchUsecase {
 
   /// 一連の流れをまとめて実施する
   Future<void> search() async {
+    //新しいrepoを取得
+    RepoModel data = await repo.getRepo();
     //SearchのStateを更新
-
     searchNotifier.update(searchText);
     //新しくRepoを取得
-    RepoModel data = await repo.getRepo();
+
+    //検索結果をStateに保存
     repoNotifier.save(data);
   }
 }

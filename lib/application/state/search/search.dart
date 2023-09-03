@@ -10,4 +10,7 @@ class SearchNotifier extends _$SearchNotifier {
   void update(String data) {
     state = data;
   }
+  void refresh() {
+    state = "stars:>0";
+  }
 }

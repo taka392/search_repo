@@ -8,9 +8,6 @@ class RepoNotifier extends _$RepoNotifier {
   Future<RepoModel> build() async {
     const repoModel = RepoModel(items: [],totalCount: 1);
     return repoModel;
-
-
-
   }
 
   Future<void> save(RepoModel data) async {
@@ -22,6 +19,9 @@ class RepoNotifier extends _$RepoNotifier {
       items: [...state.value!.items, ...data.items],
       totalCount: data.totalCount,
     ));
+  }
+  void refresh(){
+    state= const AsyncValue.data(RepoModel(items: [],totalCount: 1));
   }
 }
 
