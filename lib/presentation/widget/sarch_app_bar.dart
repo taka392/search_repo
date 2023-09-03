@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
-  final TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController controller;
+  final VoidCallback onPressed;
+  final VoidCallback onFieldSubmitted;
 
-  SearchAppBar({
-    Key? key,
-  }) : super(key: key);
+  const SearchAppBar({Key? key,required this.onPressed,required this.onFieldSubmitted,required this.controller}) : super(key: key);
 //
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight + 10);
@@ -29,7 +29,7 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
             width: 343,
             height: 36,
             child: TextFormField(
-                controller: _textEditingController,
+                controller: controller,
                 style: const TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w400,
@@ -45,6 +45,7 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
                         color:Colors.grey,
                       ),
                       onPressed: () {
+                        onPressed;
                       }
                   ),
                   filled: true,
@@ -59,6 +60,7 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
                   ),
                 ),
                 onFieldSubmitted: (anySearch)async{
+                  onFieldSubmitted;
                 }
             ),
           ),
