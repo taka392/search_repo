@@ -6,13 +6,11 @@ part 'repo.g.dart';
 class RepoNotifier extends _$RepoNotifier {
   @override
   Future<RepoModel> build() async {
-    final repoModel = await fetchData();
+    const repoModel = RepoModel(items: [],totalCount: 1);
     return repoModel;
-  }
 
-  Future<RepoModel> fetchData() async {
-    final repoModel = await build(); // 非同期初期値を取得
-    return repoModel;
+
+
   }
 
   Future<void> save(RepoModel data) async {

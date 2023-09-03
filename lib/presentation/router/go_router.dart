@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:search_repo/presentation/pages/init_page.dart';
 import 'package:search_repo/presentation/pages/list_page.dart';
 import 'package:search_repo/presentation/router/page_path.dart';
 
@@ -14,10 +15,17 @@ final goRouterProvider = Provider(
           return const ListPage();
         },
       ),
+      GoRoute(
+        path: PageId.init.path,
+        name: PageId.init.routeName,
+        builder: (context, state) {
+          return const InitPage();
+        },
+      ),
     ];
 
     return GoRouter(
-      initialLocation: PageId.list.path,
+      initialLocation: PageId.init.path,
       debugLogDiagnostics: false,
       routes: routes,
     );
