@@ -8,9 +8,6 @@ class RepoNotifier extends _$RepoNotifier {
   Future<RepoModel> build() async {
     const repoModel = RepoModel(items: [],totalCount: 1);
     return repoModel;
-
-
-
   }
 
   Future<void> save(RepoModel data) async {

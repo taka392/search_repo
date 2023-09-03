@@ -105,19 +105,28 @@ class RepoList extends HookConsumerWidget {
         loading: () => CustomAnimation(
             imageUrl: 'assets/lottie/loading.json',
             text: 'ローディング',
-            onRefresh: ()async{},
+            onRefresh: ()async{
+              final usecase = ref.read(refreshProvider);
+              usecase.refresh();
+            },
             key: loadingKey),
         error: (e, s) => CustomAnimation(
             imageUrl: 'assets/lottie/error.json',
             text: 'エラー $e',
-            onRefresh: () async{},
+            onRefresh: () async{
+              final usecase = ref.read(refreshProvider);
+              usecase.refresh();
+            },
             key: errorKey),
         data: (data) {
           if (data.totalCount == 0) {
             return CustomAnimation(
                 imageUrl: 'assets/lottie/not_found.json',
                 text: 'ヒットがありません',
-                onRefresh: () async{},
+                onRefresh: () async{
+                  final usecase = ref.read(refreshProvider);
+                  usecase.refresh();
+                },
                 key: noHitKey);
           } else {
             return listView(data);
