@@ -8,6 +8,7 @@ import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/application/usecase/add_usecase.dart';
 import 'package:search_repo/application/usecase/initial_usecase.dart';
+import 'package:search_repo/application/usecase/refresh_usecase.dart';
 import 'package:search_repo/application/usecase/search_usecase.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
@@ -122,5 +123,46 @@ void main() {
     );
     expect(containsFlutter, isTrue);
   });
+  test('RefreshUseCaseのテスト', () async {
+    // ProviderContainerを作成し、Providerを初期化
+    WidgetsFlutterBinding.ensureInitialized();
+    final container = ProviderContainer();
+
+    final client = MockClient();
+    const data = MockData.jsonMock;
+    when(client.get(any)).thenAnswer((_) async => http.Response(data, 200));
+
+
+    final page = container.read(pageNotifierProvider);
+    final search = container.read(searchNotifierProvider);
+    final sort = container.read(sortNotifierProvider);
+    RepoModel oldRepo = Repo(client, 4, "Rails", sort) as RepoModel;
+    final repoNotifier = container.read(repoNotifierProvider.notifier);
+    repoNotifier.save(oldRepo);
+
+
+    final usecase = RefreshUsecase(
+      pageNotifier: pageNotifier,
+      repoNotifier: repoNotifier,
+      searchNotifier: searchNotifier,
+      sortNotifier: sortNotifier,
+      repo: repo,
+    );
+    await usecase.search();
+    final state = container.read(repoNotifierProvider);
+
+    final result = state.when(
+      data: (repoModel) => repoModel,
+      loading: () => null,
+      error: (_, __) => null,
+    );
+
+    const flutterText = 'Flutter'; // テストしたいテキスト
+    final containsFlutter = result?.items.any((item) =>
+        item.name.toLowerCase().contains(flutterText.toLowerCase())
+    );
+    expect(containsFlutter, isTrue);
+  });
+
   });
 }
