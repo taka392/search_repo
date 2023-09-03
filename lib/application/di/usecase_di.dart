@@ -7,6 +7,7 @@ import 'package:search_repo/application/state/sort/sort.dart';
 
 import 'package:search_repo/application/usecase/add_usecase.dart';
 import 'package:search_repo/application/usecase/initial_usecase.dart';
+import 'package:search_repo/application/usecase/refresh_usecase.dart';
 import 'package:search_repo/application/usecase/search_usecase.dart';
 import 'package:search_repo/infrastructure/repo/http_client.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
@@ -65,20 +66,17 @@ final searchProvider = Provider.family<SearchUsecase, String>(
     );
   },
 );
-final searchProvider = Provider.family<SearchUsecase, String>(
+final refreshProvider = Provider.family<RefreshUsecase, String>(
       (ref,searchText) {
-    final http = ref.watch(httpClientProvider);
-    final page = ref.watch(pageNotifierProvider);
-    final search = ref.watch(searchNotifierProvider);
-    final sort = ref.watch(sortNotifierProvider);
-    final repo = Repo(http,page,search,sort);
     final searchNotifier = ref.watch(searchNotifierProvider.notifier);
     final repoNotifier = ref.watch(repoNotifierProvider.notifier);
-    return SearchUsecase(
-      repo: repo,
-      searchText: searchText,
-      searchNotifier: searchNotifier,
+    final sortNotifier = ref.watch(sortNotifierProvider.notifier);
+    final pageNotifier = ref.watch(pageNotifierProvider.notifier);
+    return RefreshUsecase(
+      pageNotifier: pageNotifier,
       repoNotifier: repoNotifier,
+      searchNotifier: searchNotifier,
+      sortNotifier: sortNotifier,
     );
   },
 );
