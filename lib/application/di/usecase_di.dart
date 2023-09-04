@@ -62,7 +62,7 @@ final searchProvider = Provider.family<SearchUsecase, Tuple2<String, ScrollContr
     final searchNotifier = ref.watch(searchNotifierProvider.notifier);
     final repoNotifier = ref.watch(repoNotifierProvider.notifier);
     final pageNotifier = ref.watch(pageNotifierProvider.notifier);
-    // ここでscrollControllerを使用するか、SearchUsecaseに渡すなどの処理を追加
+
     return SearchUsecase(
       repo: repo,
       searchText: searchText,

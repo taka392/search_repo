@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:search_repo/presentation/theme/color.dart';
 ThemeData lightTheme = ThemeData.light().copyWith(
   scaffoldBackgroundColor: const Color(0xffFCFDF6),
 
   //appbar theme
   appBarTheme: const AppBarTheme(
-    toolbarHeight: 9000,
     centerTitle: false,
-
-    backgroundColor: Colors.green,
-    elevation: 0,
+    backgroundColor: BrandColor.gg,
     titleTextStyle: TextStyle(
-      height: 900,
-      fontWeight: FontWeight.bold,
-      fontSize: 20,
-    ),
-    iconTheme: IconThemeData(
-      color: Colors.green,
-      size: 1000,
+      fontWeight: FontWeight.normal,
     ),
   ),
 
   //textField theme
   inputDecorationTheme: InputDecorationTheme(
-    prefixIconColor: const Color(0xff9e9e9e),
+    prefixIconColor: const Color.fromARGB(235, 52, 125,1),
     suffixIconColor: const Color(0xff9e9e9e),
     fillColor: const Color(0xffe1eedf),
     filled: true,
