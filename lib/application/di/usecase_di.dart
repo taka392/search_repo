@@ -55,7 +55,6 @@ final searchProvider = Provider.family<SearchUsecase, Tuple2<String, ScrollContr
       (ref, data) {
     final searchText = data.item1;
     final scrollController = data.item2;
-
     final http = ref.watch(httpClientProvider);
     final page = ref.watch(pageNotifierProvider);
     final sort = ref.watch(sortNotifierProvider);

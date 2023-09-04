@@ -41,7 +41,6 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
                   suffixIcon: IconButton(
                       icon: const Icon(
                         Icons.clear,
-                        color:Colors.grey,
                       ),
                       onPressed: () {
                         textController.clear();
@@ -50,7 +49,6 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
                   filled: true,
                   prefixIcon: const Icon(
                     Icons.search,
-                    color:Colors.grey,
                   ),
                   hintText: 'Enter your username',
                   border: OutlineInputBorder(
