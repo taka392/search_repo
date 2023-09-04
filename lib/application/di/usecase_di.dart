@@ -9,6 +9,7 @@ import 'package:search_repo/application/usecase/add_usecase.dart';
 import 'package:search_repo/application/usecase/initial_usecase.dart';
 import 'package:search_repo/application/usecase/refresh_usecase.dart';
 import 'package:search_repo/application/usecase/search_usecase.dart';
+import 'package:search_repo/application/usecase/sort_usecase.dart';
 import 'package:search_repo/infrastructure/repo/http_client.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
 
@@ -80,6 +81,21 @@ final refreshProvider = Provider<RefreshUsecase>(
       searchNotifier: searchNotifier,
       sortNotifier: sortNotifier,
       repo: repo,
+    );
+  },
+);
+final sortProvider = Provider<SortUsecase>(
+      (ref) {
+    final searchNotifier = ref.read(searchNotifierProvider.notifier);
+    final repoNotifier = ref.read(repoNotifierProvider.notifier);
+    final sortNotifier = ref.read(sortNotifierProvider.notifier);
+    final pageNotifier = ref.read(pageNotifierProvider.notifier);
+    final http = ref.watch(httpClientProvider);
+    final repo = Repo(http,1,'stars:>0','');
+    return SortUsecase(
+      repo: repo,
+      sortNotifier: sortNotifier,
+      repoNotifier: repoNotifier,
     );
   },
 );

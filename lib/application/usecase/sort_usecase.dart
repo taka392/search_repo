@@ -1,5 +1,6 @@
 import 'package:search_repo/application/state/repo/repo.dart';
 import 'package:search_repo/application/state/search/search.dart';
+import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
 
@@ -9,14 +10,12 @@ import 'package:search_repo/infrastructure/repo/repo.dart';
 class SortUsecase {
   SortUsecase({
     required this.repo,
-    required this.searchText,
-    required this.searchNotifier,
+    required this.sortNotifier,
     required this.repoNotifier,
     //以前のページ
   });
   final Repo repo;
-  final String searchText;
-  final SearchNotifier searchNotifier;
+  final SortNotifier sortNotifier;
   final RepoNotifier repoNotifier;
 
 
