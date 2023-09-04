@@ -3,7 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
 import 'package:search_repo/application/state/repo/repo.dart';
-import 'package:search_repo/application/state/scroll/scroll.dart';
 import 'package:search_repo/presentation/widget/repo_list.dart';
 import 'package:search_repo/presentation/widget/search_app_bar.dart';
 
@@ -13,7 +12,7 @@ class ListPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final repoData = ref.watch(repoNotifierProvider);
-    final scrollController = ref.watch(scrollNotifierProvider);
+    final scrollController = useScrollController();
     final textController = useTextEditingController();
     useEffect(() {
       //init
@@ -31,6 +30,7 @@ class ListPage extends HookConsumerWidget {
       body: RepoList(
         repoData: repoData,
         onPressed: () async {},
+        scrollController: scrollController,
       ),
     );
   }

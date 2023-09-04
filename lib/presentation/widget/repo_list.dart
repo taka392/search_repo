@@ -5,7 +5,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
 import 'package:search_repo/application/state/page/page.dart';
-import 'package:search_repo/application/state/scroll/scroll.dart';
 import 'package:search_repo/domain/types/item_model.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/widget/custom_animation.dart';
@@ -16,8 +15,8 @@ import 'package:search_repo/presentation/widget/custom_text.dart';
 class RepoList extends HookConsumerWidget {
   final AsyncValue<RepoModel> repoData;
   final VoidCallback onPressed;
-
-  const RepoList({Key? key, required this.repoData, required this.onPressed}) : super(key: key);
+  final ScrollController scrollController;
+  const RepoList({Key? key, required this.repoData, required this.onPressed,required this.scrollController}) : super(key: key);
 
   @visibleForTesting
   static final loadingKey = UniqueKey();
@@ -30,12 +29,11 @@ class RepoList extends HookConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     final isLoading = useState(false);
-    final scrollController = ref.watch(scrollNotifierProvider);
-
+    final scrollController = useScrollController();
     void scroll()async{
       if (!isLoading.value && scrollController.position.pixels >= scrollController.position.maxScrollExtent * 0.95) {
         isLoading.value = true;
-        final usecase = ref.read(addAppProvider);
+        final usecase = ref.read(addAppProvider(scrollController));
         await usecase.add();
         final page = ref.read(pageNotifierProvider);
         debugPrint(page.toString());

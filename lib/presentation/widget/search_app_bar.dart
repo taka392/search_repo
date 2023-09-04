@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
 
-class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
+class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
   final TextEditingController textController;
-  final ScrollController scrollController;
   final VoidCallback onPressed;
-
+  final ScrollController scrollController;
   const SearchAppBar({Key? key,required this.onPressed,required this.textController,required this.scrollController}) : super(key: key);
 //
   @override
@@ -61,6 +60,11 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
                 onFieldSubmitted: (searchText)async{
                   final usecase = ref.watch(searchProvider(searchText));
                   await usecase.search();
+                  await scrollController.animateTo(
+                    0.00,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeInOut,
+                  );
                 }
             ),
           ),
