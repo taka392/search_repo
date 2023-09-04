@@ -10,6 +10,7 @@ import 'package:search_repo/application/usecase/add_usecase.dart';
 import 'package:search_repo/application/usecase/initial_usecase.dart';
 import 'package:search_repo/application/usecase/refresh_usecase.dart';
 import 'package:search_repo/application/usecase/search_usecase.dart';
+import 'package:search_repo/application/usecase/sort_usecase.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/domain/types/sort_enum.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
@@ -176,29 +177,20 @@ void main() {
     final repoNotifier = container.read(repoNotifierProvider.notifier);
     repoNotifier.save(oldRepo);
     //refresh処理に必要なデータを用意する
-    final pageNotifier = container.read(pageNotifierProvider.notifier);
-    final searchNotifier = container.read(searchNotifierProvider.notifier);
     final sortNotifier = container.read(sortNotifierProvider.notifier);
     final repo = Repo(client,1,'stars:>0',Sort.stars);
+    const value = Sort.stars;
     //クラスを呼び出す
-    final usecase = RefreshUsecase(
-      pageNotifier: pageNotifier,
+    final usecase = SortUsecase(
       repoNotifier: repoNotifier,
-      searchNotifier: searchNotifier,
       sortNotifier: sortNotifier,
       repo: repo,
+      value: value,
     );
     //実行
-    await usecase.refresh();
-
-    final page = container.read(pageNotifierProvider);
-    final search = container.read(searchNotifierProvider);
+    await usecase.sort();
     final sort = container.read(sortNotifierProvider);
-
-
-    expect(page, 1);
-    expect(search, 'stars:>0');
-    expect(sort,'');
+    expect(sort,Sort.stars);
   });
   });
 }

@@ -4,7 +4,6 @@ import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
-
 import 'package:search_repo/application/usecase/add_usecase.dart';
 import 'package:search_repo/application/usecase/initial_usecase.dart';
 import 'package:search_repo/application/usecase/refresh_usecase.dart';
@@ -67,6 +66,7 @@ final searchProvider = Provider.family<SearchUsecase, String>(
     );
   },
 );
+
 /// Refresh App
 final refreshProvider = Provider<RefreshUsecase>(
       (ref) {
@@ -86,7 +86,7 @@ final refreshProvider = Provider<RefreshUsecase>(
   },
 );
 
-/// Sort Aps
+/// Sort App
 final sortProvider = Provider.family<SortUsecase, Sort>(
       (ref,value) {
     final repoNotifier = ref.read(repoNotifierProvider.notifier);
