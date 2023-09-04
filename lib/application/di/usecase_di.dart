@@ -58,11 +58,13 @@ final searchProvider = Provider.family<SearchUsecase, String>(
     final repo = Repo(http,page,searchText,sort);
     final searchNotifier = ref.watch(searchNotifierProvider.notifier);
     final repoNotifier = ref.watch(repoNotifierProvider.notifier);
+    final pageNotifier = ref.watch(pageNotifierProvider.notifier);
     return SearchUsecase(
         repo: repo,
         searchText: searchText,
         searchNotifier: searchNotifier,
         repoNotifier: repoNotifier,
+        pageNotifier:  pageNotifier,
     );
   },
 );
