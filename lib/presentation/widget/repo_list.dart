@@ -8,6 +8,7 @@ import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/domain/types/item_model.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/widget/custom_animation.dart';
+import 'package:search_repo/presentation/widget/custom_drop_down.dart';
 import 'package:search_repo/presentation/widget/custom_gesture_detector.dart';
 import 'package:search_repo/presentation/widget/custom_text.dart';
 
@@ -68,6 +69,7 @@ class RepoList extends HookConsumerWidget {
               const SizedBox(
                 width: 20,
               ),
+              const CustomDropdown(),
             ],
           ),
           Container(
