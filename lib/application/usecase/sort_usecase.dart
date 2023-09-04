@@ -1,7 +1,7 @@
 import 'package:search_repo/application/state/repo/repo.dart';
-import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
+import 'package:search_repo/domain/types/sort_enum.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
 
 
@@ -18,11 +18,11 @@ class SortUsecase {
   final Repo repo;
   final SortNotifier sortNotifier;
   final RepoNotifier repoNotifier;
-  final String value;
+  final Sort value;
 
 
   /// 一連の流れをまとめて実施する
-  Future<void> search() async {
+  Future<void> sort() async {
     //選択されたテキストで新しいリポジトリを取得
     RepoModel data = await repo.getRepo();
     //リポジトリのState値を更新

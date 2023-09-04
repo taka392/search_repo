@@ -10,6 +10,7 @@ import 'package:search_repo/application/usecase/initial_usecase.dart';
 import 'package:search_repo/application/usecase/refresh_usecase.dart';
 import 'package:search_repo/application/usecase/search_usecase.dart';
 import 'package:search_repo/application/usecase/sort_usecase.dart';
+import 'package:search_repo/domain/types/sort_enum.dart';
 import 'package:search_repo/infrastructure/repo/http_client.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
 
@@ -86,7 +87,7 @@ final refreshProvider = Provider<RefreshUsecase>(
 );
 
 /// Sort Aps
-final sortProvider = Provider.family<SortUsecase, String>(
+final sortProvider = Provider.family<SortUsecase, Sort>(
       (ref,value) {
     final repoNotifier = ref.read(repoNotifierProvider.notifier);
     final sortNotifier = ref.read(sortNotifierProvider.notifier);
