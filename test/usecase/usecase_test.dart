@@ -102,13 +102,13 @@ void main() {
     final repo = Repo(client, page, search, sort);
     final searchNotifier = container.read(searchNotifierProvider.notifier);
     final repoNotifier = container.read(repoNotifierProvider.notifier);
-
-
+    final pageNotifier = container.read(pageNotifierProvider.notifier);
     final usecase = SearchUsecase(
       repo: repo,
       searchText: "Flutter",
       searchNotifier: searchNotifier,
       repoNotifier: repoNotifier,
+      pageNotifier:  pageNotifier,
     );
     await usecase.search();
     final state = container.read(repoNotifierProvider);

@@ -51,20 +51,20 @@ final addAppProvider = Provider.family<AddUsecase, ScrollController>(
 
 /// Search App
 final searchProvider = Provider.family<SearchUsecase, String>(
-      (ref,searchText) {
+  (ref, searchText) {
     final http = ref.watch(httpClientProvider);
     final page = ref.watch(pageNotifierProvider);
     final sort = ref.watch(sortNotifierProvider);
-    final repo = Repo(http,page,searchText,sort);
+    final repo = Repo(http, page, searchText, sort);
     final searchNotifier = ref.watch(searchNotifierProvider.notifier);
     final repoNotifier = ref.watch(repoNotifierProvider.notifier);
     final pageNotifier = ref.watch(pageNotifierProvider.notifier);
     return SearchUsecase(
-        repo: repo,
-        searchText: searchText,
-        searchNotifier: searchNotifier,
-        repoNotifier: repoNotifier,
-        pageNotifier:  pageNotifier,
+      repo: repo,
+      searchText: searchText,
+      searchNotifier: searchNotifier,
+      repoNotifier: repoNotifier,
+      pageNotifier: pageNotifier,
     );
   },
 );
