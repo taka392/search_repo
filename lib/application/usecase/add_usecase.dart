@@ -12,13 +12,13 @@ class AddUsecase {
     required this.repo,
     required this.pageNotifier,
     required this.repoNotifier,
-    required this.controller,
+    required this.scrollController,
     //以前のページ
   });
   final Repo repo;
   final PageNotifier pageNotifier;
   final RepoNotifier repoNotifier;
-  final ScrollController? controller;
+  final ScrollController? scrollController;
 
 
   /// 一連の流れをまとめて実施する
@@ -30,9 +30,9 @@ class AddUsecase {
     //Riverpodに保存
     repoNotifier.add(data);
     //スクロールアニメーションを実行
-    if (controller != null) {
-      await  controller!.animateTo(
-        controller!.position.maxScrollExtent * 0.94,
+    if (scrollController != null) {
+      await  scrollController!.animateTo(
+        scrollController!.position.maxScrollExtent * 0.9,
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );

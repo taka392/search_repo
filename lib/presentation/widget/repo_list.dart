@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
 import 'package:search_repo/application/state/page/page.dart';
+import 'package:search_repo/application/state/scroll/scroll.dart';
 import 'package:search_repo/domain/types/item_model.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/widget/custom_animation.dart';
@@ -15,9 +16,8 @@ import 'package:search_repo/presentation/widget/custom_text.dart';
 class RepoList extends HookConsumerWidget {
   final AsyncValue<RepoModel> repoData;
   final VoidCallback onPressed;
-  final ScrollController controller;
 
-  const RepoList({Key? key, required this.repoData, required this.onPressed,required this.controller}) : super(key: key);
+  const RepoList({Key? key, required this.repoData, required this.onPressed}) : super(key: key);
 
   @visibleForTesting
   static final loadingKey = UniqueKey();
@@ -30,11 +30,12 @@ class RepoList extends HookConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     final isLoading = useState(false);
+    final scrollController = ref.watch(scrollNotifierProvider);
 
     void scroll()async{
-      if (!isLoading.value && controller.position.pixels >= controller.position.maxScrollExtent * 0.95) {
+      if (!isLoading.value && scrollController.position.pixels >= scrollController.position.maxScrollExtent * 0.95) {
         isLoading.value = true;
-        final usecase = ref.read(addAppProvider(controller));
+        final usecase = ref.read(addAppProvider);
         await usecase.add();
         final page = ref.read(pageNotifierProvider);
         debugPrint(page.toString());
@@ -43,10 +44,10 @@ class RepoList extends HookConsumerWidget {
     }
 
     useEffect(() {
-      controller.addListener(scroll);
+      scrollController.addListener(scroll);
       return (){
-        controller.removeListener(scroll);
-        controller.dispose();
+        scrollController.removeListener(scroll);
+        scrollController.dispose();
       };
     }, const []);
 
@@ -78,7 +79,7 @@ class RepoList extends HookConsumerWidget {
           ),
           Expanded(
             child: ListView.separated(
-              controller: controller,
+              controller: scrollController,
               shrinkWrap: true,
               itemCount: data.items.length+1,
               separatorBuilder: (BuildContext context, int index) => const Divider(

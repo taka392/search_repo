@@ -32,8 +32,8 @@ final initAppProvider = Provider<InitUsecase>(
 );
 
 /// Add App
-final addAppProvider = Provider.family<AddUsecase, ScrollController>(
-      (ref,controller) {
+final addAppProvider = Provider<AddUsecase>(
+      (ref) {
     final http = ref.watch(httpClientProvider);
     final page = ref.watch(pageNotifierProvider);
     final search = ref.watch(searchNotifierProvider);
@@ -41,11 +41,12 @@ final addAppProvider = Provider.family<AddUsecase, ScrollController>(
     final repo = Repo(http,page+1,search,sort);
     final pageNotifier = ref.read(pageNotifierProvider.notifier);
     final repoNotifier = ref.read(repoNotifierProvider.notifier);
+    final scrollController = ref.read(scrollNotifierProvider);
     return AddUsecase(
       pageNotifier: pageNotifier,
       repo: repo,
       repoNotifier: repoNotifier,
-      controller: controller,
+      scrollController: scrollController,
     );
   },
 );
