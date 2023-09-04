@@ -38,7 +38,7 @@ final addAppProvider = Provider.family<AddUsecase, ScrollController>(
     final page = ref.watch(pageNotifierProvider);
     final search = ref.watch(searchNotifierProvider);
     final sort = ref.watch(sortNotifierProvider);
-    final repo = Repo(http,page,search,sort);
+    final repo = Repo(http,page+1,search,sort);
     final pageNotifier = ref.read(pageNotifierProvider.notifier);
     final repoNotifier = ref.read(repoNotifierProvider.notifier);
     return AddUsecase(
@@ -75,7 +75,7 @@ final refreshProvider = Provider<RefreshUsecase>(
     final sortNotifier = ref.read(sortNotifierProvider.notifier);
     final pageNotifier = ref.read(pageNotifierProvider.notifier);
     final http = ref.watch(httpClientProvider);
-    final repo = Repo(http,1,'stars:>0','');
+    final repo = Repo(http,1,'stars:>0',Sort.stars);
     return RefreshUsecase(
       pageNotifier: pageNotifier,
       repoNotifier: repoNotifier,

@@ -32,10 +32,10 @@ class CustomDropdown extends ConsumerWidget {
     ];
 
     return DropdownButton<Sort>(
-      value: Sort.stars,
+      value: sort,
       items: items,
       onChanged: (value) {
-        final usecase = ref.read(sortProvider(value);
+        final usecase = ref.read(sortProvider(value!));
         usecase.sort();
       },
       focusColor: Colors.transparent,

@@ -23,10 +23,10 @@ class AddUsecase {
 
   /// 一連の流れをまとめて実施する
   Future<void> add() async {
-    //ページ番号を更新
-    pageNotifier.update();
     //新しいリポジトリを取得
     RepoModel data = await repo.getRepo();
+    //ページ番号を更新
+    pageNotifier.update();
     //Riverpodに保存
     repoNotifier.add(data);
     //スクロールアニメーションを実行
