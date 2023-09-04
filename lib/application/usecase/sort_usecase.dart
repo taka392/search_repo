@@ -22,6 +22,15 @@ class SortUsecase {
 
   /// 一連の流れをまとめて実施する
   Future<void> search() async {
+    //選択されたテキストで新しいリポジトリを取得
+    //リポジトリのState値を更新
+    //SortのState値を更新
+
+    //repo
+    //repoNotifier
+    //sortNotifier
+
+
     //新しいrepoを取得
     RepoModel data = await repo.getRepo();
     //SearchのStateを更新

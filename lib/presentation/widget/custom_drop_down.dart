@@ -31,7 +31,7 @@ class CustomDropdown extends ConsumerWidget {
     return DropdownButton(
       value: Sort.updated,
       items: items,
-      onChanged: (selectedValue) {
+      onChanged: (value) {
         // 選択が変更されたときに何かを行う
         // selectedValueはDropdownValue型として利用可能
       },
