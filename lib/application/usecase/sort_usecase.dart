@@ -29,20 +29,5 @@ class SortUsecase {
     repoNotifier.save(data);
     //SortのState値を更新
     sortNotifier.save(value);
-
-    //repo
-    RepoModel data = await repo.getRepo();
-    //repoNotifier
-    //sortNotifier
-
-
-    //新しいrepoを取得
-    RepoModel data = await repo.getRepo();
-    //SearchのStateを更新
-    searchNotifier.update(searchText);
-    //新しくRepoを取得
-
-    //検索結果をStateに保存
-    repoNotifier.save(data);
   }
 }
