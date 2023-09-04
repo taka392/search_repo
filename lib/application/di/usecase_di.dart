@@ -52,9 +52,9 @@ final addAppProvider = Provider.family<AddUsecase,ScrollController>(
 
 /// Search App
 final searchProvider = Provider.family<SearchUsecase, Tuple2<String, ScrollController>>(
-      (ref, args) {
-    final searchText = args.item1;
-    final scrollController = args.item2;
+      (ref, data) {
+    final searchText = data.item1;
+    final scrollController = data.item2;
 
     final http = ref.watch(httpClientProvider);
     final page = ref.watch(pageNotifierProvider);
@@ -63,9 +63,7 @@ final searchProvider = Provider.family<SearchUsecase, Tuple2<String, ScrollContr
     final searchNotifier = ref.watch(searchNotifierProvider.notifier);
     final repoNotifier = ref.watch(repoNotifierProvider.notifier);
     final pageNotifier = ref.watch(pageNotifierProvider.notifier);
-
     // ここでscrollControllerを使用するか、SearchUsecaseに渡すなどの処理を追加
-
     return SearchUsecase(
       repo: repo,
       searchText: searchText,

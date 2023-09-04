@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
+import 'package:tuple/tuple.dart';
 
 class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
-  final TextEditingController textController;
-  final VoidCallback onPressed;
   final ScrollController scrollController;
-  const SearchAppBar({Key? key,required this.onPressed,required this.textController,required this.scrollController}) : super(key: key);
+  const SearchAppBar( {Key? key,required this.scrollController}) : super(key: key);
 //
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight + 10);
   @override
   Widget build(BuildContext context,WidgetRef ref) {
+    final textController = useTextEditingController();
     return AppBar(
       automaticallyImplyLeading: false,
       bottom: PreferredSize(
@@ -58,13 +59,8 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
                   ),
                 ),
                 onFieldSubmitted: (searchText)async{
-                  final usecase = ref.watch(searchProvider(searchText));
+                  final usecase = ref.watch(searchProvider(Tuple2(searchText, scrollController)));
                   await usecase.search();
-                  await scrollController.animateTo(
-                    0.00,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeInOut,
-                  );
                 }
             ),
           ),

@@ -11,6 +11,7 @@ import 'package:search_repo/presentation/widget/custom_animation.dart';
 import 'package:search_repo/presentation/widget/custom_drop_down.dart';
 import 'package:search_repo/presentation/widget/custom_gesture_detector.dart';
 import 'package:search_repo/presentation/widget/custom_text.dart';
+import 'package:search_repo/presentation/widget/search_app_bar.dart';
 
 class RepoList extends HookConsumerWidget {
   final AsyncValue<RepoModel> repoData;
@@ -30,8 +31,9 @@ class RepoList extends HookConsumerWidget {
   Widget build(BuildContext context,WidgetRef ref) {
     final isLoading = useState(false);
     final scrollController = useScrollController();
+
     void scroll()async{
-      if (!isLoading.value && scrollController.position.pixels >= scrollController.position.maxScrollExtent * 0.95) {
+      if (!isLoading.value && scrollController.position.pixels == scrollController.position.maxScrollExtent) {
         isLoading.value = true;
         final usecase = ref.read(addAppProvider(scrollController));
         await usecase.add();
@@ -133,6 +135,11 @@ class RepoList extends HookConsumerWidget {
             return listView(data);
           }
         });
-    return repoList;
+    return Scaffold(
+      appBar: SearchAppBar(
+          scrollController: scrollController,
+      ),
+      body: repoList,
+    );
   }
 }

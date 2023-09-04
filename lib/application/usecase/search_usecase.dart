@@ -39,7 +39,7 @@ class SearchUsecase {
     repoNotifier.save(data);
 
     await scrollController.animateTo(
-      0.00,
+      scrollController.position.maxScrollExtent * 0,
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
