@@ -70,7 +70,9 @@ class RepoList extends HookConsumerWidget {
               const SizedBox(
                 width: 20,
               ),
-              const CustomDropdown(),
+              CustomDropdown(
+                scrollController: scrollController,
+              ),
             ],
           ),
           Container(

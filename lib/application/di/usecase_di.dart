@@ -97,19 +97,23 @@ final refreshProvider = Provider<RefreshUsecase>(
 );
 
 /// Sort App
-final sortProvider = Provider.family<SortUsecase, Sort>(
-      (ref,value) {
+final sortProvider =
+    Provider.family<SortUsecase, Tuple2<Sort, ScrollController>>(
+  (ref, data) {
+    final value = data.item1;
+    final scrollController = data.item2;
     final repoNotifier = ref.read(repoNotifierProvider.notifier);
     final sortNotifier = ref.read(sortNotifierProvider.notifier);
     final http = ref.watch(httpClientProvider);
     final page = ref.watch(pageNotifierProvider);
     final search = ref.watch(searchNotifierProvider);
-    final repo = Repo(http,page,search,value);
+    final repo = Repo(http, page, search, value);
     return SortUsecase(
       repoNotifier: repoNotifier,
       sortNotifier: sortNotifier,
       repo: repo,
       value: value,
+      scrollController: scrollController,
     );
   },
 );
