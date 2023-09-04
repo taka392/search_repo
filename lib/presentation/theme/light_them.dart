@@ -32,5 +32,4 @@ ThemeData lightTheme = ThemeData.light().copyWith(
   dropdownMenuTheme: const DropdownMenuThemeData(
     textStyle: CustomText.bodyL,
   ),
-
 );

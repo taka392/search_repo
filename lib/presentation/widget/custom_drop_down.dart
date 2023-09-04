@@ -34,10 +34,6 @@ class CustomDropdown extends ConsumerWidget {
     ];
 
     return Container(
-      decoration: BoxDecoration(
-        /*color: Colors.red,*/
-        borderRadius: BorderRadius.circular(4.0),
-      ),
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: DropdownButton<Sort>(
         value: sort,
@@ -46,8 +42,10 @@ class CustomDropdown extends ConsumerWidget {
           final usecase = ref.read(sortProvider(Tuple2(value!, scrollController)));
           usecase.sort();
         },
-          focusColor: Colors.deepPurpleAccent,
           dropdownColor: Colors.red,
+          isDense: false,
+          borderRadius: BorderRadius.circular(20.0),
+        underline: const SizedBox(),
         ),
     );
 
