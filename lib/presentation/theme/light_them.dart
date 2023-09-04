@@ -6,40 +6,31 @@ ThemeData lightTheme = ThemeData.light().copyWith(
 
   //appbar theme
   appBarTheme: const AppBarTheme(
+    elevation: 0,
     centerTitle: false,
-    backgroundColor: CustomColor.white1,
-    titleTextStyle: CustomText.titleL,
+    backgroundColor: CustomColor.white4,
   ),
 
   //textField theme
   inputDecorationTheme: InputDecorationTheme(
-    prefixIconColor: const Color.fromARGB(235, 52, 125,1),
-    suffixIconColor: const Color(0xff9e9e9e),
-    fillColor: const Color(0xffe1eedf),
+    prefixIconColor: CustomColor.black2,
+    suffixIconColor: CustomColor.black2,
+    fillColor: CustomColor.white5,
     filled: true,
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(30),
-      borderSide: const BorderSide(
-        color: Colors.transparent,
-
-      ),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(30),
-      borderSide: const BorderSide(
-        color: Color(0xff9e9e9e),
-      ),
-    ),
-    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
     isDense: true,
+    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide.none,
+    ),
   ),
+
 
   // divider
-  dividerColor: const Color(0x47000000),
+  dividerColor: CustomColor.black2,
 
-  //RADIOボタンのアクティブ時の色
-  radioTheme: RadioThemeData(
-    fillColor:
-    MaterialStateColor.resolveWith((states) => const Color(0xFFFF9800)),
+  dropdownMenuTheme: const DropdownMenuThemeData(
+    textStyle: CustomText.bodyL,
   ),
+
 );

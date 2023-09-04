@@ -18,41 +18,35 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       bottom: PreferredSize(
         preferredSize: preferredSize,
-        child: SizedBox(
-            width: 343,
-            height: 36,
-            child: TextFormField(
-                controller: textController,
-                style: CustomText.bodyM,
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 20,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: SizedBox(
+              width: 343,
+              height: 36,
+              child: TextFormField(
+                  controller: textController,
+                  style: CustomText.bodyM,
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                        icon: const Icon(
+                          Icons.clear,
+                        ),
+                        onPressed: () {
+                          textController.clear();
+                        }
+                    ),
+                    prefixIcon: const Icon(
+                      Icons.search,
+                    ),
+                    hintText: 'Enter your username',
                   ),
-                  suffixIcon: IconButton(
-                      icon: const Icon(
-                        Icons.clear,
-                      ),
-                      onPressed: () {
-                        textController.clear();
-                      }
-                  ),
-                  filled: true,
-                  prefixIcon: const Icon(
-                    Icons.search,
-                  ),
-                  hintText: 'Enter your username',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-                onFieldSubmitted: (searchText)async{
-                  final usecase = ref.watch(searchProvider(Tuple2(searchText, scrollController)));
-                  await usecase.search();
-                }
+                  onFieldSubmitted: (searchText)async{
+                    final usecase = ref.watch(searchProvider(Tuple2(searchText, scrollController)));
+                    await usecase.search();
+                  }
+              ),
             ),
-          ),
+        ),
         ),
     );
   }

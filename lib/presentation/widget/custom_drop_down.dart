@@ -33,14 +33,24 @@ class CustomDropdown extends ConsumerWidget {
       ),
     ];
 
-    return DropdownButton<Sort>(
-      value: sort,
-      items: items,
-      onChanged: (value) {
-        final usecase = ref.read(sortProvider(Tuple2(value!,scrollController)));
-        usecase.sort();
-      },
-      focusColor: Colors.transparent,
+    return Container(
+      decoration: BoxDecoration(
+        /*color: Colors.red,*/
+        borderRadius: BorderRadius.circular(4.0),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      child: DropdownButton<Sort>(
+        value: sort,
+        items: items,
+        onChanged: (value) {
+          final usecase = ref.read(sortProvider(Tuple2(value!, scrollController)));
+          usecase.sort();
+        },
+          focusColor: Colors.deepPurpleAccent,
+          dropdownColor: Colors.red,
+        ),
     );
+
+
   }
 }
