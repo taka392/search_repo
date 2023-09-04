@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo.dart';
+import 'package:search_repo/application/state/scroll/scroll.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/application/usecase/add_usecase.dart';
@@ -10,7 +11,7 @@ import 'package:search_repo/application/usecase/refresh_usecase.dart';
 import 'package:search_repo/application/usecase/search_usecase.dart';
 import 'package:search_repo/application/usecase/sort_usecase.dart';
 import 'package:search_repo/domain/types/sort_enum.dart';
-import 'package:search_repo/infrastructure/repo/http_client.dart';
+import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
 
 
@@ -59,12 +60,14 @@ final searchProvider = Provider.family<SearchUsecase, String>(
     final searchNotifier = ref.watch(searchNotifierProvider.notifier);
     final repoNotifier = ref.watch(repoNotifierProvider.notifier);
     final pageNotifier = ref.watch(pageNotifierProvider.notifier);
+    final scrollController = ref.watch(scrollNotifierProvider);
     return SearchUsecase(
       repo: repo,
       searchText: searchText,
       searchNotifier: searchNotifier,
       repoNotifier: repoNotifier,
       pageNotifier: pageNotifier,
+      scrollController: scrollController,
     );
   },
 );

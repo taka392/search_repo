@@ -31,7 +31,7 @@ class AddUsecase {
     repoNotifier.add(data);
     //スクロールアニメーションを実行
     if (controller != null) {
-      controller!.animateTo(
+      await  controller!.animateTo(
         controller!.position.maxScrollExtent * 0.94,
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,

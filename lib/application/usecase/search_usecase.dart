@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo.dart';
 import 'package:search_repo/application/state/search/search.dart';
@@ -14,6 +15,7 @@ class SearchUsecase {
     required this.searchNotifier,
     required this.repoNotifier,
     required this.pageNotifier,
+    required this.scrollController,
     //以前のページ
   });
   final Repo repo;
@@ -21,6 +23,8 @@ class SearchUsecase {
   final SearchNotifier searchNotifier;
   final RepoNotifier repoNotifier;
   final PageNotifier pageNotifier;
+  final ScrollController scrollController;
+
 
 
   /// 一連の流れをまとめて実施する
@@ -33,5 +37,11 @@ class SearchUsecase {
     pageNotifier.refresh();
     //検索結果をStateに保存
     repoNotifier.save(data);
-  }
+
+    await scrollController.animateTo(
+      0.00,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+    }
 }
