@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:search_repo/presentation/theme/color.dart';
+import 'package:search_repo/presentation/theme/fonts.dart';
 ThemeData lightTheme = ThemeData.light().copyWith(
   scaffoldBackgroundColor: const Color(0xffFCFDF6),
 
   //appbar theme
   appBarTheme: const AppBarTheme(
     centerTitle: false,
-    backgroundColor: BrandColor.gg,
-    titleTextStyle: TextStyle(
-      fontWeight: FontWeight.normal,
-    ),
+    backgroundColor: CustomColor.white1,
+    titleTextStyle: CustomText.titleL,
   ),
 
   //textField theme
