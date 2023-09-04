@@ -7,6 +7,7 @@ import 'package:search_repo/application/di/usecase_di.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/domain/types/item_model.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
+import 'package:search_repo/presentation/theme/color.dart';
 import 'package:search_repo/presentation/widget/custom_animation.dart';
 import 'package:search_repo/presentation/widget/custom_drop_down.dart';
 import 'package:search_repo/presentation/widget/custom_gesture_detector.dart';
@@ -77,15 +78,14 @@ class RepoList extends HookConsumerWidget {
           ),
           Container(
             height: 0.5,
-            color: Colors.grey,
+            color: CustomColor.black3,
           ),
           Expanded(
             child: ListView.separated(
               controller: scrollController,
-              shrinkWrap: true,
               itemCount: data.items.length+1,
               separatorBuilder: (BuildContext context, int index) => const Divider(
-                height: 0.5,
+                height: 15,
               ),
               itemBuilder: (BuildContext context, index) {
                 if (index < data.items.length) {
@@ -95,7 +95,7 @@ class RepoList extends HookConsumerWidget {
                   return const Center(
                       child: CupertinoActivityIndicator(
                         radius: 20.0,
-                        color: CupertinoColors.inactiveGray,
+                        color: CustomColor.black3,
                       )
                   );
                 }

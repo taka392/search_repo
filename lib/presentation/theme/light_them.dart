@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:search_repo/presentation/theme/color.dart';
 import 'package:search_repo/presentation/theme/fonts.dart';
 ThemeData lightTheme = ThemeData.light().copyWith(
-  scaffoldBackgroundColor: const Color(0xffFCFDF6),
+  scaffoldBackgroundColor: CustomColor.white4,
 
   //appbar theme
   appBarTheme: const AppBarTheme(
@@ -24,12 +24,10 @@ ThemeData lightTheme = ThemeData.light().copyWith(
       borderSide: BorderSide.none,
     ),
   ),
-
-
   // divider
-  dividerColor: CustomColor.black2,
 
-  dropdownMenuTheme: const DropdownMenuThemeData(
-    textStyle: CustomText.bodyL,
-  ),
+  dividerTheme: const DividerThemeData(
+    color: CustomColor.black3,
+    thickness: 0.5,
+  )
 );

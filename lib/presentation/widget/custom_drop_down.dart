@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/domain/types/sort_enum.dart';
+import 'package:search_repo/presentation/theme/color.dart';
 import 'package:tuple/tuple.dart';
 
 class CustomDropdown extends ConsumerWidget {
@@ -33,22 +34,17 @@ class CustomDropdown extends ConsumerWidget {
       ),
     ];
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: DropdownButton<Sort>(
+    return DropdownButton<Sort>(
         value: sort,
         items: items,
         onChanged: (value) {
           final usecase = ref.read(sortProvider(Tuple2(value!, scrollController)));
           usecase.sort();
         },
-          dropdownColor: Colors.red,
+          dropdownColor: CustomColor.white5,
           isDense: false,
           borderRadius: BorderRadius.circular(20.0),
         underline: const SizedBox(),
-        ),
     );
-
-
   }
 }
