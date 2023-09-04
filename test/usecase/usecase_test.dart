@@ -10,7 +10,9 @@ import 'package:search_repo/application/usecase/add_usecase.dart';
 import 'package:search_repo/application/usecase/initial_usecase.dart';
 import 'package:search_repo/application/usecase/refresh_usecase.dart';
 import 'package:search_repo/application/usecase/search_usecase.dart';
+import 'package:search_repo/application/usecase/sort_usecase.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
+import 'package:search_repo/domain/types/sort_enum.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
 import 'package:http/http.dart' as http;
 
@@ -133,14 +135,14 @@ void main() {
     when(client.get(any)).thenAnswer((_) async => http.Response(data, 200));
 
     //偽のデータを入れておく。
-    final oldRepo = await Repo(client, 4, "Rails", "forks").getRepo();
+    final oldRepo = await Repo(client, 4, "Rails", Sort.forks).getRepo();
     final repoNotifier = container.read(repoNotifierProvider.notifier);
     repoNotifier.save(oldRepo);
     //refresh処理に必要なデータを用意する
     final pageNotifier = container.read(pageNotifierProvider.notifier);
     final searchNotifier = container.read(searchNotifierProvider.notifier);
     final sortNotifier = container.read(sortNotifierProvider.notifier);
-    final repo = Repo(client,1,'stars:>0','');
+    final repo = Repo(client,1,'stars:>0',Sort.stars);
     //クラスを呼び出す
     final usecase = RefreshUsecase(
       pageNotifier: pageNotifier,
@@ -159,7 +161,36 @@ void main() {
 
     expect(page, 1);
     expect(search, 'stars:>0');
-    expect(sort,'');
+    expect(sort,Sort.stars);
+  });
+  test('SortUseCaseのテスト', () async {
+    // ProviderContainerを作成し、Providerを初期化
+    WidgetsFlutterBinding.ensureInitialized();
+    final container = ProviderContainer();
+
+    final client = MockClient();
+    const data = MockData.jsonMock;
+    when(client.get(any)).thenAnswer((_) async => http.Response(data, 200));
+
+    //偽のデータを入れておく。
+    final oldRepo = await Repo(client, 4, "Rails", Sort.forks).getRepo();
+    final repoNotifier = container.read(repoNotifierProvider.notifier);
+    repoNotifier.save(oldRepo);
+    //refresh処理に必要なデータを用意する
+    final sortNotifier = container.read(sortNotifierProvider.notifier);
+    final repo = Repo(client,1,'stars:>0',Sort.stars);
+    const value = Sort.stars;
+    //クラスを呼び出す
+    final usecase = SortUsecase(
+      repoNotifier: repoNotifier,
+      sortNotifier: sortNotifier,
+      repo: repo,
+      value: value,
+    );
+    //実行
+    await usecase.sort();
+    final sort = container.read(sortNotifierProvider);
+    expect(sort,Sort.stars);
   });
   });
 }

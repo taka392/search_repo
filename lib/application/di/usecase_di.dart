@@ -4,11 +4,12 @@ import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
-
 import 'package:search_repo/application/usecase/add_usecase.dart';
 import 'package:search_repo/application/usecase/initial_usecase.dart';
 import 'package:search_repo/application/usecase/refresh_usecase.dart';
 import 'package:search_repo/application/usecase/search_usecase.dart';
+import 'package:search_repo/application/usecase/sort_usecase.dart';
+import 'package:search_repo/domain/types/sort_enum.dart';
 import 'package:search_repo/infrastructure/repo/http_client.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
 
@@ -36,7 +37,7 @@ final addAppProvider = Provider.family<AddUsecase, ScrollController>(
     final page = ref.watch(pageNotifierProvider);
     final search = ref.watch(searchNotifierProvider);
     final sort = ref.watch(sortNotifierProvider);
-    final repo = Repo(http,page,search,sort);
+    final repo = Repo(http,page+1,search,sort);
     final pageNotifier = ref.read(pageNotifierProvider.notifier);
     final repoNotifier = ref.read(repoNotifierProvider.notifier);
     return AddUsecase(
@@ -65,6 +66,7 @@ final searchProvider = Provider.family<SearchUsecase, String>(
     );
   },
 );
+
 /// Refresh App
 final refreshProvider = Provider<RefreshUsecase>(
       (ref) {
@@ -73,13 +75,31 @@ final refreshProvider = Provider<RefreshUsecase>(
     final sortNotifier = ref.read(sortNotifierProvider.notifier);
     final pageNotifier = ref.read(pageNotifierProvider.notifier);
     final http = ref.watch(httpClientProvider);
-    final repo = Repo(http,1,'stars:>0','');
+    final repo = Repo(http,1,'stars:>0',Sort.stars);
     return RefreshUsecase(
       pageNotifier: pageNotifier,
       repoNotifier: repoNotifier,
       searchNotifier: searchNotifier,
       sortNotifier: sortNotifier,
       repo: repo,
+    );
+  },
+);
+
+/// Sort App
+final sortProvider = Provider.family<SortUsecase, Sort>(
+      (ref,value) {
+    final repoNotifier = ref.read(repoNotifierProvider.notifier);
+    final sortNotifier = ref.read(sortNotifierProvider.notifier);
+    final http = ref.watch(httpClientProvider);
+    final page = ref.watch(pageNotifierProvider);
+    final search = ref.watch(searchNotifierProvider);
+    final repo = Repo(http,page,search,value);
+    return SortUsecase(
+      repoNotifier: repoNotifier,
+      sortNotifier: sortNotifier,
+      repo: repo,
+      value: value,
     );
   },
 );

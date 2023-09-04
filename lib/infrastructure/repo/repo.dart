@@ -1,12 +1,13 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:search_repo/domain/types/repo_model.dart';
+import 'package:search_repo/domain/types/sort_enum.dart';
 // データソースの実装
 class Repo{
   http.Client httpClient;
   int page;
   String search;
-  String sort;
+  Sort sort;
 
   Repo(this.httpClient, this.page,this.search, this.sort);
 
