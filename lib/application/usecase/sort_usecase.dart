@@ -26,6 +26,7 @@ class SortUsecase {
     //SortのState値を更新
 
     //repo
+    RepoModel data = await repo.getRepo();
     //repoNotifier
     //sortNotifier
 

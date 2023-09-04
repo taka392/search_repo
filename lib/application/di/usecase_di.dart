@@ -67,14 +67,16 @@ final searchProvider = Provider.family<SearchUsecase, String>(
   },
 );
 /// Refresh App
-final refreshProvider = Provider<RefreshUsecase>(
-      (ref) {
+final refreshProvider = Provider.family<RefreshUsecase, String>(
+      (ref,value) {
     final searchNotifier = ref.read(searchNotifierProvider.notifier);
     final repoNotifier = ref.read(repoNotifierProvider.notifier);
     final sortNotifier = ref.read(sortNotifierProvider.notifier);
     final pageNotifier = ref.read(pageNotifierProvider.notifier);
     final http = ref.watch(httpClientProvider);
-    final repo = Repo(http,1,'stars:>0','');
+    final page = ref.watch(pageNotifierProvider);
+    final search = ref.watch(searchNotifierProvider);
+    final repo = Repo(http,page,search,value);
     return RefreshUsecase(
       pageNotifier: pageNotifier,
       repoNotifier: repoNotifier,
