@@ -161,7 +161,7 @@ void main() {
 
     expect(page, 1);
     expect(search, 'stars:>0');
-    expect(sort,'');
+    expect(sort,Sort.stars);
   });
   test('SortUseCaseのテスト', () async {
     // ProviderContainerを作成し、Providerを初期化
