@@ -9,4 +9,7 @@ class SortNotifier extends _$SortNotifier {
   void refresh() {
     state = "";
   }
+  void save(String value) {
+    state = value;
+  }
 }
