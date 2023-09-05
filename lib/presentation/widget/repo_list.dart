@@ -102,7 +102,7 @@ class RepoList extends HookConsumerWidget {
                   return const Center(
                       child: CupertinoActivityIndicator(
                     radius: 20.0,
-                    color: CustomColor.black3,
+                    color: CustomColor.gray1,
                   ));
                 }
               },

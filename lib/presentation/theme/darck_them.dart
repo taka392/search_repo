@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:search_repo/presentation/theme/color.dart';
-import 'package:search_repo/presentation/theme/fonts.dart';
 
 ThemeData darkTheme = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: CustomColor.black2,
@@ -9,14 +8,14 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
     appBarTheme: const AppBarTheme(
       elevation: 0,
       centerTitle: false,
-      backgroundColor: CustomColor.white4,
+      backgroundColor: CustomColor.black2,
     ),
 
     //textField theme
     inputDecorationTheme: InputDecorationTheme(
-      prefixIconColor: CustomColor.black2,
-      suffixIconColor: CustomColor.black2,
-      fillColor: CustomColor.white5,
+      prefixIconColor: CustomColor.white1,
+      suffixIconColor: CustomColor.white1,
+      fillColor: CustomColor.gray1,
       filled: true,
       isDense: true,
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -28,10 +27,12 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
     // divider
 
     dividerTheme: const DividerThemeData(
-      color: CustomColor.black3,
+      color: CustomColor.white1,
       thickness: 0.5,
     ),
     iconTheme: const IconThemeData(
-      color: CustomColor.black2,
+      color: CustomColor.white1,
       size: 15.0,
-    ));
+    ),
+
+);

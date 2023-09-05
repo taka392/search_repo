@@ -41,7 +41,6 @@ class CustomDropdown extends ConsumerWidget {
           final usecase = ref.read(sortProvider(Tuple2(value!, scrollController)));
           usecase.sort();
         },
-          dropdownColor: CustomColor.white5,
           isDense: false,
           borderRadius: BorderRadius.circular(20.0),
         underline: const SizedBox(),

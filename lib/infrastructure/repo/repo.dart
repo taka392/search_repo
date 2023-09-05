@@ -8,9 +8,7 @@ class Repo{
   int page;
   String search;
   Sort sort;
-
   Repo(this.httpClient, this.page,this.search, this.sort);
-
   Future<RepoModel> getRepo() async {
     final response = await httpClient.get(Uri.parse(
         'https://api.github.com/search/repositories?q=$search&sort=$sort&page=$page=per_page=20'));
