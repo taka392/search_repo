@@ -11,6 +11,7 @@ class ListPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final repoData = ref.watch(repoNotifierProvider);
+    final scrollController = useScrollController();
     useEffect(() {
       //init
       final usecase = ref.read(initAppProvider);
@@ -21,6 +22,8 @@ class ListPage extends HookConsumerWidget {
       body: RepoList(
         repoData: repoData,
         onPressed: () async {},
+        scrollController: scrollController,
+
       ),
     );
   }

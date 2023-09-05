@@ -18,11 +18,14 @@ import 'package:search_repo/presentation/widget/search_app_bar.dart';
 class RepoList extends HookConsumerWidget {
   final AsyncValue<RepoModel> repoData;
   final VoidCallback onPressed;
+  final ScrollController scrollController;
 
   const RepoList(
       {Key? key,
       required this.repoData,
-      required this.onPressed})
+      required this.onPressed,
+      required this.scrollController,
+      })
       : super(key: key);
 
   @visibleForTesting
@@ -35,7 +38,6 @@ class RepoList extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isLoading = useState(false);
-    final scrollController = useScrollController();
 
     void scroll() async {
       if (!isLoading.value &&

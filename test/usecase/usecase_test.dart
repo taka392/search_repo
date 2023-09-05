@@ -20,7 +20,6 @@ import '../infrastructure/http_server_test.mocks.dart';
 void main() {
   group('UseCaseのテスト', () {
   test('InitialUseCaseのテスト', () async {
-
     // ProviderContainerを作成し、Providerを初期化
     WidgetsFlutterBinding.ensureInitialized();
     final container = ProviderContainer();
