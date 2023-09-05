@@ -3,9 +3,9 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/presentation/router/go_router.dart';
-import 'package:search_repo/presentation/theme/darck_them.dart';
-import 'package:search_repo/presentation/theme/light_them.dart';
-
+import 'package:search_repo/presentation/theme/them_data/darck_them.dart';
+import 'package:search_repo/presentation/theme/them_data/light_them.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// アプリ本体
 class App extends ConsumerWidget {
@@ -17,13 +17,14 @@ class App extends ConsumerWidget {
     return MaterialApp.router(
       //多言語対応のための記述
       localizationsDelegates: const [
+        AppLocalizations.delegate, // Add this line
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [
         Locale('en'), // English
-        Locale('es'), // Spanish
+        Locale('ja'),
       ],
       //ここまで〜
       theme: lightTheme, // ライト用テーマ
