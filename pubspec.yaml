@@ -19,7 +19,7 @@ dependencies:
   device_preview:
   go_router:
   shared_preferences:
-
+  tuple:
 dev_dependencies:
   freezed:
   build_runner: ^2.4.6

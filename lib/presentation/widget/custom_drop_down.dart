@@ -5,9 +5,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/domain/types/sort_enum.dart';
+import 'package:tuple/tuple.dart';
 
 class CustomDropdown extends ConsumerWidget {
-  const CustomDropdown({super.key});
+  final ScrollController scrollController;
+  const CustomDropdown({super.key,required this.scrollController});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,13 +34,15 @@ class CustomDropdown extends ConsumerWidget {
     ];
 
     return DropdownButton<Sort>(
-      value: sort,
-      items: items,
-      onChanged: (value) {
-        final usecase = ref.read(sortProvider(value!));
-        usecase.sort();
-      },
-      focusColor: Colors.transparent,
+        value: sort,
+        items: items,
+        onChanged: (value) {
+          final usecase = ref.read(sortProvider(Tuple2(value!, scrollController)));
+          usecase.sort();
+        },
+          isDense: false,
+          borderRadius: BorderRadius.circular(20.0),
+        underline: const SizedBox(),
     );
   }
 }

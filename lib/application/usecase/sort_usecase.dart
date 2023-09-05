@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:search_repo/application/state/repo/repo.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
@@ -13,12 +14,14 @@ class SortUsecase {
     required this.sortNotifier,
     required this.repoNotifier,
     required this.value,
+    this.scrollController,
     //以前のページ
   });
   final Repo repo;
   final SortNotifier sortNotifier;
   final RepoNotifier repoNotifier;
   final Sort value;
+  final ScrollController? scrollController;
 
 
   /// 一連の流れをまとめて実施する
@@ -29,5 +32,15 @@ class SortUsecase {
     sortNotifier.save(value);
     //リポジトリのState値を更新
     repoNotifier.save(data);
+
+
+    if (scrollController != null) {
+      await scrollController!.animateTo(
+        scrollController!.position.maxScrollExtent * 0,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+
   }
 }

@@ -10,8 +10,9 @@ import 'package:search_repo/application/usecase/refresh_usecase.dart';
 import 'package:search_repo/application/usecase/search_usecase.dart';
 import 'package:search_repo/application/usecase/sort_usecase.dart';
 import 'package:search_repo/domain/types/sort_enum.dart';
-import 'package:search_repo/infrastructure/repo/http_client.dart';
+import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
+import 'package:tuple/tuple.dart';
 
 
 /// Init App
@@ -31,8 +32,8 @@ final initAppProvider = Provider<InitUsecase>(
 );
 
 /// Add App
-final addAppProvider = Provider.family<AddUsecase, ScrollController>(
-      (ref,controller) {
+final addAppProvider = Provider.family<AddUsecase,ScrollController>(
+      (ref,scrollController) {
     final http = ref.watch(httpClientProvider);
     final page = ref.watch(pageNotifierProvider);
     final search = ref.watch(searchNotifierProvider);
@@ -44,28 +45,36 @@ final addAppProvider = Provider.family<AddUsecase, ScrollController>(
       pageNotifier: pageNotifier,
       repo: repo,
       repoNotifier: repoNotifier,
-      controller: controller,
+      scrollController: scrollController,
     );
   },
 );
 
 /// Search App
-final searchProvider = Provider.family<SearchUsecase, String>(
-      (ref,searchText) {
+final searchProvider = Provider.family<SearchUsecase, Tuple2<String, ScrollController>>(
+      (ref, data) {
+    final searchText = data.item1;
+    final scrollController = data.item2;
     final http = ref.watch(httpClientProvider);
     final page = ref.watch(pageNotifierProvider);
     final sort = ref.watch(sortNotifierProvider);
-    final repo = Repo(http,page,searchText,sort);
+    final repo = Repo(http, page, searchText, sort);
     final searchNotifier = ref.watch(searchNotifierProvider.notifier);
     final repoNotifier = ref.watch(repoNotifierProvider.notifier);
+    final pageNotifier = ref.watch(pageNotifierProvider.notifier);
+
     return SearchUsecase(
-        repo: repo,
-        searchText: searchText,
-        searchNotifier: searchNotifier,
-        repoNotifier: repoNotifier,
+      repo: repo,
+      searchText: searchText,
+      searchNotifier: searchNotifier,
+      repoNotifier: repoNotifier,
+      pageNotifier: pageNotifier,
+      scrollController: scrollController,
     );
   },
 );
+
+
 
 /// Refresh App
 final refreshProvider = Provider<RefreshUsecase>(
@@ -87,19 +96,23 @@ final refreshProvider = Provider<RefreshUsecase>(
 );
 
 /// Sort App
-final sortProvider = Provider.family<SortUsecase, Sort>(
-      (ref,value) {
+final sortProvider =
+    Provider.family<SortUsecase, Tuple2<Sort, ScrollController>>(
+  (ref, data) {
+    final value = data.item1;
+    final scrollController = data.item2;
     final repoNotifier = ref.read(repoNotifierProvider.notifier);
     final sortNotifier = ref.read(sortNotifierProvider.notifier);
     final http = ref.watch(httpClientProvider);
     final page = ref.watch(pageNotifierProvider);
     final search = ref.watch(searchNotifierProvider);
-    final repo = Repo(http,page,search,value);
+    final repo = Repo(http, page, search, value);
     return SortUsecase(
       repoNotifier: repoNotifier,
       sortNotifier: sortNotifier,
       repo: repo,
       value: value,
+      scrollController: scrollController,
     );
   },
 );
