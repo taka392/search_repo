@@ -5,7 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/domain/types/sort_enum.dart';
-import 'package:search_repo/presentation/theme/color.dart';
 import 'package:tuple/tuple.dart';
 
 class CustomDropdown extends ConsumerWidget {
