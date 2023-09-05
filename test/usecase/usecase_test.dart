@@ -15,12 +15,12 @@ import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/domain/types/sort_enum.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
 import 'package:http/http.dart' as http;
-
 import '../domain/mock_data.dart';
 import '../infrastructure/http_server_test.mocks.dart';
 void main() {
   group('UseCaseのテスト', () {
   test('InitialUseCaseのテスト', () async {
+
     // ProviderContainerを作成し、Providerを初期化
     WidgetsFlutterBinding.ensureInitialized();
     final container = ProviderContainer();
