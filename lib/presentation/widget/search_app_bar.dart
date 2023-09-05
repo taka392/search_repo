@@ -25,7 +25,7 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
               height: 36,
               child: TextFormField(
                   controller: textController,
-                  style: CustomText.bodyM,
+                  style: CustomText.titleM,
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
                         icon: const Icon(

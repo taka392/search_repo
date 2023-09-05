@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:search_repo/presentation/theme/color.dart';
 import 'package:search_repo/presentation/theme/fonts.dart';
 
-ThemeData lightTheme = ThemeData.light().copyWith(
-    scaffoldBackgroundColor: CustomColor.white4,
+ThemeData darkTheme = ThemeData.dark().copyWith(
+    scaffoldBackgroundColor: CustomColor.black2,
 
     //appbar theme
     appBarTheme: const AppBarTheme(
