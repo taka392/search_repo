@@ -6,6 +6,7 @@ version: 1.0.0+1
 environment:
   sdk: '>=3.0.6 <4.0.0'
 dependencies:
+
   freezed_annotation:
   flutter:
     sdk: flutter
@@ -13,6 +14,8 @@ dependencies:
   flutter_riverpod:
   http: ^1.1.0
   riverpod_annotation: ^2.1.2
+  flutter_localizations:
+    sdk: flutter
   intl:
   lottie:
   hooks_riverpod: ^2.3.8
