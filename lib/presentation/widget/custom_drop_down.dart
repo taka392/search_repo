@@ -14,10 +14,11 @@ class CustomDropdown extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final sort = ref.watch(sortNotifierProvider);
+    final locate = ref.watch(appLocalizationsProvider);
     const items = [
       DropdownMenuItem(
         value: Sort.stars,
-        child: Text('stars'),
+        child: Text(locate.stars),
       ),
       DropdownMenuItem(
         value: Sort.forks,

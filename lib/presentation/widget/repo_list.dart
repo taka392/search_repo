@@ -67,12 +67,11 @@ class RepoList extends HookConsumerWidget {
         children: [
           Row(
             children: [
-              Text(locate.rate),
               const SizedBox(
                 width: 30,
               ),
               CustomTextWidget(
-                text: "${data.totalCount.toString()}件",
+                text: "${data.totalCount.toString()} ${locate.cases}",
                 maxLine: 1,
                 textStyle: CustomText.titleM,
               ),
