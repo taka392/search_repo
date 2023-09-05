@@ -2,11 +2,11 @@
   "@@locale": "en",
   "hintText": "Please enter a repository name",
   "cases": "cases",
-  "stars": "Stars",
-  "forks": "Forks",
-  "help_wanted_issues": "Help wanted issues",
-  "updated": "Updated",
-  "searching": "Searching",
-  "error": "An error has occurred.",
-  "noHit": "No hit repositories found"
+  "stars": "stars",
+  "forks": "forks",
+  "help_wanted_issues": "help wanted issues",
+  "updated": "updated",
+  "searching": "searching.....",
+  "error": "an error has occurred.",
+  "noHit": "no hit repositories found"
 }

@@ -5,7 +5,7 @@ part 'locate.g.dart';
 class LocaleNotifier extends _$LocaleNotifier {
   @override
   Locale build(){
-    return const Locale('en');
+    return const Locale('ja');
   }
   void update(Locale data){
     state = data;

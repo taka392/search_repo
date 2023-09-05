@@ -14,7 +14,6 @@ import 'package:search_repo/presentation/widget/custom_drop_down.dart';
 import 'package:search_repo/presentation/widget/custom_gesture_detector.dart';
 import 'package:search_repo/presentation/widget/custom_text.dart';
 import 'package:search_repo/presentation/widget/search_app_bar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class RepoList extends HookConsumerWidget {
   final AsyncValue<RepoModel> repoData;
   final VoidCallback onPressed;
@@ -116,7 +115,7 @@ class RepoList extends HookConsumerWidget {
     Widget repoList = repoData.when(
         loading: () => CustomAnimation(
             imageUrl: 'assets/lottie/loading.json',
-            text: 'ローディング',
+            text: locate.searching,
             onRefresh: () async {
               final usecase = ref.read(refreshProvider);
               usecase.refresh();
@@ -124,7 +123,7 @@ class RepoList extends HookConsumerWidget {
             key: loadingKey),
         error: (e, s) => CustomAnimation(
             imageUrl: 'assets/lottie/error.json',
-            text: 'エラー $e',
+            text: locate.error,
             onRefresh: () async {
               final usecase = ref.read(refreshProvider);
               usecase.refresh();
@@ -134,7 +133,7 @@ class RepoList extends HookConsumerWidget {
           if (data.totalCount == 0) {
             return CustomAnimation(
                 imageUrl: 'assets/lottie/not_found.json',
-                text: 'ヒットがありません',
+                text: locate.noHit,
                 onRefresh: () async {
                   final usecase = ref.read(refreshProvider);
                   usecase.refresh();
