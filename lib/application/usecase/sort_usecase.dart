@@ -14,14 +14,14 @@ class SortUsecase {
     required this.sortNotifier,
     required this.repoNotifier,
     required this.value,
-    required this.scrollController,
+    this.scrollController,
     //以前のページ
   });
   final Repo repo;
   final SortNotifier sortNotifier;
   final RepoNotifier repoNotifier;
   final Sort value;
-  final ScrollController scrollController;
+  final ScrollController? scrollController;
 
 
   /// 一連の流れをまとめて実施する
@@ -33,10 +33,14 @@ class SortUsecase {
     //リポジトリのState値を更新
     repoNotifier.save(data);
 
-    await scrollController.animateTo(
-      scrollController.position.maxScrollExtent * 0,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
+
+    if (scrollController != null) {
+      await scrollController!.animateTo(
+        scrollController!.position.maxScrollExtent * 0,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+
   }
 }

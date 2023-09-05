@@ -15,7 +15,7 @@ class SearchUsecase {
     required this.searchNotifier,
     required this.repoNotifier,
     required this.pageNotifier,
-    required this.scrollController,
+    this.scrollController,
     //以前のページ
   });
   final Repo repo;
@@ -23,7 +23,7 @@ class SearchUsecase {
   final SearchNotifier searchNotifier;
   final RepoNotifier repoNotifier;
   final PageNotifier pageNotifier;
-  final ScrollController scrollController;
+  final ScrollController? scrollController;
 
 
 
@@ -38,10 +38,12 @@ class SearchUsecase {
     //検索結果をStateに保存
     repoNotifier.save(data);
 
-    await scrollController.animateTo(
-      scrollController.position.maxScrollExtent * 0,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
+    if (scrollController != null) {
+      await scrollController!.animateTo(
+        scrollController!.position.maxScrollExtent * 0,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
     }
 }
