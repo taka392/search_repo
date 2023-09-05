@@ -25,7 +25,7 @@ class CustomDropdown extends ConsumerWidget {
       ),
       DropdownMenuItem(
         value: Sort.helpWantedIssues,
-        child: Text('help-wanted-issues'),
+        child: Text('helpWantedIssues'),
       ),
       DropdownMenuItem(
         value: Sort.updated,

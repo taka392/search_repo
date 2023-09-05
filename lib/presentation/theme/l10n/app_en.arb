@@ -1,10 +1,13 @@
+
 {
   "@@locale": "en",
-  "rate": "Rate",
-  "player": "Player",
-  "shake": "Shake!!",
-  "allowDuplicateNumber": "Allow duplicate number",
-  "noServiceMessage": "Not compatible with Android.\nPlease wait for a while as it is currently under development.",
-  "feedback": "Feedback",
-  "privacyPolicy": "Privacy policy"
+  "hintText": "Please enter a repository name",
+  "Cases": "Cases",
+  "Stars": "Stars",
+  "Forks": "Forks",
+  "Help wanted issues": "Help wanted issues",
+  "Updated": "Updated",
+  "Searching": "Searching",
+  "Error": "An error has occurred.",
+  "NoHit": "No hit repositories found"
 }

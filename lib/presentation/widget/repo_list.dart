@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
+import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/domain/types/item_model.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
@@ -37,6 +38,7 @@ class RepoList extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isLoading = useState(false);
+    final locate = ref.watch(appLocalizationsProvider);
 
     void scroll() async {
       if (!isLoading.value &&
@@ -65,7 +67,7 @@ class RepoList extends HookConsumerWidget {
         children: [
           Row(
             children: [
-              Text(AppLocalizations.of(context)!.rate),
+              Text(locate.rate),
               const SizedBox(
                 width: 30,
               ),
