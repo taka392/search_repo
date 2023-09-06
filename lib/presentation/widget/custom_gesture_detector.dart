@@ -26,7 +26,6 @@ class CustomGestureDetector extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-
             CustomTextWidget(
               text: data.fullName,
               maxLine: 1,

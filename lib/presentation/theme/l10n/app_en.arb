@@ -1,0 +1,12 @@
+{
+  "@@locale": "en",
+  "hintText": "Please enter a repository name",
+  "cases": "cases",
+  "stars": "stars",
+  "forks": "forks",
+  "help_wanted_issues": "help wanted issues",
+  "updated": "updated",
+  "searching": "searching.....",
+  "error": "an error has occurred.",
+  "noHit": "no hit repositories found"
+}

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
+import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
 import 'package:search_repo/presentation/theme/fonts.dart';
 import 'package:tuple/tuple.dart';
 
@@ -14,6 +15,7 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     final textController = useTextEditingController();
+    final locate = ref.watch(appLocalizationsProvider);
     return AppBar(
       automaticallyImplyLeading: false,
       bottom: PreferredSize(
@@ -38,7 +40,7 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
                     prefixIcon: const Icon(
                       Icons.search,
                     ),
-                    hintText: 'Enter your username',
+                    hintText: locate.hintText,
                   ),
                   onFieldSubmitted: (searchText)async{
                     final usecase = ref.watch(searchProvider(Tuple2(searchText, scrollController)));

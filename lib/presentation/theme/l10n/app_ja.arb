@@ -1,0 +1,12 @@
+{
+  "@@locale": "ja",
+  "hintText": "リポジトリ名を入力してください",
+  "cases": "件",
+  "stars": "スター",
+  "forks": "フォーク",
+  "help_wanted_issues": "Help wanted issues",
+  "updated": "更新日",
+  "searching": "検索中....",
+  "error": "エラーが発生しました",
+  "noHit": "ヒットするリポジトリが見つかりませんでした"
+}
