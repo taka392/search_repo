@@ -11,19 +11,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 /// Provide GoRouter
 final goRouterProvider = Provider(
   (ref) {
-    final repoData = ref.watch(repoNotifierProvider);
-    ScrollController scrollController =ScrollController();
-    AppLocalizations locate = ref.watch(appLocalizationsProvider);
+
     final routes = [
       GoRoute(
         path: PageId.list.path,
         name: PageId.list.routeName,
-        pageBuilder: (context, state) => buildTransitionPage(
-          child: ListPage(
-            repoData: repoData,
-            scrollController: scrollController,
-            locate: locate,
-          ),
+        pageBuilder: (context, state,) => buildTransitionPage(
+          child: const ListPage(),
         ),
       ),
       GoRoute(

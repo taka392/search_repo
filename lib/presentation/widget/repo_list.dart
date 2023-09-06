@@ -14,15 +14,15 @@ import 'package:search_repo/presentation/widget/custom_gesture_detector.dart';
 import 'package:search_repo/presentation/widget/custom_text.dart';
 import 'package:search_repo/presentation/widget/search_app_bar.dart';
 class RepoList extends HookConsumerWidget {
-  final RepoModel data;
   final ScrollController scrollController;
+  final RepoModel data;
 
-  const RepoList(
-      {Key? key,
-      required this.data,
-      required this.scrollController,
-      })
-      : super(key: key);
+
+  const RepoList({
+    Key? key,
+    required this.scrollController,
+    required this.data,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,8 +34,8 @@ class RepoList extends HookConsumerWidget {
           scrollController.position.pixels ==
               scrollController.position.maxScrollExtent) {
         isLoading.value = true;
-        final usecase = ref.read(addAppProvider(scrollController));
-        await usecase.add();
+        /*final usecase = ref.read(addAppProvider(scrollController));
+        await usecase.add();*/
         final page = ref.read(pageNotifierProvider);
         debugPrint(page.toString());
         isLoading.value = false;
@@ -48,10 +48,13 @@ class RepoList extends HookConsumerWidget {
         scrollController.removeListener(scroll);
         scrollController.dispose();
       };
-    }, const []);
+    }, []);
 
-    Widget listView(RepoModel data) {
-      return Column(
+    return Scaffold(
+      appBar: SearchAppBar(
+        scrollController: scrollController,
+      ),
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -77,43 +80,33 @@ class RepoList extends HookConsumerWidget {
             height: 15,
           ),
           Expanded(
-            child: RefreshIndicator(
-              onRefresh: () async{},
-              child: ListView.separated(
-                controller: scrollController,
-                itemCount: data.items.length + 1,
-                separatorBuilder: (BuildContext context, int index) =>
-                    const Divider(
-                  height: 15,
-                ),
-                itemBuilder: (BuildContext context, index) {
-                  if (index < data.items.length) {
-                    ItemModel repo = data.items[index];
-                    return CustomGestureDetector(data: repo, onPressed: () {
-                      final usecase = ref.read(detailProvider(repo));
-                      usecase.detail();
-                    });
-                  } else {
-                    return const Center(
-                        child: CupertinoActivityIndicator(
+            child: ListView.separated(
+              controller: scrollController,
+              itemCount: data.items.length + 1,
+              separatorBuilder: (BuildContext context, int index) =>
+              const Divider(
+                height: 15,
+              ),
+              itemBuilder: (BuildContext context, index) {
+                if (index < data.items.length) {
+                  ItemModel repo = data.items[index];
+                  return CustomGestureDetector(data: repo, onPressed: () {
+                    final usecase = ref.read(detailProvider(repo));
+                    usecase.detail();
+                  });
+                } else {
+                  return const Center(
+                    child: CupertinoActivityIndicator(
                       radius: 20.0,
                       color: CustomColor.gray1,
-                    ));
-                  }
-                },
-              ),
+                    ),
+                  );
+                }
+              },
             ),
           ),
         ],
-      );
-    }
-
-
-    return Scaffold(
-      appBar: SearchAppBar(
-        scrollController: scrollController,
       ),
-      body: listView(data),
     );
   }
 }

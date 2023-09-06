@@ -52,9 +52,9 @@ class CustomDropdown extends ConsumerWidget {
       value: sort,
       items: items,
       onChanged: (value) {
-        final usecase =
+        /*final usecase =
             ref.read(sortProvider(Tuple2(value!, scrollController)));
-        usecase.sort();
+        usecase.sort();*/
       },
       isDense: false,
       borderRadius: BorderRadius.circular(20.0),

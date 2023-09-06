@@ -27,12 +27,15 @@ class InitPage extends HookConsumerWidget {
 
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Lottie.asset('assets/lottie/loading.json'),
-            Text(locate.searching),
-          ],
+        child: Container(
+          color: Colors.grey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Lottie.asset('assets/lottie/loading.json'),
+              Text(locate.searching),
+            ],
+          ),
         ),
       ),
     );
