@@ -9,14 +9,14 @@ import 'package:search_repo/presentation/widget/custom_animation.dart';
 import 'package:search_repo/presentation/widget/repo_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-final GlobalKey customAnimationKey = GlobalKey();
 class ListPage extends HookConsumerWidget {
   const ListPage({Key? key,required this.repoData,required this.scrollController,required this.locate}) : super(key: key);
   final AsyncValue<RepoModel> repoData;
   final ScrollController scrollController;
   final AppLocalizations locate;
 
-
+  @visibleForTesting
+  static final loadingKey = UniqueKey();
   @visibleForTesting
   static final errorKey = UniqueKey();
   @visibleForTesting
@@ -34,7 +34,7 @@ class ListPage extends HookConsumerWidget {
             final usecase = ref.read(refreshProvider);
             usecase.refresh();
           },
-          key: customAnimationKey,
+          key: loadingKey,
         ),
         error: (e, s) => CustomAnimation(
           imageUrl: 'assets/lottie/error.json',

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -7,6 +9,8 @@ import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/pages/list_page.dart';
 import 'package:search_repo/presentation/pages/list_page.dart';
 import 'package:search_repo/presentation/widget/custom_animation.dart';
+
+import '../domain/mock_data.dart';
 void main() {
 
   group('AsyncValue型のエラーハンドリングテスト', () {
@@ -27,41 +31,43 @@ void main() {
         ),
       );
       await tester.pump();
-      final customAnimationWidget = find.byKey(customAnimationKey);
-      expect(customAnimationWidget, findsOneWidget);
+      expect(find.byKey(ListPage.loadingKey), findsOneWidget);
     });
 
-/*    testWidgets('errorのテスト', (WidgetTester tester) async {
+    testWidgets('errorのテスト', (WidgetTester tester) async {
       //repoModelの状態をloadingに設定
       final repoData = AsyncValue<RepoModel>.error('エラーが発生しました', StackTrace.fromString('疑似スタックトレース'));
       final scrollController = ScrollController();
       final container = ProviderContainer();
       final locate = container.read(appLocalizationsProvider);
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ProviderScope(
-              child: ListPage(repoData: repoData, scrollController: scrollController,locate: locate),
-            ),
+        MaterialApp( // MaterialAppでDirectionalityを提供
+          home: ProviderScope(
+            overrides: const [],
+            child: ListPage(repoData: repoData, scrollController: scrollController, locate: locate),
           ),
         ),
       );
       await tester.pump();
       expect(find.byKey(ListPage.errorKey), findsOneWidget);
-    });*/
-/*    testWidgets('data.totalCount == 0のテスト', (WidgetTester tester) async {
+    });
+    testWidgets('data.totalCount == 0のテスト', (WidgetTester tester) async {
       final data = json.decode(MockData.noJsonData);
-      final AsyncValue<RepoModel> noMatch = AsyncValue.data(RepoModel.fromJson(data));
+      final AsyncValue<RepoModel> repoData = AsyncValue.data(RepoModel.fromJson(data));
       final scrollController = ScrollController();
+      final container = ProviderContainer();
+      final locate = container.read(appLocalizationsProvider);
       await tester.pumpWidget(
         MaterialApp( // MaterialAppでDirectionalityを提供
-          home: Scaffold(
-            body: RepoList(repoData: noMatch, onPressed: () {},scrollController: scrollController),
+          home: ProviderScope(
+            overrides: const [],
+            child: ListPage(repoData: repoData, scrollController: scrollController, locate: locate),
           ),
         ),
       );
-      expect(find.byKey(RepoList.noHitKey), findsOneWidget);
-    });*/
+      await tester.pump();
+      expect(find.byKey(ListPage.noHitKey), findsOneWidget);
+    });
   });
 }
 
