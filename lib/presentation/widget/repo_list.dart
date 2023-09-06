@@ -15,13 +15,11 @@ import 'package:search_repo/presentation/widget/custom_text.dart';
 import 'package:search_repo/presentation/widget/search_app_bar.dart';
 class RepoList extends HookConsumerWidget {
   final RepoModel data;
-  final VoidCallback onPressed;
   final ScrollController scrollController;
 
   const RepoList(
       {Key? key,
       required this.data,
-      required this.onPressed,
       required this.scrollController,
       })
       : super(key: key);
@@ -91,7 +89,10 @@ class RepoList extends HookConsumerWidget {
                 itemBuilder: (BuildContext context, index) {
                   if (index < data.items.length) {
                     ItemModel repo = data.items[index];
-                    return CustomGestureDetector(data: repo, onPressed: () {});
+                    return CustomGestureDetector(data: repo, onPressed: () {
+                      final usecase = ref.read(detailProvider(repo));
+                      usecase.detail();
+                    });
                   } else {
                     return const Center(
                         child: CupertinoActivityIndicator(
