@@ -1,7 +1,7 @@
 
 /// 画面ID
 enum PageId {
-  list,init
+  list,init,
 }
 
 /// 設計上の画面パス

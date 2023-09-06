@@ -56,7 +56,6 @@ class ListPage extends HookConsumerWidget {
           } else {
             return RepoList(
               data: data,
-              onPressed: () async {},
               scrollController: scrollController,
             );
           }

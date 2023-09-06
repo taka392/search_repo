@@ -64,7 +64,6 @@ class CustomGestureDetector extends StatelessWidget {
                   maxLine: 1,
                   textStyle: CustomText.titleS,
                 ),
-
               ],
             ),
           ],

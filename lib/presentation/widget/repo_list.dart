@@ -15,13 +15,11 @@ import 'package:search_repo/presentation/widget/custom_text.dart';
 import 'package:search_repo/presentation/widget/search_app_bar.dart';
 class RepoList extends HookConsumerWidget {
   final RepoModel data;
-  final VoidCallback onPressed;
   final ScrollController scrollController;
 
   const RepoList(
       {Key? key,
       required this.data,
-      required this.onPressed,
       required this.scrollController,
       })
       : super(key: key);
@@ -79,25 +77,31 @@ class RepoList extends HookConsumerWidget {
             height: 15,
           ),
           Expanded(
-            child: ListView.separated(
-              controller: scrollController,
-              itemCount: data.items.length + 1,
-              separatorBuilder: (BuildContext context, int index) =>
-                  const Divider(
-                height: 15,
+            child: RefreshIndicator(
+              onRefresh: () async{},
+              child: ListView.separated(
+                controller: scrollController,
+                itemCount: data.items.length + 1,
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(
+                  height: 15,
+                ),
+                itemBuilder: (BuildContext context, index) {
+                  if (index < data.items.length) {
+                    ItemModel repo = data.items[index];
+                    return CustomGestureDetector(data: repo, onPressed: () {
+                      final usecase = ref.read(detailProvider(repo));
+                      usecase.detail();
+                    });
+                  } else {
+                    return const Center(
+                        child: CupertinoActivityIndicator(
+                      radius: 20.0,
+                      color: CustomColor.gray1,
+                    ));
+                  }
+                },
               ),
-              itemBuilder: (BuildContext context, index) {
-                if (index < data.items.length) {
-                  ItemModel repo = data.items[index];
-                  return CustomGestureDetector(data: repo, onPressed: () {});
-                } else {
-                  return const Center(
-                      child: CupertinoActivityIndicator(
-                    radius: 20.0,
-                    color: CustomColor.gray1,
-                  ));
-                }
-              },
             ),
           ),
         ],
