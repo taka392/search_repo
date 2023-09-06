@@ -4,11 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
-import 'package:search_repo/application/state/repo/repo.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/pages/list_page.dart';
-import 'package:search_repo/presentation/pages/list_page.dart';
-import 'package:search_repo/presentation/widget/custom_animation.dart';
 
 import '../domain/mock_data.dart';
 void main() {
