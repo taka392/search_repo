@@ -33,6 +33,13 @@ final goRouterProvider = Provider(
           child: const InitPage(),
         ),
       ),
+      GoRoute(
+        path: PageId.show.path,
+        name: PageId.show.routeName,
+        pageBuilder: (context, state) => buildTransitionPage(
+          child: const InitPage(),
+        ),
+      ),
     ];
 
     return GoRouter(
