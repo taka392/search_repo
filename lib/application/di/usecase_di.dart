@@ -5,10 +5,12 @@ import 'package:search_repo/application/state/repo/repo.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/application/usecase/add_usecase.dart';
+import 'package:search_repo/application/usecase/detail_usecase.dart';
 import 'package:search_repo/application/usecase/initial_usecase.dart';
 import 'package:search_repo/application/usecase/refresh_usecase.dart';
 import 'package:search_repo/application/usecase/search_usecase.dart';
 import 'package:search_repo/application/usecase/sort_usecase.dart';
+import 'package:search_repo/domain/types/item_model.dart';
 import 'package:search_repo/domain/types/sort_enum.dart';
 import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
@@ -116,23 +118,10 @@ final sortProvider =
 );
 /// Detail App
 //画面をタップしたら、詳細画面を表示させるUsecaseです。
-final detailProvider =
-Provider.family<SortUsecase, Tuple2<Sort, ScrollController>>(
-      (ref, data) {
-    final value = data.item1;
-    final scrollController = data.item2;
-    final repoNotifier = ref.read(repoNotifierProvider.notifier);
-    final sortNotifier = ref.read(sortNotifierProvider.notifier);
-    final http = ref.watch(httpClientProvider);
-    final page = ref.watch(pageNotifierProvider);
-    final search = ref.watch(searchNotifierProvider);
-    final repo = Repo(http, page, search, value);
-    return SortUsecase(
-      repoNotifier: repoNotifier,
-      sortNotifier: sortNotifier,
-      repo: repo,
-      value: value,
-      scrollController: scrollController,
+final detailProvider = Provider.family<DetailUsecase, ItemModel>(
+      (ref, item) {
+    return DetailUsecase(
+      item: item,
     );
   },
 );
