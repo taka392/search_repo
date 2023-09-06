@@ -6,7 +6,6 @@ version: 1.0.0+1
 environment:
   sdk: '>=3.0.6 <4.0.0'
 dependencies:
-
   freezed_annotation:
   flutter:
     sdk: flutter
@@ -23,6 +22,7 @@ dependencies:
   go_router:
   shared_preferences:
   tuple:
+  url_launcher:
 dev_dependencies:
   freezed:
   build_runner: ^2.4.6
@@ -33,7 +33,6 @@ dev_dependencies:
   riverpod_generator:
   envied_generator:
   mockito: ^5.4.2
-  url_launcher:
 
 
 flutter:

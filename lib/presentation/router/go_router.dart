@@ -5,6 +5,7 @@ import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart
 import 'package:search_repo/application/state/repo/repo.dart';
 import 'package:search_repo/presentation/pages/init_page.dart';
 import 'package:search_repo/presentation/pages/list_page.dart';
+import 'package:search_repo/presentation/pages/show_page.dart';
 import 'package:search_repo/presentation/router/page_path.dart';
 import 'package:search_repo/presentation/widget/custom_transition.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -33,13 +34,7 @@ final goRouterProvider = Provider(
           child: const InitPage(),
         ),
       ),
-      GoRoute(
-        path: PageId.show.path,
-        name: PageId.show.routeName,
-        pageBuilder: (context, state) => buildTransitionPage(
-          child: const InitPage(),
-        ),
-      ),
+
     ];
 
     return GoRouter(
