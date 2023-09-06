@@ -116,7 +116,7 @@ final sortProvider =
 );
 /// Detail App
 //画面をタップしたら、詳細画面を表示させるUsecaseです。
-final sortProvider =
+final detailProvider =
 Provider.family<SortUsecase, Tuple2<Sort, ScrollController>>(
       (ref, data) {
     final value = data.item1;
