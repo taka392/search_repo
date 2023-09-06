@@ -11,6 +11,7 @@ import 'package:search_repo/application/usecase/refresh_usecase.dart';
 import 'package:search_repo/application/usecase/search_usecase.dart';
 import 'package:search_repo/application/usecase/sort_usecase.dart';
 import 'package:search_repo/domain/types/item_model.dart';
+import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/domain/types/sort_enum.dart';
 import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
@@ -119,9 +120,9 @@ final sortProvider =
 /// Detail App
 //画面をタップしたら、詳細画面を表示させるUsecaseです。
 final detailProvider = Provider.family<DetailUsecase, ItemModel>(
-      (ref, item) {
+      (ref, data) {
     return DetailUsecase(
-      item: item,
+      url: data.owner.htmlUrl,
     );
   },
 );
