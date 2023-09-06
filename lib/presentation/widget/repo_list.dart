@@ -78,27 +78,29 @@ class RepoList extends HookConsumerWidget {
           const Divider(
             height: 15,
           ),
-          RefreshIndicator(
-            onRefresh: () async{},
-            child: ListView.separated(
-              controller: scrollController,
-              itemCount: data.items.length + 1,
-              separatorBuilder: (BuildContext context, int index) =>
-                  const Divider(
-                height: 15,
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: () async{},
+              child: ListView.separated(
+                controller: scrollController,
+                itemCount: data.items.length + 1,
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(
+                  height: 15,
+                ),
+                itemBuilder: (BuildContext context, index) {
+                  if (index < data.items.length) {
+                    ItemModel repo = data.items[index];
+                    return CustomGestureDetector(data: repo, onPressed: () {});
+                  } else {
+                    return const Center(
+                        child: CupertinoActivityIndicator(
+                      radius: 20.0,
+                      color: CustomColor.gray1,
+                    ));
+                  }
+                },
               ),
-              itemBuilder: (BuildContext context, index) {
-                if (index < data.items.length) {
-                  ItemModel repo = data.items[index];
-                  return CustomGestureDetector(data: repo, onPressed: () {});
-                } else {
-                  return const Center(
-                      child: CupertinoActivityIndicator(
-                    radius: 20.0,
-                    color: CustomColor.gray1,
-                  ));
-                }
-              },
             ),
           ),
         ],
