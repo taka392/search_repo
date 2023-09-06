@@ -33,6 +33,7 @@ dev_dependencies:
   riverpod_generator:
   envied_generator:
   mockito: ^5.4.2
+  url_launcher:
 
 
 flutter:
