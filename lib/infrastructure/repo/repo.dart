@@ -4,7 +4,7 @@ import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/domain/types/sort_enum.dart';
 // データソースの実装
 abstract class Repo {
-  Future<RepoModel> getRepo();
+  Future getRepo();
 }
 class RepoImpl implements Repo {
   http.Client httpClient;
@@ -15,7 +15,7 @@ class RepoImpl implements Repo {
   RepoImpl({required this.httpClient, required this.page, required this.search, required this.sort});
 
   @override
-  Future<RepoModel> getRepo() async {
+  Future getRepo() async {
     final response = await httpClient.get(Uri.parse(
         'https://api.github.com/search/repositories?q=$search&sort=$sort&page=$page&per_page=20'));
     if (response.statusCode == 200) {

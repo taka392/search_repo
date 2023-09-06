@@ -1,16 +1,18 @@
+import 'package:search_repo/domain/types/sort_enum.dart';
+import 'package:search_repo/infrastructure/repo/repo.dart';
 import 'dart:convert';
 import 'package:search_repo/domain/types/repo_model.dart';
-import 'package:search_repo/infrastructure/repo/repo.dart';
+import 'package:http/http.dart' as http;
 class FakeRepository implements Repo {
-  String fakeData;
-  FakeRepository({required this.fakeData});
+  http.Client? httpClient;
+  int? page;
+  String? search;
+  Sort? sort;
+
+  FakeRepository({this.httpClient, this.page, this.search, this.sort});
+
   @override
-  Future<RepoModel> getRepo() async {
-    final Map<String, dynamic> data = json.decode(fakeData);
-    await Future.delayed(const Duration(seconds: 2));
-    final RepoModel repo = RepoModel.fromJson(data);
-    return repo;
+  Future getRepo() async {
+      throw Exception('Invalid JSON response structure');
+    }
   }
-}
-
-

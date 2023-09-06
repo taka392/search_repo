@@ -1,4 +1,4 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+/*import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 part 'repo.g.dart';
 
@@ -28,7 +28,7 @@ class RepoNotifier extends _$RepoNotifier {
   }
 
 
-}
+}*/
 
 
 
