@@ -78,7 +78,8 @@ class RepoList extends HookConsumerWidget {
           const Divider(
             height: 15,
           ),
-          Expanded(
+          RefreshIndicator(
+            onRefresh: () async{},
             child: ListView.separated(
               controller: scrollController,
               itemCount: data.items.length + 1,
