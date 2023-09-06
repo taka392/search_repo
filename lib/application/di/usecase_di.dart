@@ -14,15 +14,14 @@ import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
 import 'package:tuple/tuple.dart';
 
-
 /// Init App
 final initAppProvider = Provider<InitUsecase>(
-      (ref) {
+  (ref) {
     final http = ref.watch(httpClientProvider);
     final page = ref.watch(pageNotifierProvider);
     final search = ref.watch(searchNotifierProvider);
     final sort = ref.watch(sortNotifierProvider);
-    final repo = Repo(http,page,search,sort);
+    final repo = Repo(http, page, search, sort);
     final repoNotifier = ref.read(repoNotifierProvider.notifier);
     return InitUsecase(
       repo: repo,
@@ -32,13 +31,13 @@ final initAppProvider = Provider<InitUsecase>(
 );
 
 /// Add App
-final addAppProvider = Provider.family<AddUsecase,ScrollController>(
-      (ref,scrollController) {
+final addAppProvider = Provider.family<AddUsecase, ScrollController>(
+  (ref, scrollController) {
     final http = ref.watch(httpClientProvider);
     final page = ref.watch(pageNotifierProvider);
     final search = ref.watch(searchNotifierProvider);
     final sort = ref.watch(sortNotifierProvider);
-    final repo = Repo(http,page+1,search,sort);
+    final repo = Repo(http, page + 1, search, sort);
     final pageNotifier = ref.read(pageNotifierProvider.notifier);
     final repoNotifier = ref.read(repoNotifierProvider.notifier);
     return AddUsecase(
@@ -51,8 +50,9 @@ final addAppProvider = Provider.family<AddUsecase,ScrollController>(
 );
 
 /// Search App
-final searchProvider = Provider.family<SearchUsecase, Tuple2<String, ScrollController>>(
-      (ref, data) {
+final searchProvider =
+    Provider.family<SearchUsecase, Tuple2<String, ScrollController>>(
+  (ref, data) {
     final searchText = data.item1;
     final scrollController = data.item2;
     final http = ref.watch(httpClientProvider);
@@ -74,17 +74,15 @@ final searchProvider = Provider.family<SearchUsecase, Tuple2<String, ScrollContr
   },
 );
 
-
-
 /// Refresh App
 final refreshProvider = Provider<RefreshUsecase>(
-      (ref) {
+  (ref) {
     final searchNotifier = ref.read(searchNotifierProvider.notifier);
     final repoNotifier = ref.read(repoNotifierProvider.notifier);
     final sortNotifier = ref.read(sortNotifierProvider.notifier);
     final pageNotifier = ref.read(pageNotifierProvider.notifier);
     final http = ref.watch(httpClientProvider);
-    final repo = Repo(http,1,'stars:>0',Sort.stars);
+    final repo = Repo(http, 1, 'stars:>0', Sort.stars);
     return RefreshUsecase(
       pageNotifier: pageNotifier,
       repoNotifier: repoNotifier,
@@ -99,6 +97,28 @@ final refreshProvider = Provider<RefreshUsecase>(
 final sortProvider =
     Provider.family<SortUsecase, Tuple2<Sort, ScrollController>>(
   (ref, data) {
+    final value = data.item1;
+    final scrollController = data.item2;
+    final repoNotifier = ref.read(repoNotifierProvider.notifier);
+    final sortNotifier = ref.read(sortNotifierProvider.notifier);
+    final http = ref.watch(httpClientProvider);
+    final page = ref.watch(pageNotifierProvider);
+    final search = ref.watch(searchNotifierProvider);
+    final repo = Repo(http, page, search, value);
+    return SortUsecase(
+      repoNotifier: repoNotifier,
+      sortNotifier: sortNotifier,
+      repo: repo,
+      value: value,
+      scrollController: scrollController,
+    );
+  },
+);
+/// Detail App
+//画面をタップしたら、詳細画面を表示させるUsecaseです。
+final sortProvider =
+Provider.family<SortUsecase, Tuple2<Sort, ScrollController>>(
+      (ref, data) {
     final value = data.item1;
     final scrollController = data.item2;
     final repoNotifier = ref.read(repoNotifierProvider.notifier);
