@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod/src/framework.dart';
 import 'package:search_repo/application/state/page/page.dart';
-import 'package:search_repo/application/state/repo/repo.dart';
+import 'package:search_repo/application/state/repo/repo_provider.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/application/usecase/add_usecase.dart';
@@ -31,7 +32,7 @@ final repositoryProvider = Provider<Repo>((ref) {
 final initAppProvider = Provider<InitUsecase>(
   (ref) {
     final repo = ref.watch(repositoryProvider);
-    final repoNotifier = ref.read(repoNotifierProvider.notifier);
+    final repoNotifier = ref.watch(repoProvider.notifier);
     return InitUsecase(
       repo: repo,
       repoNotifier: repoNotifier,
@@ -39,39 +40,32 @@ final initAppProvider = Provider<InitUsecase>(
   },
 );
 
-/*/// Add App
+/// Add App
 final addAppProvider = Provider.family<AddUsecase, ScrollController>(
   (ref, scrollController) {
-    final httpClient = ref.watch(httpClientProvider);
-    final page = ref.watch(pageNotifierProvider);
-    final search = ref.watch(searchNotifierProvider);
-    final sort = ref.watch(sortNotifierProvider);
-    final repo = Repo(httpClient: httpClient, page: page + 1, search: search, sort: sort);
     final pageNotifier = ref.read(pageNotifierProvider.notifier);
-    final repoNotifier = ref.read(repoNotifierProvider.notifier);
+    final repo = ref.read(repositoryProvider);
+    final repoNotifier = ref.read(repoProvider.notifier);
     return AddUsecase(
-      pageNotifier: pageNotifier,
       repo: repo,
       repoNotifier: repoNotifier,
       scrollController: scrollController,
+      pageNotifier: pageNotifier,
     );
-  },
+  }
 );
 
-/// Search App
+/*/// Search App
 final searchProvider =
     Provider.family<SearchUsecase, Tuple2<String, ScrollController>>(
   (ref, data) {
     final search = data.item1;
     final scrollController = data.item2;
-    final httpClient = ref.watch(httpClientProvider);
-    final page = ref.watch(pageNotifierProvider);
-    final sort = ref.watch(sortNotifierProvider);
-    final repo = Repo(httpClient: httpClient, page: page, search: search,  sort: sort);
     final searchNotifier = ref.watch(searchNotifierProvider.notifier);
-    final repoNotifier = ref.watch(repoNotifierProvider.notifier);
+    searchNotifier.update(search);
+    final repo = ref.watch(repositoryProvider);
+    final repoNotifier = ref.watch(repoProvider.notifier);
     final pageNotifier = ref.watch(pageNotifierProvider.notifier);
-
     return SearchUsecase(
       repo: repo,
       searchText: search,

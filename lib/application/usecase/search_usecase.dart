@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:search_repo/application/state/page/page.dart';
-import 'package:search_repo/application/state/repo/repo.dart';
+import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';

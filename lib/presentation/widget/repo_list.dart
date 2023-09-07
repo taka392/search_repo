@@ -14,13 +14,11 @@ import 'package:search_repo/presentation/widget/custom_gesture_detector.dart';
 import 'package:search_repo/presentation/widget/custom_text.dart';
 import 'package:search_repo/presentation/widget/search_app_bar.dart';
 class RepoList extends HookConsumerWidget {
-  final ScrollController scrollController;
   final RepoModel data;
 
 
   const RepoList({
     Key? key,
-    required this.scrollController,
     required this.data,
   }) : super(key: key);
 
@@ -28,14 +26,16 @@ class RepoList extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isLoading = useState(false);
     final locate = ref.watch(appLocalizationsProvider);
+    ScrollController scrollController = useScrollController();
+
 
     void scroll() async {
       if (!isLoading.value &&
           scrollController.position.pixels ==
               scrollController.position.maxScrollExtent) {
         isLoading.value = true;
-        /*final usecase = ref.read(addAppProvider(scrollController));
-        await usecase.add();*/
+        final usecase = ref.read(addAppProvider(scrollController));
+        await usecase.add();
         final page = ref.read(pageNotifierProvider);
         debugPrint(page.toString());
         isLoading.value = false;

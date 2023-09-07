@@ -1,4 +1,4 @@
-import 'package:search_repo/application/state/repo/repo.dart';
+import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
 
 /// アプリの初期準備をする

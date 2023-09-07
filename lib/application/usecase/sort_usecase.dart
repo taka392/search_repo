@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:search_repo/application/state/repo/repo.dart';
+import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/domain/types/sort_enum.dart';
