@@ -7,7 +7,6 @@ import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/application/usecase/add_usecase.dart';
 import 'package:search_repo/application/usecase/detail_usecase.dart';
-import 'package:search_repo/application/usecase/initial_usecase.dart';
 import 'package:search_repo/application/usecase/refresh_usecase.dart';
 import 'package:search_repo/application/usecase/search_usecase.dart';
 import 'package:search_repo/application/usecase/sort_usecase.dart';
@@ -97,7 +96,7 @@ final sortProvider =
       repoNotifier: repoNotifier,
       sortNotifier: sortNotifier,
       repo: repo,
-      value: value,
+      data: value,
       scrollController: scrollController,
     );
   },

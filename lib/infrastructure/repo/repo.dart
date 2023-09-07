@@ -7,6 +7,7 @@ abstract class Repo {
   Future addRepo();
   Future searchRepo(String data);
   Future refreshRepo();
+  Future sortRepo(Sort data);
 }
 class RepoImpl implements Repo {
   http.Client httpClient;
@@ -49,6 +50,18 @@ class RepoImpl implements Repo {
     String initText = "stars:>0";
     final response = await httpClient.get(Uri.parse(
         'https://api.github.com/search/repositories?q=$initText&page=$initPage&per_page=20'));
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
+      final RepoModel repo = RepoModel.fromJson(data);
+      return repo;
+    } else {
+      throw Exception('Invalid JSON response structure');
+    }
+  }
+  @override
+  Future sortRepo(Sort data) async {
+    final response = await httpClient.get(Uri.parse(
+        'https://api.github.com/search/repositories?q=$search&sort=$data&page=$page&per_page=20'));
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       final RepoModel repo = RepoModel.fromJson(data);
