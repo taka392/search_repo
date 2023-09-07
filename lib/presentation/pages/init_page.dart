@@ -14,13 +14,9 @@ class InitPage extends HookConsumerWidget {
     final locate = ref.watch(appLocalizationsProvider);
     useEffect(() {
       void navigateToNextPage() async {
-
-
         //初期化処理
         final usecase = ref.read(refreshProvider);
         await usecase.refresh();
-        /*final usecase = ref.read(initAppProvider);
-        await usecase.init();*/ // 非同期処理が完了するまで待つ
         final router = ref.read(goRouterProvider);
         router.pushNamed(
           PageId.list.routeName,

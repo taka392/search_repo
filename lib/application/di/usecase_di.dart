@@ -30,16 +30,6 @@ final repositoryProvider = Provider<Repo>((ref) {
 
 /// Init App
 /// この処理はRefreshのみでいいので、後に修正する。
-final initAppProvider = Provider<InitUsecase>(
-  (ref) {
-    final repo = ref.watch(repositoryProvider);
-    final repoNotifier = ref.watch(repoProvider.notifier);
-    return InitUsecase(
-      repo: repo,
-      repoNotifier: repoNotifier,
-    );
-  },
-);
 
 /// Add App
 final addAppProvider = Provider.family<AddUsecase, ScrollController>(
@@ -94,19 +84,15 @@ final refreshProvider = Provider<RefreshUsecase>(
     );
   },
 );
-/*
 /// Sort App
 final sortProvider =
     Provider.family<SortUsecase, Tuple2<Sort, ScrollController>>(
   (ref, data) {
     final value = data.item1;
     final scrollController = data.item2;
-    final repoNotifier = ref.read(repoNotifierProvider.notifier);
+    final repoNotifier = ref.read(repoProvider.notifier);
     final sortNotifier = ref.read(sortNotifierProvider.notifier);
-    final http = ref.watch(httpClientProvider);
-    final page = ref.watch(pageNotifierProvider);
-    final search = ref.watch(searchNotifierProvider);
-    final repo = Repo(http, page, search, value);
+    final repo = ref.watch(repositoryProvider);
     return SortUsecase(
       repoNotifier: repoNotifier,
       sortNotifier: sortNotifier,
@@ -115,7 +101,7 @@ final sortProvider =
       scrollController: scrollController,
     );
   },
-);*/
+);
 /// Detail App
 //画面をタップしたら、詳細画面を表示させるUsecaseです。
 final detailProvider = Provider.family<DetailUsecase, ItemModel>(
