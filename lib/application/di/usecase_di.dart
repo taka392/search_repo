@@ -77,15 +77,14 @@ final searchProvider =
   },
 );
 
-/*/// Refresh App
+/// Refresh App
 final refreshProvider = Provider<RefreshUsecase>(
   (ref) {
     final searchNotifier = ref.read(searchNotifierProvider.notifier);
-    final repoNotifier = ref.read(repoNotifierProvider.notifier);
+    final repoNotifier = ref.read(repoProvider.notifier);
     final sortNotifier = ref.read(sortNotifierProvider.notifier);
     final pageNotifier = ref.read(pageNotifierProvider.notifier);
-    final http = ref.watch(httpClientProvider);
-    final repo = Repo(http, 1, 'stars:>0', Sort.stars);
+    final repo = ref.watch(repositoryProvider);
     return RefreshUsecase(
       pageNotifier: pageNotifier,
       repoNotifier: repoNotifier,
@@ -95,7 +94,7 @@ final refreshProvider = Provider<RefreshUsecase>(
     );
   },
 );
-
+/*
 /// Sort App
 final sortProvider =
     Provider.family<SortUsecase, Tuple2<Sort, ScrollController>>(

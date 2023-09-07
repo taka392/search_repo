@@ -27,7 +27,7 @@ class RefreshUsecase {
   /// 一連の流れをまとめて実施する
   Future<void> refresh() async {
     //リポジトリを初期化
-    RepoModel data = await repo.getRepo();
+    RepoModel data = await repo.refreshRepo();
     //リポジトリをStateに保存
     repoNotifier.save(data);
     //pageの初期化

@@ -29,18 +29,14 @@ class ListPage extends HookConsumerWidget {
         loading: () => CustomAnimation(
           imageUrl: 'assets/lottie/loading.json',
           text: locate.searching,
-          onRefresh: () async {
-            /*final usecase = ref.read(refreshProvider);
-            usecase.refresh();*/
-          },
           key: loadingKey,
         ),
         error: (e, s) => CustomAnimation(
           imageUrl: 'assets/lottie/error.json',
           text: locate.error,
           onRefresh: () async {
-            /*final usecase = ref.read(refreshProvider);
-            usecase.refresh();*/
+            final usecase = ref.read(refreshProvider);
+            usecase.refresh();
           },
           key: errorKey,
         ),
@@ -50,8 +46,8 @@ class ListPage extends HookConsumerWidget {
               imageUrl: 'assets/lottie/not_found.json',
               text: locate.noHit,
               onRefresh: () async {
-                /*final usecase = ref.read(refreshProvider);
-                usecase.refresh();*/
+                final usecase = ref.read(refreshProvider);
+                usecase.refresh();
               },
               key: noHitKey,
             );

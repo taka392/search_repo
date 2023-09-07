@@ -8,10 +8,6 @@ import 'package:search_repo/presentation/router/app.dart';
 void main() async {
   // インスタンスを非同期で取得
   WidgetsFlutterBinding.ensureInitialized();
-/*  final container = ProviderContainer();
-  //初期化処理
-  final usecase = container.read(refreshProvider);
-  usecase.refresh();*/
   const app = App();
   const scope = ProviderScope(
     overrides: [],
