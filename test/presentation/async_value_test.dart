@@ -3,12 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
+import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/pages/list_page.dart';
 import 'package:http/http.dart' as http;
+
+import '../domain/mock_data.dart';
 import '../fake_repository.dart';
+
 import '../infrastructure/http_server_test.mocks.dart';
 import '../repo_provider.dart';
 
@@ -36,22 +40,26 @@ void main() {
 
 
   testWidgets('Test loading behavior', (WidgetTester tester) async {
-    // Create an instance of MockRepoProvider and set it to loading state
-    final mockRepoProvider = MockRepoProvider.loading();
-
+    const data = MockData.jsonMock;
+    final mockClient = MockClient();
+    //空文字を送信するとリクエストはせず、エラーメッセージを表示する仕様
+    when(mockClient.get(any))
+        .thenAnswer((_) async => http.Response(data, 200));
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          repoProvider.overrideWithValue(mockRepoProvider),
+          httpClientProvider.overrideWithValue(mockClient),
         ],
         child: const MaterialApp(
-          home: ListPage(), // Specify the widget to test the loading behavior
+          home: ListPage(),
           // Other necessary configurations
         ),
       ),
     );
-
-    // Add an assertion to verify the loading state within the widget
+    final container = ProviderContainer();
+    final repo = container.read(repoProvider.notifier);
+    repo.loadingText();
+    await tester.pump();
     expect(find.byKey(ListPage.loadingKey), findsOneWidget);
   });
 

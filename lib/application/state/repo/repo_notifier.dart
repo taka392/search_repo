@@ -27,6 +27,10 @@ class RepoNotifier extends StateNotifier<AsyncValue<RepoModel>> {
   void refresh() {
     state = const AsyncValue.loading();
   }
+  void loadingText(){
+    state = const AsyncValue.loading();
+  }
+
 }
 
 
