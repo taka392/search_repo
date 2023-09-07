@@ -12,44 +12,49 @@ import 'package:search_repo/presentation/widget/custom_drop_down.dart';
 import 'package:search_repo/presentation/widget/custom_gesture_detector.dart';
 import 'package:search_repo/presentation/widget/custom_text.dart';
 import 'package:search_repo/presentation/widget/search_app_bar.dart';
+// ignore: must_be_immutable
 class RepoList extends HookConsumerWidget {
-  final RepoModel data;
+  final RepoModel? data;
+  final ScrollController controller;
+  final ValueNotifier<bool> isLoading;
 
-
-  const RepoList({
+  RepoList({
     Key? key,
-    required this.data,
-  }) : super(key: key);
+    this.data,
+  }) :
+        controller = ScrollController(),
+        isLoading = ValueNotifier(false),
+        super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLoading = useState(false);
     final locate = ref.watch(appLocalizationsProvider);
-    ScrollController scrollController = useScrollController();
+
 
 
     void scroll() async {
       if (!isLoading.value &&
-          scrollController.position.pixels ==
-              scrollController.position.maxScrollExtent) {
+          controller.position.pixels ==
+              controller.position.maxScrollExtent) {
         isLoading.value = true;
-        final usecase = ref.read(addAppProvider(scrollController));
+        final usecase = ref.read(addAppProvider(controller));
         await usecase.add();
         isLoading.value = false;
       }
     }
 
     useEffect(() {
-      scrollController.addListener(scroll);
+      controller.addListener(scroll);
       return () {
-        scrollController.removeListener(scroll);
-        scrollController.dispose();
+        controller.removeListener(scroll);
+        controller.dispose();
+        isLoading.dispose(); // ValueNotifierのdisposeを呼び出す
       };
     }, []);
 
     return Scaffold(
       appBar: SearchAppBar(
-        scrollController: scrollController,
+        scrollController: controller,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,13 +65,13 @@ class RepoList extends HookConsumerWidget {
                 width: 30,
               ),
               CustomTextWidget(
-                text: "${data.totalCount.toString()} ${locate.cases}",
+                text: "${data!.totalCount.toString()} ${locate.cases}",
                 maxLine: 1,
                 textStyle: CustomText.titleM,
               ),
               const Spacer(),
               CustomDropdown(
-                scrollController: scrollController,
+                scrollController: controller,
               ),
               const SizedBox(
                 width: 30,
@@ -78,15 +83,15 @@ class RepoList extends HookConsumerWidget {
           ),
           Expanded(
             child: ListView.separated(
-              controller: scrollController,
-              itemCount: data.items.length + 1,
+              controller: controller,
+              itemCount: data!.items.length + 1,
               separatorBuilder: (BuildContext context, int index) =>
               const Divider(
                 height: 15,
               ),
               itemBuilder: (BuildContext context, index) {
-                if (index < data.items.length) {
-                  ItemModel repo = data.items[index];
+                if (index < data!.items.length) {
+                  ItemModel repo = data!.items[index];
                   return CustomGestureDetector(data: repo, onPressed: () {
                     final usecase = ref.read(detailProvider(repo));
                     usecase.detail();

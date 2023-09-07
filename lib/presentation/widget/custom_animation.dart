@@ -14,7 +14,7 @@ class CustomAnimation extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return RefreshIndicator(
         color: Colors.grey,
-        onRefresh: onRefresh!,
+      onRefresh: onRefresh!,
         child: ListView(
           children: [
             const SizedBox(height: 80),

@@ -8,9 +8,10 @@ import 'package:search_repo/presentation/widget/custom_animation.dart';
 import 'package:search_repo/presentation/widget/repo_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+
+
 class ListPage extends HookConsumerWidget {
   const ListPage({Key? key}) : super(key: key);
-
 
   @visibleForTesting
   static final loadingKey = UniqueKey();
@@ -21,14 +22,17 @@ class ListPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AppLocalizations locate = ref.watch(appLocalizationsProvider);
+    final locate = ref.watch(appLocalizationsProvider);
     final repoData = ref.watch(repoProvider);
-
     return Scaffold(
       body: repoData.when(
         loading: () => CustomAnimation(
           imageUrl: 'assets/lottie/loading.json',
           text: locate.searching,
+          onRefresh: () async {
+            final usecase = ref.read(refreshProvider);
+            usecase.refresh();
+          },
           key: loadingKey,
         ),
         error: (e, s) => CustomAnimation(

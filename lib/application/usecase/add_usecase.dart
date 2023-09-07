@@ -28,7 +28,9 @@ class AddUsecase {
     //Riverpodに保存
     repoNotifier.add(data);
     //ページ番号を更新
+    debugPrint(pageNotifier.state.toString());
     pageNotifier.update();
+    debugPrint(pageNotifier.state.toString());
     //スクロールアニメーションを実行
     if (scrollController != null) {
       await scrollController!.animateTo(
