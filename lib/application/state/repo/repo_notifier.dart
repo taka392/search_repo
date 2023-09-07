@@ -2,27 +2,30 @@
 
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:search_repo/application/di/usecase_di.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 
-class RepoNotifier extends StateNotifier<AsyncValue<RepoModel>> {
-  RepoNotifier(AsyncValue<RepoModel> state) : super(state);
+class RepoNotifier extends StateNotifier<CustomAsyncValue<RepoModel>> {
+  RepoNotifier() : super(CustomAsyncValue<RepoModel>(
+    data: const RepoModel(items: [], totalCount: 1),
+  ));
 
   Future<void> save(RepoModel data) async {
-    state = AsyncValue.data(data);
+    state = CustomAsyncValue<RepoModel>(data: data);
   }
 
   Future<void> add(RepoModel data) async {
-    state = AsyncValue.data(RepoModel(
-      items: [...(state.value?.items ?? []), ...data.items],
-      totalCount: data.totalCount,
-    ));
+    state = CustomAsyncValue<RepoModel>(
+      data: RepoModel(
+        items: [...(state.data?.items ?? []), ...data.items],
+        totalCount: data.totalCount,
+      ),
+    );
   }
 
   void refresh() {
-    state = const AsyncValue.data(RepoModel(items: [], totalCount: 1));
-  }
-
-  void setLoading() {
-    state = const AsyncValue<RepoModel>.loading();
+    state = CustomAsyncValue<RepoModel>(
+      data: const RepoModel(items: [], totalCount: 1),
+    );
   }
 }

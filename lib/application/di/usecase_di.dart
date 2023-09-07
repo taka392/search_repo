@@ -11,10 +11,62 @@ import 'package:search_repo/application/usecase/refresh_usecase.dart';
 import 'package:search_repo/application/usecase/search_usecase.dart';
 import 'package:search_repo/application/usecase/sort_usecase.dart';
 import 'package:search_repo/domain/types/item_model.dart';
+import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/domain/types/sort_enum.dart';
 import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
 import 'package:tuple/tuple.dart';
+
+
+class CustomAsyncValue<T> {
+  final T? data;
+  final String? error;
+  final bool loading;
+
+  CustomAsyncValue({
+    this.data,
+    this.error,
+    this.loading = false,
+  });
+}
+
+final repositoryStateProvider = Provider<CustomAsyncValue<Repo>>((ref) {
+  final asyncValue = ref.watch(repoProvider);
+
+  if (asyncValue.loading) {
+    // ローディング中の場合
+    return CustomAsyncValue<Repo>(loading: true);
+  } else if (asyncValue.error != null) {
+    // エラーが発生した場合
+    return CustomAsyncValue<Repo>(error: asyncValue.error);
+  } else if (asyncValue.data != null) {
+    // データが存在する場合
+    final httpClient = ref.watch(httpClientProvider);
+    final page = ref.watch(pageNotifierProvider);
+    final search = ref.watch(searchNotifierProvider);
+    final sort = ref.watch(sortNotifierProvider);
+    return CustomAsyncValue<Repo>(
+      data: RepoImpl(httpClient: httpClient, page: page, search: search, sort: sort),
+    );
+  } else {
+    // その他のケースに対するハンドリング
+    return CustomAsyncValue<Repo>(error: 'Unknown error');
+  }
+});
+
+final asyncValueProvider = FutureProvider<CustomAsyncValue<RepoModel>>((ref) async {
+  try {
+    // データの非同期取得ロジックをここに記述
+
+    final repository = ref.watch(repoProvider);
+
+    return CustomAsyncValue<RepoModel>(data: repository.data);
+  } catch (e) {
+    // エラーハンドリング
+    return CustomAsyncValue<RepoModel>(error: e.toString());
+  }
+});
+
 
 
 ///リポジトリインスタンスを取得する。

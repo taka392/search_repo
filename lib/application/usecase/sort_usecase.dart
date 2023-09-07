@@ -34,8 +34,6 @@ class SortUsecase {
     //SortのState値を更新
     sortNotifier.save(data);
 
-
-
     if (scrollController != null) {
       await scrollController!.animateTo(
         scrollController!.position.maxScrollExtent * 0,
