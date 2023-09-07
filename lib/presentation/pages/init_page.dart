@@ -18,9 +18,7 @@ class InitPage extends HookConsumerWidget {
 
         //初期化処理
         final usecase = ref.read(refreshProvider);
-        usecase.refresh();
-
-
+        await usecase.refresh();
         /*final usecase = ref.read(initAppProvider);
         await usecase.init();*/ // 非同期処理が完了するまで待つ
         final router = ref.read(goRouterProvider);

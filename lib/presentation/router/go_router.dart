@@ -1,16 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
 import 'package:search_repo/presentation/pages/init_page.dart';
 import 'package:search_repo/presentation/pages/list_page.dart';
 import 'package:search_repo/presentation/router/page_path.dart';
 import 'package:search_repo/presentation/widget/custom_transition.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 /// Provide GoRouter
 final goRouterProvider = Provider(
   (ref) {
-
     final routes = [
       GoRoute(
         path: PageId.list.path,
