@@ -29,6 +29,7 @@ final repositoryProvider = Provider<Repo>((ref) {
 
 
 /// Init App
+/// この処理はRefreshのみでいいので、後に修正する。
 final initAppProvider = Provider<InitUsecase>(
   (ref) {
     final repo = ref.watch(repositoryProvider);
@@ -55,27 +56,26 @@ final addAppProvider = Provider.family<AddUsecase, ScrollController>(
   }
 );
 
-/*/// Search App
+/// Search App
 final searchProvider =
     Provider.family<SearchUsecase, Tuple2<String, ScrollController>>(
   (ref, data) {
-    final search = data.item1;
+    final text = data.item1;
     final scrollController = data.item2;
     final searchNotifier = ref.watch(searchNotifierProvider.notifier);
-    searchNotifier.update(search);
     final repo = ref.watch(repositoryProvider);
     final repoNotifier = ref.watch(repoProvider.notifier);
     final pageNotifier = ref.watch(pageNotifierProvider.notifier);
     return SearchUsecase(
       repo: repo,
-      searchText: search,
+      text: text,
       searchNotifier: searchNotifier,
       repoNotifier: repoNotifier,
       pageNotifier: pageNotifier,
       scrollController: scrollController,
     );
   },
-);*/
+);
 
 /*/// Refresh App
 final refreshProvider = Provider<RefreshUsecase>(

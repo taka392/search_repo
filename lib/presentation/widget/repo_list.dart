@@ -4,7 +4,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
 import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
-import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/domain/types/item_model.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/theme/color.dart';
@@ -36,8 +35,6 @@ class RepoList extends HookConsumerWidget {
         isLoading.value = true;
         final usecase = ref.read(addAppProvider(scrollController));
         await usecase.add();
-        final page = ref.read(pageNotifierProvider);
-        debugPrint(page.toString());
         isLoading.value = false;
       }
     }
