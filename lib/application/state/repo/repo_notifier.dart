@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 
 class RepoNotifier extends StateNotifier<AsyncValue<RepoModel>> {
-  RepoNotifier() : super(const AsyncValue.data(RepoModel(items: [], totalCount: 1)));
+  RepoNotifier() : super(const AsyncValue.loading());
 
   Future<void> save(RepoModel data) async {
     state = AsyncValue.data(data);
@@ -28,4 +28,5 @@ class RepoNotifier extends StateNotifier<AsyncValue<RepoModel>> {
     state = const AsyncValue.loading();
   }
 }
+
 
