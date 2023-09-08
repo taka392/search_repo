@@ -11,19 +11,31 @@ import 'package:search_repo/presentation/widget/repo_list.dart';
 class ListPage extends HookConsumerWidget {
   const ListPage({Key? key}) : super(key: key);
 
+
   @visibleForTesting
   static final loadingKey = UniqueKey();
+
   @visibleForTesting
-  static final errorKey = UniqueKey();
+  static final aaerrorKey = UniqueKey();
+
   @visibleForTesting
   static final noHitKey = UniqueKey();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locate = ref.watch(appLocalizationsProvider);
-    final repoData = ref.watch(repoProvider);
+    final repoData = ref.watch(watchRepoProvider);
     return Scaffold(
       body: repoData.when(
+        error: (e, s) => CustomAnimation(
+          imageUrl: 'assets/lottie/error.json',
+          text: "エラー"/*locate.error*/,
+          onRefresh: () async {
+            final usecase = ref.read(refreshProvider);
+            usecase.refresh();
+          },
+          key: aaerrorKey,
+        ),
         loading: () => CustomAnimation(
           imageUrl: 'assets/lottie/loading.json',
           text: locate.searching,
@@ -32,15 +44,6 @@ class ListPage extends HookConsumerWidget {
             usecase.refresh();
           },
           key: loadingKey,
-        ),
-        error: (e, s) => CustomAnimation(
-          imageUrl: 'assets/lottie/error.json',
-          text: locate.error,
-          onRefresh: () async {
-            final usecase = ref.read(refreshProvider);
-            usecase.refresh();
-          },
-          key: errorKey,
         ),
         data: (data) {
           if (data.totalCount == 0) {

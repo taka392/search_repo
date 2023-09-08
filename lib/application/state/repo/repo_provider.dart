@@ -3,8 +3,13 @@ import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 
 
-final repoProvider = StateNotifierProvider<RepoNotifier, AsyncValue<RepoModel>>(
-      (ref) => RepoNotifier(),
+final watchRepoProvider = Provider<AsyncValue<RepoModel>>((ref) {
+  return ref.watch(repoProvider);
+});
+
+
+final repoProvider = StateNotifierProvider<RepoNotifier<RepoModel>, AsyncValue<RepoModel>>(
+      (ref) => RepoNotifier<RepoModel>(),
 );
 
 

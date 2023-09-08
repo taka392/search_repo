@@ -4,20 +4,25 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 
-class RepoNotifier extends StateNotifier<AsyncValue<RepoModel>> {
+class RepoNotifier<T> extends StateNotifier<AsyncValue<T>> {
   RepoNotifier() : super(const AsyncValue.loading());
 
-  Future<void> save(RepoModel data) async {
+  Future<void> save(T data) async {
     state = AsyncValue.data(data);
   }
 
-  Future<void> add(RepoModel data) async {
+  Future<void> add(T data) async {
     state = state.when(
-      data: (repoModel) {
-        return AsyncValue.data(RepoModel(
-          items: [...repoModel.items, ...data.items],
-          totalCount: data.totalCount,
-        ));
+      data: (existingData) {
+        // エラーチェックと型変換が必要
+        if (existingData is RepoModel && data is RepoModel) {
+          return AsyncValue.data(RepoModel(
+            items: [...existingData.items, ...data.items],
+            totalCount: data.totalCount,
+          ) as T);
+        } else {
+          return state; // エラーまたは不正な型の場合、現在の状態を返す
+        }
       },
       loading: () => state,
       error: (error, stackTrace) => state,
@@ -31,6 +36,14 @@ class RepoNotifier extends StateNotifier<AsyncValue<RepoModel>> {
     state = const AsyncValue.loading();
   }
 
+
+
+  void errorText() {
+    final fakeStackTrace = StackTrace.fromString('Fake stack trace'); // ダミーのスタックトレースを生成
+    state = AsyncValue.error("エラーメッセージ", fakeStackTrace);
+  }
+
 }
+
 
 

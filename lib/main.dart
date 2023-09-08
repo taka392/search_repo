@@ -14,7 +14,6 @@ void main() async {
     child: app,
   );
 
-  // Device Preview
   Widget window = scope;
 
   // Web上で実行されている時のみDevicePreviewを有効化
