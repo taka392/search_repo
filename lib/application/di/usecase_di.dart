@@ -26,10 +26,6 @@ final repositoryProvider = Provider<Repo>((ref) {
   return RepoImpl(httpClient: httpClient, page: page, search: search, sort: sort);
 });
 
-
-/// Init App
-/// この処理はRefreshのみでいいので、後に修正する。
-
 /// Add App
 final addAppProvider = Provider.family<AddUsecase, ScrollController?>(
   (ref, scrollController) {
@@ -101,6 +97,8 @@ final sortProvider =
     );
   },
 );
+
+
 /// Detail App
 //画面をタップしたら、詳細画面を表示させるUsecaseです。
 final detailProvider = Provider.family<DetailUsecase, ItemModel>(
@@ -112,7 +110,7 @@ final detailProvider = Provider.family<DetailUsecase, ItemModel>(
 );
 
 
-/// Test APp
+/// Test APP
 // テスト用に初期値を変更するUsecaseです。
 final testProvider = Provider<TestUsecase>(
       (ref) {

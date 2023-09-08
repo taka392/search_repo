@@ -10,7 +10,14 @@ import 'package:tuple/tuple.dart';
 class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
   final ScrollController? scrollController;
   const SearchAppBar( {Key? key,this.scrollController}) : super(key: key);
-//
+
+
+  @visibleForTesting
+  static final textFormField = UniqueKey();
+  @visibleForTesting
+  static final clear = UniqueKey();
+
+
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
   @override
@@ -27,10 +34,12 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
               width: 343,
               height: 36,
               child: TextFormField(
+                key: textFormField,
                   controller: textController,
                   style: CustomText.titleM,
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
+                      key: clear,
                         icon: const Icon(
                           Icons.clear,
                         ),

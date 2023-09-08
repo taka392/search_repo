@@ -15,17 +15,18 @@ import 'package:search_repo/presentation/widget/search_app_bar.dart';
 // ignore: must_be_immutable
 class RepoList extends HookConsumerWidget {
   final RepoModel? data;
-  final ValueNotifier<bool> isLoading;
+  /*final ValueNotifier<bool> isLoading;*/
 
-  RepoList({
+  const RepoList({
     Key? key,
     this.data,
   }) :
 
-        isLoading = ValueNotifier(false),
+        /*isLoading = ValueNotifier(false),*/
         super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isLoading = useState(false);
     final locate = ref.watch(appLocalizationsProvider);
     final controller = useScrollController();
 
@@ -63,7 +64,7 @@ class RepoList extends HookConsumerWidget {
                 width: 30,
               ),
               CustomTextWidget(
-                text: "${data!.totalCount.toString()} ${locate.cases}",
+                text: "${data?.totalCount.toString() ?? '0'} ${locate.cases}",
                 maxLine: 1,
                 textStyle: CustomText.titleM,
               ),
