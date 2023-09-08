@@ -26,6 +26,10 @@ class RepoList extends HookConsumerWidget {
         isLoading = ValueNotifier(false),
         super(key: key);
 
+  //ListViewのにセットした controllerをテストで取得する。
+  ScrollController getListScrollController() {
+    return controller;
+  }
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locate = ref.watch(appLocalizationsProvider);

@@ -1,8 +1,22 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:search_repo/application/state/http_client.dart';
 import 'dart:convert';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/domain/types/sort_enum.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
+
+
+final fakeRepositoryProvider = Provider<Repo>((ref) {
+  final httpClient = ref.watch(httpClientProvider);
+  const fakePage = 3;
+  const fakeSearch = "Flutter";
+  const fakeSort = Sort.forks;
+  return RepoImpl(httpClient: httpClient, page: fakePage, search: fakeSearch, sort: fakeSort);
+});
+
+
+
 class FakeImpl implements Repo {
   http.Client httpClient;
   int page;
