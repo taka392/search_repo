@@ -45,6 +45,13 @@ class CustomDropdown extends ConsumerWidget {
           locate.updated,
           style: CustomText.titleM,
         ),
+      ),
+      DropdownMenuItem(
+        value: Sort.empty,
+        child: Text(
+          locate.empty,
+          style: CustomText.titleM,
+        ),
       )
     ];
 

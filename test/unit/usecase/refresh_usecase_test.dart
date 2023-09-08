@@ -1,12 +1,15 @@
+import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
+import 'package:mockito/mockito.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
 import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/application/state/page/page.dart';
-import 'package:search_repo/application/state/repo/repo_provider.dart';
+import 'package:search_repo/application/state/search/search.dart';
+import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
+import 'package:search_repo/domain/types/sort_enum.dart';
 import '../../http_mocks.dart';
 import '../../mock_data.dart';
 /// Usecaseのテスト
@@ -18,6 +21,10 @@ void main() {
     const data = MockData.jsonMock;
     when(client.get(any)).thenAnswer((_) async => http.Response(data, 200));
 
+
+
+    final RepoModel result = RepoModel.fromJson(json.decode(data));
+
     //プロバイダーをオーバーライド
     final container = ProviderContainer(
       overrides: [
@@ -25,24 +32,27 @@ void main() {
       ],
     );
 
-    //Repoの初期値がAsyncLoadingであるか確認。
-    final repo = container.read(watchRepoProvider);
-    await tester.pumpAndSettle();
-    expect(repo, const AsyncLoading<Never>());
+    //stateに仮の値を代入.(Stateに保存されていれば、ログに表示される。)
+    final testUsecase = container.read(testProvider);
+    testUsecase.test(result, 3, "Flutter", Sort.forks);
 
-    //UseCaseを実行
+    //RefreshUseCaseを実行
     final addUseCase = container.read(refreshProvider);
     await addUseCase.refresh();
 
     //Page番号が更新されているかのチェック
     int page = container.read(pageNotifierProvider);
     await tester.pumpAndSettle();
-    expect(page, 2);
+    expect(page, 1);
 
-
-    //RiverPodに保存できているかのチェック
-    final updateRepo = container.read(watchRepoProvider);
+    //Searchが更新されているかのチェック
+    String search = container.read(searchNotifierProvider);
     await tester.pumpAndSettle();
-    expect(updateRepo, isA<AsyncValue<RepoModel>>());
+    expect(search, "stars:>0");
+
+    //Sort番号が更新されているかのチェック
+    Sort sort = container.read(sortNotifierProvider);
+    await tester.pumpAndSettle();
+    expect(sort, Sort.empty);
   });
 }

@@ -9,6 +9,7 @@ import 'package:search_repo/application/usecase/detail_usecase.dart';
 import 'package:search_repo/application/usecase/refresh_usecase.dart';
 import 'package:search_repo/application/usecase/search_usecase.dart';
 import 'package:search_repo/application/usecase/sort_usecase.dart';
+import 'package:search_repo/application/usecase/test_usecase.dart';
 import 'package:search_repo/domain/types/item_model.dart';
 import 'package:search_repo/domain/types/sort_enum.dart';
 import 'package:search_repo/application/state/http_client.dart';
@@ -46,7 +47,7 @@ final addAppProvider = Provider.family<AddUsecase, ScrollController?>(
 
 /// Search App
 final searchProvider =
-    Provider.family<SearchUsecase, Tuple2<String, ScrollController>>(
+    Provider.family<SearchUsecase, Tuple2<String, ScrollController?>>(
   (ref, data) {
     final text = data.item1;
     final scrollController = data.item2;
@@ -84,7 +85,7 @@ final refreshProvider = Provider<RefreshUsecase>(
 );
 /// Sort App
 final sortProvider =
-    Provider.family<SortUsecase, Tuple2<Sort, ScrollController>>(
+    Provider.family<SortUsecase, Tuple2<Sort, ScrollController?>>(
   (ref, data) {
     final value = data.item1;
     final scrollController = data.item2;
@@ -109,3 +110,24 @@ final detailProvider = Provider.family<DetailUsecase, ItemModel>(
     );
   },
 );
+
+
+/// Test APp
+// テスト用に初期値を変更するUsecaseです。
+final testProvider = Provider<TestUsecase>(
+      (ref) {
+    final searchNotifier = ref.read(searchNotifierProvider.notifier);
+    final repoNotifier = ref.read(repoProvider.notifier);
+    final sortNotifier = ref.read(sortNotifierProvider.notifier);
+    final pageNotifier = ref.read(pageNotifierProvider.notifier);
+    final repo = ref.watch(repositoryProvider);
+    return TestUsecase(
+      pageNotifier: pageNotifier,
+      repoNotifier: repoNotifier,
+      searchNotifier: searchNotifier,
+      sortNotifier: sortNotifier,
+      repo: repo,
+    );
+  },
+);
+

@@ -21,8 +21,9 @@ class RepoImpl implements Repo {
 
   @override
   Future getRepo() async {
+    String sortValue = (sort == Sort.empty) ? "" : sort.toString(); // Sort.emptyの場合、空文字列にする
     final response = await httpClient.get(Uri.parse(
-        'https://api.github.com/search/repositories?q=$search&sort=$sort&page=$page&per_page=20'));
+        'https://api.github.com/search/repositories?q=$search&sort=$sortValue&page=$page&per_page=20'));
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       final RepoModel repo = RepoModel.fromJson(data);
@@ -34,8 +35,9 @@ class RepoImpl implements Repo {
   @override
   Future addRepo() async {
     int nextPage = page + 1;
+    String sortValue = (sort == Sort.empty) ? "" : sort.toString(); // Sort.emptyの場合、空文字列にする
     final response = await httpClient.get(Uri.parse(
-        'https://api.github.com/search/repositories?q=$search&sort=$sort&page=$nextPage&per_page=20'));
+        'https://api.github.com/search/repositories?q=$search&sort=$sortValue&page=$nextPage&per_page=20'));
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       final RepoModel repo = RepoModel.fromJson(data);
