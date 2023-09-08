@@ -16,7 +16,7 @@ class ListPage extends HookConsumerWidget {
   static final loadingKey = UniqueKey();
 
   @visibleForTesting
-  static final aaerrorKey = UniqueKey();
+  static final errorKey = UniqueKey();
 
   @visibleForTesting
   static final noHitKey = UniqueKey();
@@ -34,7 +34,7 @@ class ListPage extends HookConsumerWidget {
             final usecase = ref.read(refreshProvider);
             usecase.refresh();
           },
-          key: aaerrorKey,
+          key: errorKey,
         ),
         loading: () => CustomAnimation(
           imageUrl: 'assets/lottie/loading.json',

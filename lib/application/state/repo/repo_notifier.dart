@@ -42,7 +42,6 @@ class RepoNotifier<T> extends StateNotifier<AsyncValue<T>> {
     final fakeStackTrace = StackTrace.fromString('Fake stack trace'); // ダミーのスタックトレースを生成
     state = AsyncValue.error("エラーメッセージ", fakeStackTrace);
   }
-
 }
 
 
