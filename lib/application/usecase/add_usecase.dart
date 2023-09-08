@@ -26,7 +26,7 @@ class AddUsecase {
     //新しいリポジトリを取得
     RepoModel data = await repo.addRepo();
     //Riverpodに保存
-    repoNotifier.add(data);
+    await repoNotifier.add(data);
     //ページ番号を更新
     pageNotifier.update();
     //スクロールアニメーションを実行

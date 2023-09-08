@@ -15,25 +15,19 @@ import 'package:search_repo/presentation/widget/search_app_bar.dart';
 // ignore: must_be_immutable
 class RepoList extends HookConsumerWidget {
   final RepoModel? data;
-  final ScrollController controller;
   final ValueNotifier<bool> isLoading;
 
   RepoList({
     Key? key,
     this.data,
   }) :
-        controller = ScrollController(),
+
         isLoading = ValueNotifier(false),
         super(key: key);
-
-  //ListViewのにセットした controllerをテストで取得する。
-  ScrollController getListScrollController() {
-    return controller;
-  }
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locate = ref.watch(appLocalizationsProvider);
-
+    final controller = useScrollController();
 
 
     void scroll() async {

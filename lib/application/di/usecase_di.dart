@@ -30,7 +30,7 @@ final repositoryProvider = Provider<Repo>((ref) {
 /// この処理はRefreshのみでいいので、後に修正する。
 
 /// Add App
-final addAppProvider = Provider.family<AddUsecase, ScrollController>(
+final addAppProvider = Provider.family<AddUsecase, ScrollController?>(
   (ref, scrollController) {
     final pageNotifier = ref.read(pageNotifierProvider.notifier);
     final repo = ref.read(repositoryProvider);
