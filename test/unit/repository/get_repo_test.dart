@@ -6,14 +6,16 @@ import 'package:mockito/mockito.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
 import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
+import '../../http_mocks.dart';
+import '../../mock_data.dart';
 
-import 'http_server_test.mocks.dart';
-import '../domain/mock_data.dart';
 
+
+/// リポジトリ取得関数のテスト
 @GenerateMocks([http.Client])
 void main() {
-  group('リポジトリテスト', () {
-    test('成功時RepoModelが取得できるかのテスト', () async {
+  group('getRepo関数のテスト', () {
+    test('成功時のテスト', () async {
       final client = MockClient();
       const data = MockData.jsonMock;
       when(client.get(any)).thenAnswer((_) async => http.Response(data, 200));
@@ -23,8 +25,9 @@ void main() {
       final repo = container.read(repositoryProvider);
       RepoModel repoModel = await repo.getRepo();
       expect(repoModel, isA<RepoModel>());
+
     });
-    test('失敗時throwsExceptionが実行されるかのテスト', () async {
+    test('失敗時のテスト', () async {
       final client = MockClient();
       when(client.get(any)).thenAnswer((_) async => http.Response('Not Found', 404));
       final container = ProviderContainer(
