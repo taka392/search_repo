@@ -67,7 +67,7 @@ class RepoList extends HookConsumerWidget {
                 width: 30,
               ),
               CustomTextWidget(
-                text: "${data?.totalCount.toString() ?? '0'} ${locate.cases ?? ''}",
+                text: "${data?.totalCount.toString() ?? '0'} ${locate.cases}",
                 maxLine: 1,
                 textStyle: CustomText.titleM,
               ),
