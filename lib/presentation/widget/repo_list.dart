@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecases.dart';
 import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
+import 'package:search_repo/application/state/scroll_controller.dart';
 import 'package:search_repo/application/types/screen_size.dart';
 import 'package:search_repo/domain/types/item/item_model.dart';
 import 'package:search_repo/domain/types/repo/repo_model.dart';
@@ -17,12 +18,10 @@ import 'package:search_repo/presentation/widget/custom_text.dart';
 
 class RepoList extends HookConsumerWidget {
   final RepoModel? data;
-  final ScrollController controller;
 
   const RepoList({
     Key? key,
     this.data,
-    required this.controller,
   }) : super(key: key);
 
   @visibleForTesting
@@ -35,6 +34,7 @@ class RepoList extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isLoading = useState(false);
     final locate = ref.watch(appLocalizationsProvider);
+    final controller = ref.watch(scrollProvider);
 
 
     final screen = ScreenRef(context).watch(screenProvider);
@@ -53,7 +53,6 @@ class RepoList extends HookConsumerWidget {
       controller.addListener(scroll);
       return () {
         controller.removeListener(scroll);
-        controller.dispose();
         isLoading.dispose();
       };
     }, []);

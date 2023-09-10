@@ -37,7 +37,6 @@ class SortUsecase {
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
-      scrollController?.dispose();
     }
   }
 }

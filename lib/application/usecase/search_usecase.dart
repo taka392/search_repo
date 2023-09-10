@@ -41,7 +41,6 @@ class SearchUsecase {
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
-      scrollController?.dispose();
     }
   }
 }
