@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/application/state/search/search.dart';
@@ -35,12 +32,10 @@ class TestUsecase {
     //テスト時にMockデータを代入し、stateに保存する。
     repoNotifier.save(data);
     //pageの初期化
-    pageNotifier.state=page;
+    pageNotifier.save(page);
     //searchの初期化
-    searchNotifier.state = search;
+    searchNotifier.save(search);
     //sortの初期化
-    sortNotifier.state = sort;
-    debugPrint("sort:${sortNotifier.state}/search:${searchNotifier.state}/page:${pageNotifier.state}に更新されました。");
-
+    sortNotifier.save(sort);
   }
 }

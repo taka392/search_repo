@@ -15,4 +15,7 @@ class PageNotifier extends _$PageNotifier {
   void refresh(){
     state= 1;
   }
+  void save(int page){
+    state = page;
+  }
 }

@@ -78,6 +78,7 @@ class FakeImpl implements Repo {
       throw Exception('Invalid JSON response structure');
     }
   }
+
   @override
   Future sortRepo(Sort data) async {
     final response = await httpClient.get(Uri.parse(

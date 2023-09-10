@@ -21,6 +21,9 @@ class ListPage extends HookConsumerWidget {
   @visibleForTesting
   static final noHitKey = UniqueKey();
 
+  @visibleForTesting
+  static final repoList = UniqueKey();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locate = ref.watch(appLocalizationsProvider);
@@ -59,6 +62,7 @@ class ListPage extends HookConsumerWidget {
           } else {
             return RepoList(
               data: data,
+              key: repoList,
             );
           }
         },

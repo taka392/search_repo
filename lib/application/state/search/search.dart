@@ -13,4 +13,7 @@ class SearchNotifier extends _$SearchNotifier {
   void refresh() {
     state = "stars:>0";
   }
+  void save(String search){
+    state = search;
+  }
 }
