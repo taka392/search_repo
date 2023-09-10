@@ -36,7 +36,7 @@ void main() {
       expect(locate.cases, "件");
       expect(locate.stars, "スター");
       expect(locate.forks, "フォーク");
-      expect(locate.empty, "デフォルト検索");
+      expect(locate.empty, "ベストマッチ");
       expect(locate.help_wanted_issues, "Help wanted issues");
       expect(locate.updated, "更新日");
       expect(locate.searching, "検索中....");

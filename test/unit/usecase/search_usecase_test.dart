@@ -15,7 +15,7 @@ import '../../http_mocks.dart';
 import '../../mock_data.dart';
 /// Usecaseのテスト
 void main() {
-  testWidgets('addUsecaseのテスト', (WidgetTester tester) async {
+  testWidgets('searchUsecaseのテスト', (WidgetTester tester) async {
 
     //clientが呼ばれた時、ステータスコード200,の偽データをセット
     final client = MockClient();
@@ -41,10 +41,10 @@ void main() {
     final searchUseCase = container.read(searchProvider((const Tuple2("Rails", null))));
     await searchUseCase.search();
 
-    //Page番号が維持されてるかのテスト
+    //Page番号が更新されてるかのテスト
     int page = container.read(pageNotifierProvider);
     await tester.pumpAndSettle();
-    expect(page, 3);
+    expect(page, 1);
 
     //Searchが更新されているかのチェック
     String search = container.read(searchNotifierProvider);

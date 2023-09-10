@@ -28,7 +28,6 @@ class TestUsecase {
 
   /// 一連の流れをまとめて実施する
   Future<void> test(RepoModel data,int page,String search,Sort sort) async {
-    debugPrint("TestUsecaseが実行され、Stateに下記の値がセットされました");
     //テスト時にMockデータを代入し、stateに保存する。
     repoNotifier.save(data);
     //pageの初期化
