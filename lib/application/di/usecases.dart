@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:search_repo/application/di/repository.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
 import 'package:search_repo/application/state/search/search.dart';
@@ -10,38 +11,27 @@ import 'package:search_repo/application/usecase/refresh_usecase.dart';
 import 'package:search_repo/application/usecase/search_usecase.dart';
 import 'package:search_repo/application/usecase/sort_usecase.dart';
 import 'package:search_repo/application/usecase/test_usecase.dart';
-import 'package:search_repo/domain/types/item_model.dart';
-import 'package:search_repo/domain/types/sort_enum.dart';
-import 'package:search_repo/application/state/http_client.dart';
-import 'package:search_repo/infrastructure/repo/repo.dart';
+import 'package:search_repo/domain/types/item/item_model.dart';
+import 'package:search_repo/application/types/sort_enum.dart';
 import 'package:tuple/tuple.dart';
 
-
-///リポジトリインスタンスを取得する。
-final repositoryProvider = Provider<Repo>((ref) {
-  final httpClient = ref.watch(httpClientProvider);
-  final page = ref.watch(pageNotifierProvider);
-  final search = ref.watch(searchNotifierProvider);
-  final sort = ref.watch(sortNotifierProvider);
-  return RepoImpl(httpClient: httpClient, page: page, search: search, sort: sort);
+/// Add App
+//画面一番下までスクロールした際に発火するリポジトリ追加取得用のUsecaseです。
+final addProvider =
+    Provider.family<AddUsecase, ScrollController?>((ref, scrollController) {
+  final pageNotifier = ref.read(pageNotifierProvider.notifier);
+  final repo = ref.read(repositoryProvider);
+  final repoNotifier = ref.read(repoProvider.notifier);
+  return AddUsecase(
+    repo: repo,
+    repoNotifier: repoNotifier,
+    scrollController: scrollController,
+    pageNotifier: pageNotifier,
+  );
 });
 
-/// Add App
-final addAppProvider = Provider.family<AddUsecase, ScrollController?>(
-  (ref, scrollController) {
-    final pageNotifier = ref.read(pageNotifierProvider.notifier);
-    final repo = ref.read(repositoryProvider);
-    final repoNotifier = ref.read(repoProvider.notifier);
-    return AddUsecase(
-      repo: repo,
-      repoNotifier: repoNotifier,
-      scrollController: scrollController,
-      pageNotifier: pageNotifier,
-    );
-  }
-);
-
 /// Search App
+//検索用のUsecaseです。
 final searchProvider =
     Provider.family<SearchUsecase, Tuple2<String, ScrollController?>>(
   (ref, data) {
@@ -63,6 +53,7 @@ final searchProvider =
 );
 
 /// Refresh App
+//リフレッシュ処理用のUsecaseです。
 final refreshProvider = Provider<RefreshUsecase>(
   (ref) {
     final searchNotifier = ref.read(searchNotifierProvider.notifier);
@@ -79,7 +70,9 @@ final refreshProvider = Provider<RefreshUsecase>(
     );
   },
 );
+
 /// Sort App
+//絞り込み用のUsecaseです。主にドロップダウンで使用します。
 final sortProvider =
     Provider.family<SortUsecase, Tuple2<Sort, ScrollController?>>(
   (ref, data) {
@@ -98,22 +91,20 @@ final sortProvider =
   },
 );
 
-
 /// Detail App
 //画面をタップしたら、詳細画面を表示させるUsecaseです。
 final detailProvider = Provider.family<DetailUsecase, ItemModel>(
-      (ref, data) {
+  (ref, data) {
     return DetailUsecase(
       url: data.owner.htmlUrl,
     );
   },
 );
 
-
 /// Test APP
 // テスト用に初期値を変更するUsecaseです。
 final testProvider = Provider<TestUsecase>(
-      (ref) {
+  (ref) {
     final searchNotifier = ref.read(searchNotifierProvider.notifier);
     final repoNotifier = ref.read(repoProvider.notifier);
     final sortNotifier = ref.read(sortNotifierProvider.notifier);
@@ -128,4 +119,3 @@ final testProvider = Provider<TestUsecase>(
     );
   },
 );
-

@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:search_repo/application/di/usecase_di.dart';
+import 'package:search_repo/application/di/usecases.dart';
 import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
 import 'package:search_repo/presentation/widget/custom_animation.dart';
 import 'package:search_repo/presentation/widget/repo_list.dart';
 
-
-
 class ListPage extends HookConsumerWidget {
   const ListPage({Key? key}) : super(key: key);
-
 
   @visibleForTesting
   static final loadingKey = UniqueKey();
@@ -29,7 +26,7 @@ class ListPage extends HookConsumerWidget {
       body: repoData.when(
         error: (e, s) => CustomAnimation(
           imageUrl: 'assets/lottie/error.json',
-          text: "エラー"/*locate.error*/,
+          text: "エラー",
           onRefresh: () async {
             final usecase = ref.read(refreshProvider);
             usecase.refresh();
@@ -65,5 +62,4 @@ class ListPage extends HookConsumerWidget {
       ),
     );
   }
-
 }

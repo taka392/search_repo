@@ -18,8 +18,6 @@ class CustomText {
     fontFamily: CustomFont.general,
   );
 
-
-
   static const titleS = TextStyle(
     fontSize: RawSize.p12,
     fontFamily: CustomFont.general,

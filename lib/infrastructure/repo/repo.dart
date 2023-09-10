@@ -1,22 +1,15 @@
 import 'package:http/http.dart' as http;
+import 'package:search_repo/domain/repo_Interface.dart';
 import 'dart:convert';
-import 'package:search_repo/domain/types/repo_model.dart';
-import 'package:search_repo/domain/types/sort_enum.dart';
-// データソースの実装
-abstract class Repo {
-  Future getRepo();
-  Future addRepo();
-  Future searchRepo(String data);
-  Future refreshRepo();
-  Future sortRepo(Sort data);
-}
+import 'package:search_repo/domain/types/repo/repo_model.dart';
+import 'package:search_repo/application/types/sort_enum.dart';
+
+///リポジトリ実態の実装
 class RepoImpl implements Repo {
   http.Client httpClient;
   int page;
   String search;
   Sort sort;
-
-
   RepoImpl({required this.httpClient, required this.page, required this.search, required this.sort});
 
   @override

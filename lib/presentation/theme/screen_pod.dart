@@ -1,20 +1,5 @@
 import 'package:flutter/material.dart';
 
-///
-/// [Example]
-/// ```dart
-/// 1. ウィジェットの中から `watch` する
-/// final screen = ScreenRef(context).watch(screenProvider);
-///
-/// 2. データを取り出して使う
-/// final sizeClass = screen.sizeClass; // スマホ or タブレット or パソコン
-/// final orientation = screen.orientation; // 回転の向き
-/// final designW = screen.designW(100); // デザイン基準に合わせて伸縮する幅
-/// final designH = screen.designH(100); // デザイン基準に合わせて伸縮する高さ
-/// ```
-
-// --------------------------- //
-
 /// 画面サイズクラス
 enum ScreenSizeClass {
   /// スマホ

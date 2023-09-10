@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:search_repo/application/di/usecase_di.dart';
+import 'package:search_repo/application/di/usecases.dart';
 import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
-import 'package:search_repo/domain/types/sort_enum.dart';
+import 'package:search_repo/application/types/sort_enum.dart';
 import 'package:search_repo/presentation/theme/fonts.dart';
 import 'package:tuple/tuple.dart';
 
@@ -35,8 +35,8 @@ class CustomDropdown extends ConsumerWidget {
         key: stars,
         value: Sort.stars,
         child: Text(
-            locate.stars,
-            style: CustomText.titleM,
+          locate.stars,
+          style: CustomText.titleM,
         ),
       ),
       DropdownMenuItem(
@@ -67,9 +67,8 @@ class CustomDropdown extends ConsumerWidget {
         key: empty,
         value: Sort.empty,
         child: Text(
-            locate.empty,
-            style: CustomText.titleM,
-
+          locate.empty,
+          style: CustomText.titleM,
         ),
       ),
     ];

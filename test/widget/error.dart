@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
-import 'package:search_repo/domain/types/repo_model.dart';
+import 'package:search_repo/domain/types/repo/repo_model.dart';
 import 'package:search_repo/presentation/pages/list_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:search_repo/presentation/widget/custom_animation.dart';

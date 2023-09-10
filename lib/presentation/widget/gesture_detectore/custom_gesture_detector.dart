@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:search_repo/domain/types/item_model.dart';
+import 'package:search_repo/domain/types/item/item_model.dart';
 import 'package:search_repo/presentation/theme/fonts.dart';
 import 'package:search_repo/presentation/widget/custom_text.dart';
 
-class Custom2GestureDetector extends StatelessWidget {
-
-  const Custom2GestureDetector({
+///スマホで閲覧した際に表示されるWidgetです。
+class CustomGestureDetector extends StatelessWidget {
+  const CustomGestureDetector({
     super.key,
     required this.data,
     required this.onPressed,
   });
+
   final ItemModel data;
   final VoidCallback onPressed;
 
@@ -19,21 +20,32 @@ class Custom2GestureDetector extends StatelessWidget {
       onTap: onPressed,
       child: ListTile(
         leading: CircleAvatar(
-          radius: 40.0, // サークルアバターの大きさを調整するための半径の値
+          radius: 40.0,
           backgroundImage: NetworkImage(data.owner.avatarUrl),
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            CustomTextWidget(
+              text: data.fullName,
+              maxLine: 1,
+              textStyle: CustomText.titleMBold,
+            ),
+            Container(
+              height: 3,
+            ),
+            CustomTextWidget(
+              text: data.description,
+              maxLine: 2,
+              textStyle: CustomText.titleS,
+            ),
+            Container(
+              height: 3,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                CustomTextWidget(
-                  text: data.fullName,
-                  maxLine: 1,
-                  textStyle: CustomText.titleMBold,
-                ),
                 const Icon(
                   Icons.star_border_sharp,
                 ),
@@ -54,11 +66,6 @@ class Custom2GestureDetector extends StatelessWidget {
                   textStyle: CustomText.titleS,
                 ),
               ],
-            ),
-            CustomTextWidget(
-              text: data.description,
-              maxLine: 2,
-              textStyle: CustomText.titleS,
             ),
           ],
         ),

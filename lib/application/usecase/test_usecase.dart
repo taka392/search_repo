@@ -2,12 +2,9 @@ import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
-import 'package:search_repo/domain/types/repo_model.dart';
-import 'package:search_repo/domain/types/sort_enum.dart';
-import 'package:search_repo/infrastructure/repo/repo.dart';
-
-
-
+import 'package:search_repo/domain/repo_Interface.dart';
+import 'package:search_repo/domain/types/repo/repo_model.dart';
+import 'package:search_repo/application/types/sort_enum.dart';
 /// アプリの初期準備をする
 class TestUsecase {
   TestUsecase({
@@ -16,7 +13,6 @@ class TestUsecase {
     required this.searchNotifier,
     required this.sortNotifier,
     required this.repo,
-    //以前のページ
   });
   final PageNotifier pageNotifier;
   final RepoNotifier repoNotifier;

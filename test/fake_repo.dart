@@ -2,8 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:search_repo/application/state/http_client.dart';
 import 'dart:convert';
-import 'package:search_repo/domain/types/repo_model.dart';
-import 'package:search_repo/domain/types/sort_enum.dart';
+import 'package:search_repo/domain/types/repo/repo_model.dart';
+import 'package:search_repo/application/types/sort_enum.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
 
 

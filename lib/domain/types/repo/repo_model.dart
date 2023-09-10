@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:search_repo/domain/types/item_model.dart';
+import 'package:search_repo/domain/types/item/item_model.dart';
 part 'repo_model.freezed.dart';
 
 @freezed

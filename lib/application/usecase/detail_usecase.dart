@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// アプリの初期準備をする
@@ -8,9 +7,6 @@ class DetailUsecase {
   });
 
   final String url;
-
-  @visibleForTesting
-  static final noHitKey = UniqueKey();
 
   /// 一連の流れをまとめて実施する
   Future<void> detail() async {
