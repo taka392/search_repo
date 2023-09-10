@@ -28,8 +28,6 @@ class InitPage extends HookConsumerWidget {
 
     return Scaffold(
       body: Center(
-        child: Container(
-          color: Colors.grey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -38,7 +36,6 @@ class InitPage extends HookConsumerWidget {
             ],
           ),
         ),
-      ),
     );
   }
 }

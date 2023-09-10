@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecase_di.dart';
 import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
 import 'package:search_repo/presentation/theme/fonts.dart';
+import 'package:search_repo/presentation/theme/screen_pod.dart';
 import 'package:tuple/tuple.dart';
 
 class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
@@ -23,6 +24,19 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
   Widget build(BuildContext context,WidgetRef ref) {
     final textController = useTextEditingController();
     final locate = ref.watch(appLocalizationsProvider);
+    double screenWidth = MediaQuery.of(context).size.width;
+
+
+    final screen = ScreenRef(context).watch(screenProvider);
+
+    double appBarWidth;
+    if (screen.sizeClass == ScreenSizeClass.phone) {
+      appBarWidth=(screenWidth*0.9);
+    }else {
+      appBarWidth=(screenWidth*0.8);
+    }
+
+
     return AppBar(
       automaticallyImplyLeading: false,
       bottom: PreferredSize(
@@ -30,7 +44,7 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: SizedBox(
-              width: 343,
+              width: appBarWidth,
               height: 36,
               child: TextFormField(
                 key: textFormField,

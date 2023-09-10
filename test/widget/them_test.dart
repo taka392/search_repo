@@ -17,7 +17,7 @@ void main() {
     test('LightThemテーマが反映されているかのテスト', () async {
       const fakeThemeMode = ThemeMode.light;
       final container = ProviderContainer(overrides: [
-        themeModeProvider.overrideWithValue(fakeThemeMode),
+        themeModeProvider. (fakeThemeMode),
       ]);
       final currentThemeMode = container.read(themeModeProvider);
       expect(currentThemeMode, ThemeMode.light);
