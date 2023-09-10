@@ -3,13 +3,14 @@ import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
+import 'package:search_repo/domain/types/sort_enum.dart';
 import 'package:search_repo/infrastructure/repo/repo.dart';
 
 
 
 /// アプリの初期準備をする
-class RefreshUsecase {
-  RefreshUsecase({
+class TestUsecase {
+  TestUsecase({
     required this.pageNotifier,
     required this.repoNotifier,
     required this.searchNotifier,
@@ -25,16 +26,14 @@ class RefreshUsecase {
 
 
   /// 一連の流れをまとめて実施する
-  Future<void> refresh() async {
-    //リポジトリを初期化
-    RepoModel data = await repo.refreshRepo();
-    //リポジトリをStateに保存
+  Future<void> test(RepoModel data,int page,String search,Sort sort) async {
+    //テスト時にMockデータを代入し、stateに保存する。
     repoNotifier.save(data);
     //pageの初期化
-    pageNotifier.refresh();
+    pageNotifier.save(page);
     //searchの初期化
-    searchNotifier.refresh();
+    searchNotifier.save(search);
     //sortの初期化
-    sortNotifier.refresh();
+    sortNotifier.save(sort);
   }
 }

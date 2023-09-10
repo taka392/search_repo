@@ -5,10 +5,10 @@ part 'sort.g.dart';
 class SortNotifier extends _$SortNotifier {
   @override
   Sort build() {
-    return Sort.stars;
+    return Sort.empty;
   }
   void refresh() {
-    state = Sort.stars;
+    state = Sort.empty;
   }
   void save(Sort value) {
     state = value;

@@ -3,4 +3,5 @@ enum Sort {
   forks,
   helpWantedIssues,
   updated,
+  empty,
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:search_repo/application/state/repo/repo.dart';
+
+import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/domain/types/sort_enum.dart';
@@ -13,26 +14,25 @@ class SortUsecase {
     required this.repo,
     required this.sortNotifier,
     required this.repoNotifier,
-    required this.value,
+    required this.data,
     this.scrollController,
     //以前のページ
   });
   final Repo repo;
   final SortNotifier sortNotifier;
   final RepoNotifier repoNotifier;
-  final Sort value;
+  final Sort data;
   final ScrollController? scrollController;
 
 
   /// 一連の流れをまとめて実施する
   Future<void> sort() async {
     //選択されたテキストで新しいリポジトリを取得
-    RepoModel data = await repo.getRepo();
-    //SortのState値を更新
-    sortNotifier.save(value);
+    RepoModel result = await repo.sortRepo(data);
     //リポジトリのState値を更新
-    repoNotifier.save(data);
-
+    repoNotifier.save(result);
+    //SortのState値を更新
+    sortNotifier.save(data);
 
     if (scrollController != null) {
       await scrollController!.animateTo(

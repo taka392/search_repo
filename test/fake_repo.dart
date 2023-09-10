@@ -1,29 +1,35 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:search_repo/application/state/http_client.dart';
 import 'dart:convert';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/domain/types/sort_enum.dart';
-// データソースの実装
-abstract class Repo {
-  Future getRepo();
-  Future addRepo();
-  Future searchRepo(String data);
-  Future refreshRepo();
-  Future sortRepo(Sort data);
-}
-class RepoImpl implements Repo {
+import 'package:search_repo/infrastructure/repo/repo.dart';
+
+
+final fakeRepositoryProvider = Provider<Repo>((ref) {
+  final httpClient = ref.watch(httpClientProvider);
+  const fakePage = 3;
+  const fakeSearch = "Flutter";
+  const fakeSort = Sort.forks;
+  return RepoImpl(httpClient: httpClient, page: fakePage, search: fakeSearch, sort: fakeSort);
+});
+
+
+
+class FakeImpl implements Repo {
   http.Client httpClient;
   int page;
   String search;
   Sort sort;
 
 
-  RepoImpl({required this.httpClient, required this.page, required this.search, required this.sort});
+  FakeImpl({required this.httpClient, required this.page, required this.search, required this.sort});
 
   @override
   Future getRepo() async {
-    String sortValue = (sort == Sort.empty) ? "" : sort.toString(); // Sort.emptyの場合、空文字列にする
     final response = await httpClient.get(Uri.parse(
-        'https://api.github.com/search/repositories?q=$search&sort=$sortValue&page=$page&per_page=20'));
+        'https://api.github.com/search/repositories?q=$search&sort=$sort&page=$page&per_page=20'));
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       final RepoModel repo = RepoModel.fromJson(data);
@@ -35,9 +41,8 @@ class RepoImpl implements Repo {
   @override
   Future addRepo() async {
     int nextPage = page + 1;
-    String sortValue = (sort == Sort.empty) ? "" : sort.toString(); // Sort.emptyの場合、空文字列にする
     final response = await httpClient.get(Uri.parse(
-        'https://api.github.com/search/repositories?q=$search&sort=$sortValue&page=$nextPage&per_page=20'));
+        'https://api.github.com/search/repositories?q=$search&sort=$sort&page=$nextPage&per_page=20'));
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       final RepoModel repo = RepoModel.fromJson(data);
@@ -73,6 +78,7 @@ class RepoImpl implements Repo {
       throw Exception('Invalid JSON response structure');
     }
   }
+
   @override
   Future sortRepo(Sort data) async {
     final response = await httpClient.get(Uri.parse(
@@ -86,6 +92,3 @@ class RepoImpl implements Repo {
     }
   }
 }
-
-
-

@@ -14,8 +14,9 @@ class InitPage extends HookConsumerWidget {
     final locate = ref.watch(appLocalizationsProvider);
     useEffect(() {
       void navigateToNextPage() async {
-        final usecase = ref.read(initAppProvider);
-        await usecase.init(); // 非同期処理が完了するまで待つ
+        //初期化処理
+        final usecase = ref.read(refreshProvider);
+        await usecase.refresh();
         final router = ref.read(goRouterProvider);
         router.pushNamed(
           PageId.list.routeName,
@@ -27,12 +28,15 @@ class InitPage extends HookConsumerWidget {
 
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Lottie.asset('assets/lottie/loading.json'),
-            Text(locate.searching),
-          ],
+        child: Container(
+          color: Colors.grey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Lottie.asset('assets/lottie/loading.json'),
+              Text(locate.searching),
+            ],
+          ),
         ),
       ),
     );

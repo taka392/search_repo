@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:search_repo/presentation/theme/color.dart';
+
+final themeDataProvider = Provider<ThemeData>((ref) => darkTheme);
 
 ThemeData darkTheme = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: CustomColor.black2,

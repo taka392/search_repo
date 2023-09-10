@@ -5,16 +5,16 @@ import 'package:lottie/lottie.dart';
 class CustomAnimation extends ConsumerWidget {
   final String imageUrl;
   final String text;
-  final Future<void> Function() onRefresh;
+  final Future<void> Function()? onRefresh;
 
-  const CustomAnimation({Key? key, required this.imageUrl, required this.text, required this.onRefresh})
+  const CustomAnimation({Key? key, required this.imageUrl, required this.text,this.onRefresh})
       : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return RefreshIndicator(
         color: Colors.grey,
-        onRefresh: onRefresh,
+      onRefresh: onRefresh!,
         child: ListView(
           children: [
             const SizedBox(height: 80),

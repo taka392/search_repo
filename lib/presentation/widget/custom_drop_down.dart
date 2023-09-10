@@ -9,9 +9,22 @@ import 'package:search_repo/presentation/theme/fonts.dart';
 import 'package:tuple/tuple.dart';
 
 class CustomDropdown extends ConsumerWidget {
-  final ScrollController scrollController;
+  final ScrollController? scrollController;
 
-  const CustomDropdown({super.key, required this.scrollController});
+  const CustomDropdown({super.key, this.scrollController});
+
+  @visibleForTesting
+  static final dropDown = UniqueKey();
+  @visibleForTesting
+  static final stars = UniqueKey();
+  @visibleForTesting
+  static final forks = UniqueKey();
+  @visibleForTesting
+  static final help = UniqueKey();
+  @visibleForTesting
+  static final update = UniqueKey();
+  @visibleForTesting
+  static final empty = UniqueKey();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,6 +32,7 @@ class CustomDropdown extends ConsumerWidget {
     final locate = ref.watch(appLocalizationsProvider);
     final items = [
       DropdownMenuItem(
+        key: stars,
         value: Sort.stars,
         child: Text(
           locate.stars,
@@ -26,6 +40,7 @@ class CustomDropdown extends ConsumerWidget {
         ),
       ),
       DropdownMenuItem(
+        key: forks,
         value: Sort.forks,
         child: Text(
           locate.forks,
@@ -33,6 +48,7 @@ class CustomDropdown extends ConsumerWidget {
         ),
       ),
       DropdownMenuItem(
+        key: help,
         value: Sort.helpWantedIssues,
         child: Text(
           locate.help_wanted_issues,
@@ -40,20 +56,30 @@ class CustomDropdown extends ConsumerWidget {
         ),
       ),
       DropdownMenuItem(
+        key: update,
         value: Sort.updated,
         child: Text(
           locate.updated,
           style: CustomText.titleM,
         ),
-      )
+      ),
+      DropdownMenuItem(
+        key: empty,
+        value: Sort.empty,
+        child: Text(
+          locate.empty,
+          style: CustomText.titleM,
+        ),
+      ),
     ];
 
     return DropdownButton<Sort>(
+      key: dropDown,
       value: sort,
       items: items,
       onChanged: (value) {
         final usecase =
-            ref.read(sortProvider(Tuple2(value!, scrollController)));
+            ref.read(sortProvider(Tuple2(value!, scrollController!)));
         usecase.sort();
       },
       isDense: false,
