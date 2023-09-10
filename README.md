@@ -15,7 +15,7 @@
 ![Imgur](https://i.imgur.com/4hsqoUD.png)|![Imgur](https://i.imgur.com/5f2582C.png)
 
 ### 動作
-## ⚠️[こちら](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTc2anc5aXMzaWlzZDBxZXFjbWUwc3E1YWEyMzRlZTlpcW1rZG9kZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4lAZd4rj3JXlgRKeKg/giphy.gif)から途切れていない動画が閲覧可能です。
+## ⚠️[こちら](https://youtu.be/AWo8jtpkw1M)から途切れていない動画が閲覧可能です。
 <img width="500" src="https://media.giphy.com/media/4lAZd4rj3JXlgRKeKg/giphy.gif">
 * 何かしらのキーワードを入力できる
 * 入力したキーワードで GitHub のリポジトリを検索できる
