@@ -21,6 +21,7 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
   @override
   Widget build(BuildContext context,WidgetRef ref) {
+    double screenWidth = MediaQuery.of(context).size.width*0.9;
     final textController = useTextEditingController();
     final locate = ref.watch(appLocalizationsProvider);
     return AppBar(
@@ -30,7 +31,7 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: SizedBox(
-              width: 343,
+              width: screenWidth,
               height: 36,
               child: TextFormField(
                 key: textFormField,
