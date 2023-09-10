@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:search_repo/domain/types/repo_model.dart';
+import 'package:search_repo/domain/types/repo/repo_model.dart';
 import '../../mock_data.dart';
 
 void main() {
@@ -9,6 +9,7 @@ void main() {
     final RepoModel result = RepoModel.fromJson(data);
     expect(result.totalCount, 573491);
     expect(result.items[0].fullName, "flutter/flutter");
-    expect(result.items[0].owner.avatarUrl, "https://avatars.githubusercontent.com/u/14101776?v=4");
+    expect(result.items[0].owner.avatarUrl,
+        "https://avatars.githubusercontent.com/u/14101776?v=4");
   });
 }

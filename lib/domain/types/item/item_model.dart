@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:search_repo/domain/types/owner_model.dart';
-part 'item_model.freezed.dart';
+import 'package:search_repo/domain/types/owner/owner_model.dart';
 
+part 'item_model.freezed.dart';
 
 @freezed
 class ItemModel with _$ItemModel {
@@ -14,20 +14,19 @@ class ItemModel with _$ItemModel {
     required String description,
     required int stargazersCount,
     required int forksCount,
-
   }) = _ItemModel;
+
   factory ItemModel.fromJson(Map<String, dynamic> json) {
-    OwnerModel owner = OwnerModel.fromJson(json['owner']); // Owner オブジェクトとして解析
+    OwnerModel owner = OwnerModel.fromJson(json['owner']);
     return ItemModel(
       id: json['id'] ?? 0,
-      nodeId: json['node_id'] ?? 'NO_node_id',
-      name: json['name']??'No_name',
-      fullName: json['full_name']??'No_fullName',
+      nodeId: json['node_id'] ?? '',
+      name: json['name'] ?? '',
+      fullName: json['full_name'] ?? '',
       owner: owner,
-      description: json['description']?? 'No_description',
-      stargazersCount:  json['stargazers_count']??0,
-      forksCount: json['forks_count']??0,
+      description: json['description'] ?? '',
+      stargazersCount: json['stargazers_count'] ?? 0,
+      forksCount: json['forks_count'] ?? 0,
     );
   }
 }
-

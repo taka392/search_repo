@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
-import 'package:search_repo/domain/types/repo_model.dart';
+import 'package:search_repo/domain/types/repo/repo_model.dart';
 import 'package:search_repo/presentation/pages/list_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:search_repo/presentation/widget/custom_animation.dart';
@@ -17,7 +17,7 @@ void main() {
     testWidgets('Errorのテスト', (WidgetTester tester) async {
       const data = MockData.jsonMock;
       final mockClient = MockClient();
-      //空文字を送信するとリクエストはせず、エラーメッセージを表示する仕様
+      //空文字を送信するとリクエストはせず、エラーメッセージを表示する
       when(mockClient.get(any))
           .thenAnswer((_) async => http.Response(data, 404));
       await tester.pumpWidget(
@@ -42,7 +42,7 @@ void main() {
     testWidgets('loadingのテスト', (WidgetTester tester) async {
       const data = MockData.jsonMock;
       final mockClient = MockClient();
-      //空文字を送信するとリクエストはせず、エラーメッセージを表示する仕様
+      //空文字を送信するとリクエストはせず、エラーメッセージを表示する
       when(mockClient.get(any))
           .thenAnswer((_) async => http.Response(data, 200));
       await tester.pumpWidget(
@@ -65,7 +65,7 @@ void main() {
     testWidgets('Emptyのテスト', (WidgetTester tester) async {
       const data = MockData.jsonMock;
       final mockClient = MockClient();
-      //空文字を送信するとリクエストはせず、エラーメッセージを表示する仕様
+      //空文字を送信するとリクエストはせず、エラーメッセージを表示する
       when(mockClient.get(any))
           .thenAnswer((_) async => http.Response(data, 200));
       await tester.pumpWidget(

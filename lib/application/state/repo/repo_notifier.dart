@@ -2,7 +2,7 @@
 
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:search_repo/domain/types/repo_model.dart';
+import 'package:search_repo/domain/types/repo/repo_model.dart';
 
 class RepoNotifier<T> extends StateNotifier<AsyncValue<T>> {
   RepoNotifier() : super(const AsyncValue.loading());

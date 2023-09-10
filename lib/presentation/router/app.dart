@@ -19,23 +19,31 @@ class App extends ConsumerWidget {
     return MaterialApp.router(
       //多言語対応のための記述
       localizationsDelegates: const [
-        AppLocalizations.delegate, // Add this line
+        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [
+        //英語と日本語をサポートしています。
         Locale('en'), // English
-        Locale('ja'),
+        Locale('ja'), // 日本語
       ],
-      //ここまで〜
-      theme: lightTheme, // ライト用テーマ
-      darkTheme: darkTheme, // ダーク用テーマ
+      //多言語対応のための記述
+      theme: lightTheme,
+      // ライト用テーマ
+      darkTheme: darkTheme,
+      // ダーク用テーマ
       themeMode: themMode,
-      builder: DevicePreview.appBuilder, // DevicePreview
-      routerDelegate: router.routerDelegate, // GoRouter
-      routeInformationParser: router.routeInformationParser, // GoRouter
-      routeInformationProvider: router.routeInformationProvider, // GoRouter
+      //システムデータでthemのテーマが変更されます。
+      builder: DevicePreview.appBuilder,
+      // DevicePreview
+      routerDelegate: router.routerDelegate,
+      // GoRouter
+      routeInformationParser: router.routeInformationParser,
+      // GoRouter
+      routeInformationProvider: router.routeInformationProvider,
+      // GoRouter
       debugShowCheckedModeBanner: false,
     );
   }

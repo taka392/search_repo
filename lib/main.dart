@@ -6,16 +6,13 @@ import 'package:search_repo/presentation/router/app.dart';
 
 
 void main() async {
-  // インスタンスを非同期で取得
   WidgetsFlutterBinding.ensureInitialized();
   const app = App();
   const scope = ProviderScope(
     overrides: [],
     child: app,
   );
-
   Widget window = scope;
-
   // Web上で実行されている時のみDevicePreviewを有効化
   if (kIsWeb) {
     window = DevicePreview(

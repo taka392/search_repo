@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_notifier.dart';
-import 'package:search_repo/domain/types/repo_model.dart';
-import 'package:search_repo/infrastructure/repo/repo.dart';
-
-
+import 'package:search_repo/domain/interface.dart';
+import 'package:search_repo/domain/types/repo/repo_model.dart';
 
 /// アプリの初期準備をする
 class AddUsecase {
@@ -13,13 +11,14 @@ class AddUsecase {
     required this.repoNotifier,
     this.scrollController,
     required this.pageNotifier,
-    //以前のページ
   });
+
   final Repo repo;
   final RepoNotifier repoNotifier;
+
+  //ListViewにセットしたScrollControllerのインスタンスを取得。
   final ScrollController? scrollController;
   final PageNotifier pageNotifier;
-
 
   /// 一連の流れをまとめて実施する
   Future<void> add() async {

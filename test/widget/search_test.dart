@@ -62,7 +62,5 @@ void main() {
       expect(find.text('Rails'), findsNothing);
       expect(find.text('リポジトリ名を入力してください'), findsOneWidget);
     });
-
   });
 }
-

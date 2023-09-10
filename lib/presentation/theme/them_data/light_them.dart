@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:search_repo/presentation/theme/color.dart';
 
+///ライト用のテーマを設定しています。
 ThemeData lightTheme = ThemeData.light().copyWith(
     scaffoldBackgroundColor: CustomColor.white4,
 
@@ -33,4 +34,5 @@ ThemeData lightTheme = ThemeData.light().copyWith(
     iconTheme: const IconThemeData(
       color: CustomColor.black2,
       size: 15.0,
-    ));
+    ),
+);
