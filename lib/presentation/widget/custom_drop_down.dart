@@ -35,8 +35,8 @@ class CustomDropdown extends ConsumerWidget {
         key: stars,
         value: Sort.stars,
         child: Text(
-          locate.stars,
-          style: CustomText.titleM,
+            locate.stars,
+            style: CustomText.titleM,
         ),
       ),
       DropdownMenuItem(
@@ -67,8 +67,9 @@ class CustomDropdown extends ConsumerWidget {
         key: empty,
         value: Sort.empty,
         child: Text(
-          locate.empty,
-          style: CustomText.titleM,
+            locate.empty,
+            style: CustomText.titleM,
+
         ),
       ),
     ];
@@ -85,6 +86,7 @@ class CustomDropdown extends ConsumerWidget {
       isDense: false,
       borderRadius: BorderRadius.circular(20.0),
       underline: const SizedBox(),
+      padding: const EdgeInsets.symmetric(horizontal: 30.0),
     );
   }
 }

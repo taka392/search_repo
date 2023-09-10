@@ -8,6 +8,8 @@ import 'package:search_repo/domain/types/item_model.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/theme/color.dart';
 import 'package:search_repo/presentation/theme/fonts.dart';
+import 'package:search_repo/presentation/theme/screen_pod.dart';
+import 'package:search_repo/presentation/widget/custom2_gesture_detector.dart';
 import 'package:search_repo/presentation/widget/custom_drop_down.dart';
 import 'package:search_repo/presentation/widget/custom_gesture_detector.dart';
 import 'package:search_repo/presentation/widget/custom_text.dart';
@@ -32,12 +34,11 @@ class RepoList extends HookConsumerWidget {
     final locate = ref.watch(appLocalizationsProvider);
     final controller = useScrollController();
 
-
+    final screen = ScreenRef(context).watch(screenProvider);
 
     void scroll() async {
       if (!isLoading.value &&
-          controller.position.pixels ==
-              controller.position.maxScrollExtent) {
+          controller.position.pixels == controller.position.maxScrollExtent) {
         isLoading.value = true;
         final usecase = ref.read(addAppProvider(controller));
         await usecase.add();
@@ -50,7 +51,7 @@ class RepoList extends HookConsumerWidget {
       return () {
         controller.removeListener(scroll);
         controller.dispose();
-        isLoading.dispose(); // ValueNotifierのdisposeを呼び出す
+        isLoading.dispose();
       };
     }, []);
 
@@ -94,7 +95,13 @@ class RepoList extends HookConsumerWidget {
               itemBuilder: (BuildContext context, index) {
                 if (index < data!.items.length) {
                   ItemModel repo = data!.items[index];
-                  return CustomGestureDetector(data: repo, onPressed: () {
+                  // 条件に基づいてCustomGestureDetectorを使い分ける
+                  return screen.sizeClass == ScreenSizeClass.phone
+                      ? CustomGestureDetector(data: repo, onPressed: () {
+                    final usecase = ref.read(detailProvider(repo));
+                    usecase.detail();
+                  })
+                      : Custom2GestureDetector(data: repo, onPressed: () {
                     final usecase = ref.read(detailProvider(repo));
                     usecase.detail();
                   });
@@ -113,4 +120,5 @@ class RepoList extends HookConsumerWidget {
       ),
     );
   }
+
 }
