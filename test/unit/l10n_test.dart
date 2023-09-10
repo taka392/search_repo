@@ -17,7 +17,7 @@ void main() {
       expect(locate.cases, "cases");
       expect(locate.stars, "stars");
       expect(locate.forks, "forks");
-      expect(locate.empty, "default");
+      expect(locate.empty, "best match");
       expect(locate.help_wanted_issues, "help wanted issues");
       expect(locate.updated, "updated");
       expect(locate.searching, "searching.....");
