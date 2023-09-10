@@ -15,8 +15,7 @@
 ![Imgur](https://i.imgur.com/4hsqoUD.png)|![Imgur](https://i.imgur.com/5f2582C.png)
 
 ### 動作
-<img width="500" src="https://media.giphy.com/media/rzWZrQ51rvhiKKUJxJ/giphy.gif">
-
+<img width="500" src="https://media.giphy.com/media/4lAZd4rj3JXlgRKeKg/giphy.gif">
 * 何かしらのキーワードを入力できる
 * 入力したキーワードで GitHub のリポジトリを検索できる
 * 検索結果は一覧で概要（リポジトリ名）を表示する
