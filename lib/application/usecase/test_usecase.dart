@@ -20,7 +20,6 @@ class TestUsecase {
   final SortNotifier sortNotifier;
   final Repo repo;
 
-
   /// 一連の流れをまとめて実施する
   Future<void> test(RepoModel data,int page,String search,Sort sort) async {
     //テスト時にMockデータを代入し、stateに保存する。
