@@ -13,6 +13,8 @@ class CustomGestureDetector extends StatelessWidget {
   final ItemModel data;
   final VoidCallback onPressed;
 
+
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

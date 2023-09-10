@@ -24,9 +24,10 @@ class RepoList extends HookConsumerWidget {
   }) :super(key: key);
 
   @visibleForTesting
-  static final totalCountKey = UniqueKey();
+  static final iphone = UniqueKey();
 
-
+  @visibleForTesting
+  static final elseKey = UniqueKey();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -100,11 +101,18 @@ class RepoList extends HookConsumerWidget {
                       ? CustomGestureDetector(data: repo, onPressed: () {
                     final usecase = ref.read(detailProvider(repo));
                     usecase.detail();
-                  })
+                  },
+                    key: iphone,
+
+                  )
                       : Custom2GestureDetector(data: repo, onPressed: () {
                     final usecase = ref.read(detailProvider(repo));
                     usecase.detail();
-                  });
+                  },
+
+                    key: elseKey,
+
+                  );
                 } else {
                   return const Center(
                     child: CupertinoActivityIndicator(
@@ -120,5 +128,4 @@ class RepoList extends HookConsumerWidget {
       ),
     );
   }
-
 }
