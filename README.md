@@ -19,6 +19,8 @@
 ![](https://media.giphy.com/media/Xw7GrCRFpDtDrfV1DI/giphy.gif)
 
 
+
+<img src="https://github.com/taka392/github_repo/assets/88756420/216c2723-dd77-4ee7-8900-45eed6fd9837">
 ### 動作
 
 * 何かしらのキーワードを入力できる
@@ -27,6 +29,7 @@
 * 検索結果のアイテムをタップしたら、該当リポジトリの詳細（リポジトリ名、オーナーアイコン、プロジェクト言語、Star 数、Watcher 数、Fork 数、Issue
   数）を表示する
 
+![Simulator Screenshot - iPhone 14 Pro Max - 2023-09-10 at 21 32 43](https://github.com/taka392/search_repo/assets/88756420/5c9b9922-ac17-40c4-b16e-45695992a74e)
 
 
 
