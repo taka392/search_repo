@@ -85,7 +85,7 @@ class CustomDropdown extends ConsumerWidget {
       isDense: false,
       borderRadius: BorderRadius.circular(20.0),
       underline: const SizedBox(),
-      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      padding: const EdgeInsets.fromLTRB(30.0, 0, 0, 0),
     );
   }
 }
