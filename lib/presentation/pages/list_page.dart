@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecases.dart';
 import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
 import 'package:search_repo/presentation/widget/custom_animation.dart';
 import 'package:search_repo/presentation/widget/repo_list.dart';
+import 'package:search_repo/presentation/widget/search_app_bar.dart';
 
 class ListPage extends HookConsumerWidget {
   const ListPage({Key? key}) : super(key: key);
@@ -22,7 +24,12 @@ class ListPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final locate = ref.watch(appLocalizationsProvider);
     final repoData = ref.watch(watchRepoProvider);
+    final controller = useScrollController();
+    /*final repoData = AsyncValue.error("エラーメッセージ", StackTrace.current);*/
     return Scaffold(
+      appBar: SearchAppBar(
+        scrollController: controller,
+      ),
       body: repoData.when(
         error: (e, s) => CustomAnimation(
           imageUrl: 'assets/lottie/error.json',
@@ -56,6 +63,7 @@ class ListPage extends HookConsumerWidget {
           } else {
             return RepoList(
               data: data,
+              controller: controller,
             );
           }
         },

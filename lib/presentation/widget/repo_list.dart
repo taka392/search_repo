@@ -14,14 +14,15 @@ import 'package:search_repo/presentation/widget/gesture_detector/custom2_gesture
 import 'package:search_repo/presentation/widget/gesture_detector/custom_gesture_detector.dart';
 import 'package:search_repo/presentation/widget/custom_drop_down.dart';
 import 'package:search_repo/presentation/widget/custom_text.dart';
-import 'package:search_repo/presentation/widget/search_app_bar.dart';
 
 class RepoList extends HookConsumerWidget {
   final RepoModel? data;
+  final ScrollController controller;
 
   const RepoList({
     Key? key,
     this.data,
+    required this.controller,
   }) : super(key: key);
 
   @visibleForTesting
@@ -34,7 +35,7 @@ class RepoList extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isLoading = useState(false);
     final locate = ref.watch(appLocalizationsProvider);
-    final controller = useScrollController();
+
 
     final screen = ScreenRef(context).watch(screenProvider);
 
@@ -58,9 +59,7 @@ class RepoList extends HookConsumerWidget {
     }, []);
 
     return Scaffold(
-      appBar: SearchAppBar(
-        scrollController: controller,
-      ),
+
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
