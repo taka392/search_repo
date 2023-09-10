@@ -1,21 +1,5 @@
 import 'package:flutter/material.dart';
-
-/// 画面サイズクラス
-enum ScreenSizeClass {
-  /// スマホ
-  phone,
-
-  /// タブレット
-  tablet,
-
-  /// パソコン
-  desktop,
-
-  ///その他をここに追加
-}
-
-// --------------------------- //
-
+import 'package:search_repo/application/types/screen_size.dart';
 /// 画面サイズの設定値
 const screenProvider = ScreenProvider(
   designWidth: 390, // iPhone14の幅をデザイン基準にする
@@ -27,7 +11,6 @@ const screenProvider = ScreenProvider(
   },
 );
 
-// --------------------------- //
 
 /// Screen Data
 class Screen<SizeClass> {

@@ -17,7 +17,7 @@ void main() {
     testWidgets('Errorのテスト', (WidgetTester tester) async {
       const data = MockData.jsonMock;
       final mockClient = MockClient();
-      //空文字を送信するとリクエストはせず、エラーメッセージを表示する仕様
+      //空文字を送信するとリクエストはせず、エラーメッセージを表示する
       when(mockClient.get(any))
           .thenAnswer((_) async => http.Response(data, 404));
       await tester.pumpWidget(
@@ -42,7 +42,7 @@ void main() {
     testWidgets('loadingのテスト', (WidgetTester tester) async {
       const data = MockData.jsonMock;
       final mockClient = MockClient();
-      //空文字を送信するとリクエストはせず、エラーメッセージを表示する仕様
+      //空文字を送信するとリクエストはせず、エラーメッセージを表示する
       when(mockClient.get(any))
           .thenAnswer((_) async => http.Response(data, 200));
       await tester.pumpWidget(
@@ -65,7 +65,7 @@ void main() {
     testWidgets('Emptyのテスト', (WidgetTester tester) async {
       const data = MockData.jsonMock;
       final mockClient = MockClient();
-      //空文字を送信するとリクエストはせず、エラーメッセージを表示する仕様
+      //空文字を送信するとリクエストはせず、エラーメッセージを表示する
       when(mockClient.get(any))
           .thenAnswer((_) async => http.Response(data, 200));
       await tester.pumpWidget(

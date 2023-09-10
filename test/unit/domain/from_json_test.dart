@@ -9,6 +9,7 @@ void main() {
     final RepoModel result = RepoModel.fromJson(data);
     expect(result.totalCount, 573491);
     expect(result.items[0].fullName, "flutter/flutter");
-    expect(result.items[0].owner.avatarUrl, "https://avatars.githubusercontent.com/u/14101776?v=4");
+    expect(result.items[0].owner.avatarUrl,
+        "https://avatars.githubusercontent.com/u/14101776?v=4");
   });
 }

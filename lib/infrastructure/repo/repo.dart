@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'package:search_repo/domain/repo_Interface.dart';
+import 'package:search_repo/domain/interface.dart';
 import 'dart:convert';
 import 'package:search_repo/domain/types/repo/repo_model.dart';
 import 'package:search_repo/application/types/sort_enum.dart';

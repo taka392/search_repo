@@ -17,23 +17,19 @@ void main() {
     final mockClient = MockClient();
 
     // モッククライアントの設定
-    when(mockClient.get(any))
-        .thenAnswer((_) async => http.Response(data, 200));
+    when(mockClient.get(any)).thenAnswer((_) async => http.Response(data, 200));
 
-    // アプリケーションをテストモードで起動
+
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
           httpClientProvider.overrideWithValue(mockClient),
         ],
         child: const Material(
-          child: MaterialApp(
-            home: CustomDropdown()
-          ),
+          child: MaterialApp(home: CustomDropdown()),
         ),
       ),
     );
-
 
     // ドロップダウンを見つける
     final dropDown = find.byKey(CustomDropdown.dropDown);
@@ -42,10 +38,11 @@ void main() {
     expect(dropDown, findsOneWidget);
 
     //初期値がベストマッチになっているか。
-    expect(find.descendant(
-        of: find.byKey(CustomDropdown.dropDown),
-        matching: find.text("ベストマッチ")
-    ), findsOneWidget);
+    expect(
+        find.descendant(
+            of: find.byKey(CustomDropdown.dropDown),
+            matching: find.text("ベストマッチ")),
+        findsOneWidget);
 
     // ドロップダウンをタップ
     await tester.tap(dropDown);

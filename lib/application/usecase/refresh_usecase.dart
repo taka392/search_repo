@@ -2,7 +2,7 @@ import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
-import 'package:search_repo/domain/repo_Interface.dart';
+import 'package:search_repo/domain/interface.dart';
 import 'package:search_repo/domain/types/repo/repo_model.dart';
 
 /// アプリの初期準備をする
