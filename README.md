@@ -1,35 +1,28 @@
 # search repo
 一覧(Light)(日本語)|一覧(Dark)（英語）
 --|--
-![Simulator Screenshot - iPhone 14 Pro Max - 2023-09-10 at 21 11 56](https://github.com/taka392/github_repo/assets/88756420/216c2723-dd77-4ee7-8900-45eed6fd9837)|![Simulator Screenshot - iPhone 14 Pro Max - 2023-09-10 at 21 26 16](https://github.com/taka392/github_repo/assets/88756420/a4127e97-65ef-495d-9c21-0f916a1e89d7)
+<img src="https://github.com/taka392/github_repo/assets/88756420/216c2723-dd77-4ee7-8900-45eed6fd9837">|<img src="https://github.com/taka392/github_repo/assets/88756420/a4127e97-65ef-495d-9c21-0f916a1e89d7">
 
 タブレット(Light)(日本語)|デスクトップ(Dark)（英語）
 --|--
-![iPad](https://github.com/taka392/github_repo/assets/88756420/9762cc3c-cd46-4eaf-ae70-47e6216e26e4)|![MacOS](https://github.com/taka392/github_repo/assets/88756420/38c3f866-2589-4671-92cf-7ed7297938b4)
+<img src="https://github.com/taka392/github_repo/assets/88756420/9762cc3c-cd46-4eaf-ae70-47e6216e26e4">|<img src="https://github.com/taka392/github_repo/assets/88756420/38c3f866-2589-4671-92cf-7ed7297938b4">
 
 
 0件(Light)(日本語)|日本語(Dark)
 --|--
-![Simulator Screenshot - iPhone 14 Pro Max - 2023-09-10 at 21 12 45](https://github.com/taka392/github_repo/assets/88756420/7b4a2bb4-6e9e-4ef6-beb4-9a62d3f7fc85)|![Simulator Screenshot - iPhone 14 Pro Max - 2023-09-10 at 21 29 21](https://github.com/taka392/github_repo/assets/88756420/af4866f0-cf43-4a5f-a697-3f887633d901)
-
+<img src="https://github.com/taka392/github_repo/assets/88756420/7b4a2bb4-6e9e-4ef6-beb4-9a62d3f7fc85">|<img src="https://github.com/taka392/github_repo/assets/88756420/af4866f0-cf43-4a5f-a697-3f887633d901">
 エラー(Light)(日本語)|(英語)詳細画面
 --|--
-![Simulator Screenshot - iPhone 14 Pro Max - 2023-09-10 at 21 23 49](https://github.com/taka392/github_repo/assets/88756420/c01f757a-09f5-4e56-adb6-dca421bbe32a)!|![Simulator Screenshot - iPhone 14 Pro Max - 2023-09-10 at 21 19 26](https://github.com/taka392/github_repo/assets/88756420/963610f0-707f-4e9a-90fc-f7b4305b500a)
+<img src="https://github.com/taka392/github_repo/assets/88756420/c01f757a-09f5-4e56-adb6-dca421bbe32a">|<img src="https://github.com/taka392/github_repo/assets/88756420/963610f0-707f-4e9a-90fc-f7b4305b500a">
 
-![](https://media.giphy.com/media/Xw7GrCRFpDtDrfV1DI/giphy.gif)
-
-
-
-<img src="https://github.com/taka392/github_repo/assets/88756420/216c2723-dd77-4ee7-8900-45eed6fd9837">
 ### 動作
+https://media.giphy.com/media/rzWZrQ51rvhiKKUJxJ/giphy.gif
 
 * 何かしらのキーワードを入力できる
 * 入力したキーワードで GitHub のリポジトリを検索できる
 * 検索結果は一覧で概要（リポジトリ名）を表示する
 * 検索結果のアイテムをタップしたら、該当リポジトリの詳細（リポジトリ名、オーナーアイコン、プロジェクト言語、Star 数、Watcher 数、Fork 数、Issue
   数）を表示する
-
-![Simulator Screenshot - iPhone 14 Pro Max - 2023-09-10 at 21 32 43](https://github.com/taka392/search_repo/assets/88756420/5c9b9922-ac17-40c4-b16e-45695992a74e)
 
 
 
