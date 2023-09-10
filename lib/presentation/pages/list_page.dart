@@ -25,7 +25,6 @@ class ListPage extends HookConsumerWidget {
     final locate = ref.watch(appLocalizationsProvider);
     final repoData = ref.watch(watchRepoProvider);
     final controller = useScrollController();
-    /*final repoData = AsyncValue.error("エラーメッセージ", StackTrace.current);*/
     return Scaffold(
       appBar: SearchAppBar(
         scrollController: controller,
@@ -33,7 +32,7 @@ class ListPage extends HookConsumerWidget {
       body: repoData.when(
         error: (e, s) => CustomAnimation(
           imageUrl: 'assets/lottie/error.json',
-          text: "エラー",
+          text: locate.error,
           onRefresh: () async {
             final usecase = ref.read(refreshProvider);
             usecase.refresh();
