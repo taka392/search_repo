@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecases.dart';
 import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
+import 'package:search_repo/application/state/loading.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
 import 'package:search_repo/application/state/scroll_controller.dart';
 import 'package:search_repo/presentation/widget/custom_animation.dart';
@@ -26,7 +27,24 @@ class ListPage extends HookConsumerWidget {
     final locate = ref.watch(appLocalizationsProvider);
     final repoData = ref.watch(watchRepoProvider);
     final controller = ref.watch(scrollProvider);
+    final isLoading = ref.watch(isLoadingProvider.notifier);
 
+    void scroll() async {
+      if (!isLoading.state &&
+          controller.position.pixels == controller.position.maxScrollExtent) {
+        isLoading.state=true;
+        final usecase = ref.read(addProvider(controller));
+        await usecase.add();
+        isLoading.state=false;
+      }
+    }
+
+    useEffect(() {
+      controller.addListener(scroll);
+      return () {
+        controller.removeListener(scroll);
+      };
+    }, []);
 
 
     return Scaffold(

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecases.dart';
 import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
@@ -16,7 +15,7 @@ import 'package:search_repo/presentation/widget/gesture_detector/custom_gesture_
 import 'package:search_repo/presentation/widget/custom_drop_down.dart';
 import 'package:search_repo/presentation/widget/custom_text.dart';
 
-class RepoList extends HookConsumerWidget {
+class RepoList extends ConsumerWidget {
   final RepoModel? data;
 
   const RepoList({
@@ -32,30 +31,12 @@ class RepoList extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLoading = useState(false);
+
     final locate = ref.watch(appLocalizationsProvider);
     final controller = ref.watch(scrollProvider);
-
-
     final screen = ScreenRef(context).watch(screenProvider);
 
-    void scroll() async {
-      if (!isLoading.value &&
-          controller.position.pixels == controller.position.maxScrollExtent) {
-        isLoading.value = true;
-        final usecase = ref.read(addProvider(controller));
-        await usecase.add();
-        isLoading.value = false;
-      }
-    }
 
-    useEffect(() {
-      controller.addListener(scroll);
-      return () {
-        controller.removeListener(scroll);
-        isLoading.dispose();
-      };
-    }, []);
 
     return Scaffold(
 
