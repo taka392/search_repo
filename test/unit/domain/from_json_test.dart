@@ -5,7 +5,7 @@ import '../../mock_data.dart';
 
 void main() {
   test('fromJsonの変換テスト', () async {
-    final data = json.decode(MockData.jsonMock);
+    final Map<String, dynamic> data = json.decode(MockData.jsonMock)as Map<String, dynamic>;
     final RepoModel result = RepoModel.fromJson(data);
     expect(result.totalCount, 573491);
     expect(result.items[0].fullName, "flutter/flutter");

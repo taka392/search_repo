@@ -26,9 +26,10 @@ class SearchUsecase {
   /// 一連の流れをまとめて実施する
   Future<void> search() async {
     //新しいrepoを取得
-    RepoModel data = await repo.searchRepo(text);
-    //検索結果をStateに保存
-    repoNotifier.save(data);
+    final data = await repo.searchRepo(text);
+    if(data is RepoModel){
+      repoNotifier.save(data);
+    }
     //SearchのStateを更新
     searchNotifier.update(text);
     //page番号を初期化

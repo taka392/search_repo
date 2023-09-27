@@ -17,7 +17,7 @@ class ItemModel with _$ItemModel {
   }) = _ItemModel;
 
   factory ItemModel.fromJson(Map<String, dynamic> json) {
-    OwnerModel owner = OwnerModel.fromJson(json['owner']);
+    final OwnerModel owner = OwnerModel.fromJson(json['owner']);
     return ItemModel(
       id: json['id'] ?? 0,
       nodeId: json['node_id'] ?? '',

@@ -8,8 +8,8 @@ import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
-import 'package:search_repo/domain/types/repo/repo_model.dart';
 import 'package:search_repo/application/types/sort_enum.dart';
+import 'package:search_repo/domain/types/repo/repo_model.dart';
 import '../../http_mocks.dart';
 import '../../mock_data.dart';
 
@@ -20,8 +20,8 @@ void main() {
     final client = MockClient();
     const data = MockData.jsonMock;
     when(client.get(any)).thenAnswer((_) async => http.Response(data, 200));
-
-    final RepoModel result = RepoModel.fromJson(json.decode(data));
+    final Map<String, dynamic> map= json.decode(data)as Map<String, dynamic>;
+    final RepoModel result = RepoModel.fromJson(map);
 
     //プロバイダーをオーバーライド
     final container = ProviderContainer(
@@ -39,17 +39,17 @@ void main() {
     await addUseCase.refresh();
 
     //Page番号が更新されているかのチェック
-    int page = container.read(pageNotifierProvider);
+    final int page = container.read(pageNotifierProvider);
     await tester.pumpAndSettle();
     expect(page, 1);
 
     //Searchが更新されているかのチェック
-    String search = container.read(searchNotifierProvider);
+    final String search = container.read(searchNotifierProvider);
     await tester.pumpAndSettle();
     expect(search, "stars:>0");
 
     //Sort番号が更新されているかのチェック
-    Sort sort = container.read(sortNotifierProvider);
+    final Sort sort = container.read(sortNotifierProvider);
     await tester.pumpAndSettle();
     expect(sort, Sort.empty);
   });

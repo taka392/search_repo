@@ -10,8 +10,8 @@ class RepoModel with _$RepoModel {
   }) = _RepoModel;
 
   factory RepoModel.fromJson(Map<String, dynamic> json) {
-    List<dynamic> itemsJson = json['items'];
-    List<ItemModel> items = itemsJson.map((json) => ItemModel.fromJson(json)).toList();
+    final List<dynamic> itemsJson = json['items'];
+    final List<ItemModel> items = itemsJson.map((json) => ItemModel.fromJson(json)).toList();
     return RepoModel(
       totalCount: json['total_count'] ?? 0,
       items: items,
