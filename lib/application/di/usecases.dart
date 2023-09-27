@@ -5,6 +5,7 @@ import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
+import 'package:search_repo/application/types/sort_enum.dart';
 import 'package:search_repo/application/usecase/add_usecase.dart';
 import 'package:search_repo/application/usecase/detail_usecase.dart';
 import 'package:search_repo/application/usecase/refresh_usecase.dart';
@@ -12,7 +13,6 @@ import 'package:search_repo/application/usecase/search_usecase.dart';
 import 'package:search_repo/application/usecase/sort_usecase.dart';
 import 'package:search_repo/application/usecase/test_usecase.dart';
 import 'package:search_repo/domain/types/item/item_model.dart';
-import 'package:search_repo/application/types/sort_enum.dart';
 import 'package:tuple/tuple.dart';
 
 /// Add App

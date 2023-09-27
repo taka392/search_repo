@@ -12,6 +12,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_riverpod:
+  flutter_hooks:
   freezed_annotation:
   go_router:
   hooks_riverpod: ^2.3.8

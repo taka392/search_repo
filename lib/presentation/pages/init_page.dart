@@ -13,27 +13,29 @@ class InitPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locate = ref.watch(appLocalizationsProvider);
-    useEffect(() {
-      void navigateToNextPage() async {
-        //初期化処理
-        final usecase = ref.read(refreshProvider);
-        await usecase.refresh();
-        //ListPageへ遷移します。
-        final router = ref.read(goRouterProvider);
-        router.pushNamed(
-          PageId.list.routeName,
-        );
-      }
+    useEffect(
+      () {
+        Future<void> navigateToNextPage() async {
+          //初期化処理
+          final usecase = ref.read(refreshProvider);
+          await usecase.refresh();
+          //ListPageへ遷移します。
+          final router = ref.read(goRouterProvider);
+          router.pushNamed(
+            PageId.list.routeName,
+          );
+        }
 
-      navigateToNextPage();
-      return null;
-    }, const []);
+        navigateToNextPage();
+        return null;
+      },
+      const [],
+    );
 
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Lottie.asset('assets/lottie/loading.json'),
             Text(locate.searching),

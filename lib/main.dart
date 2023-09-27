@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:search_repo/presentation/router/app.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   const app = App();
   const scope = ProviderScope(
-    overrides: [],
     child: app,
   );
   Widget window = scope;
@@ -21,5 +19,3 @@ void main() async {
   }
   runApp(window);
 }
-
-

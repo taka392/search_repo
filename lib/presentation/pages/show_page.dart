@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:search_repo/application/di/usecases.dart';
-import 'package:search_repo/application/state/infinite_scrolling.dart';
 import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
+import 'package:search_repo/application/state/scroll_controller.dart';
 import 'package:search_repo/presentation/widget/custom_animation.dart';
 import 'package:search_repo/presentation/widget/repo_list.dart';
 import 'package:search_repo/presentation/widget/search_app_bar.dart';
 
-class ListPage extends ConsumerWidget {
-  const ListPage({super.key});
+class ShowPage extends ConsumerWidget {
+  const ShowPage({super.key});
 
   @visibleForTesting
   static final loadingKey = UniqueKey();
@@ -24,7 +24,7 @@ class ListPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final locate = ref.watch(appLocalizationsProvider);
     final repoData = ref.watch(watchRepoProvider);
-    final controller = ref.watch(infiniteScrollProvider);
+    final controller = ref.watch(scrollProvider);
 
     return Scaffold(
       appBar: SearchAppBar(

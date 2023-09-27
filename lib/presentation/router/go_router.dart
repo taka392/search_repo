@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/presentation/pages/init_page.dart';
 import 'package:search_repo/presentation/pages/list_page.dart';
+import 'package:search_repo/presentation/pages/show_page.dart';
 import 'package:search_repo/presentation/router/page_path.dart';
 import 'package:search_repo/presentation/widget/custom_transition.dart';
 
@@ -27,12 +28,18 @@ final goRouterProvider = Provider(
           child: const InitPage(),
         ),
       ),
+      GoRoute(
+        path: PageId.show.path,
+        name: PageId.show.routeName,
+        pageBuilder: (context, state) => buildTransitionPage(
+          child: const ShowPage(),
+        ),
+      ),
     ];
 
     return GoRouter(
       //初回のルーティングをinitialLocationに記述しました。
       initialLocation: PageId.init.path,
-      debugLogDiagnostics: false,
       routes: routes,
     );
   },
