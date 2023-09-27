@@ -24,6 +24,7 @@ dependencies:
   tuple:
   url_launcher:
 dev_dependencies:
+  lint:
   flutter_driver:
     sdk: flutter
   freezed:
