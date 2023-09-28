@@ -7,12 +7,10 @@ import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/application/types/sort_enum.dart';
 import 'package:search_repo/application/usecase/add_usecase.dart';
-import 'package:search_repo/application/usecase/detail_usecase.dart';
 import 'package:search_repo/application/usecase/refresh_usecase.dart';
 import 'package:search_repo/application/usecase/search_usecase.dart';
 import 'package:search_repo/application/usecase/sort_usecase.dart';
 import 'package:search_repo/application/usecase/test_usecase.dart';
-import 'package:search_repo/domain/types/item/item_model.dart';
 import 'package:tuple/tuple.dart';
 
 /// Add App
@@ -87,16 +85,6 @@ final sortProvider =
       repo: repo,
       data: value,
       scrollController: scrollController,
-    );
-  },
-);
-
-/// Detail App
-//画面をタップしたら、詳細画面を表示させるUsecaseです。
-final detailProvider = Provider.family<DetailUsecase, ItemModel>(
-  (ref, data) {
-    return DetailUsecase(
-      url: data.owner.htmlUrl,
     );
   },
 );

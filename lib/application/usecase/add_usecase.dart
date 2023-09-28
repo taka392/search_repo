@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/domain/interface.dart';
-import 'package:search_repo/domain/types/repo/repo_model.dart';
+import 'package:search_repo/domain/types/repo_model.dart';
 
 /// アプリの初期準備をする
 class AddUsecase {
@@ -24,7 +24,7 @@ class AddUsecase {
   Future<void> add() async {
     //新しいリポジトリを取得
     final data = await repo.addRepo();
-    if(data is RepoModel){
+    if (data is RepoModel) {
       await repoNotifier.add(data);
     }
     //ページ番号を更新

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:search_repo/domain/types/item/item_model.dart';
+import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/theme/fonts.dart';
 import 'package:search_repo/presentation/widget/custom_text.dart';
 
@@ -13,7 +13,6 @@ class CustomGestureDetector extends StatelessWidget {
 
   final ItemModel data;
   final VoidCallback onPressed;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -28,7 +27,7 @@ class CustomGestureDetector extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             CustomTextWidget(
-              text: data.fullName,
+              text: data.fullName!,
               maxLine: 1,
               textStyle: CustomText.titleMBold,
             ),
@@ -36,7 +35,7 @@ class CustomGestureDetector extends StatelessWidget {
               height: 3,
             ),
             CustomTextWidget(
-              text: data.description,
+              text: data.description!,
               maxLine: 2,
               textStyle: CustomText.titleS,
             ),
@@ -44,7 +43,6 @@ class CustomGestureDetector extends StatelessWidget {
               height: 3,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const Icon(
                   Icons.star_border_sharp,

@@ -3,7 +3,7 @@ import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/domain/interface.dart';
-import 'package:search_repo/domain/types/repo/repo_model.dart';
+import 'package:search_repo/domain/types/repo_model.dart';
 
 /// アプリの初期準備をする
 class RefreshUsecase {
@@ -25,7 +25,7 @@ class RefreshUsecase {
   Future<void> refresh() async {
     //リポジトリを初期化
     final data = await repo.refreshRepo();
-    if(data is RepoModel){
+    if (data is RepoModel) {
       repoNotifier.save(data);
     }
     //pageの初期化

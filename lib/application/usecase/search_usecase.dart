@@ -3,7 +3,7 @@ import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/domain/interface.dart';
-import 'package:search_repo/domain/types/repo/repo_model.dart';
+import 'package:search_repo/domain/types/repo_model.dart';
 
 /// アプリの初期準備をする
 class SearchUsecase {
@@ -27,7 +27,7 @@ class SearchUsecase {
   Future<void> search() async {
     //新しいrepoを取得
     final data = await repo.searchRepo(text);
-    if(data is RepoModel){
+    if (data is RepoModel) {
       repoNotifier.save(data);
     }
     //SearchのStateを更新

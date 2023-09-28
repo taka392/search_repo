@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
-import 'package:search_repo/domain/types/repo/repo_model.dart';
+import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/pages/list_page.dart';
-import 'package:http/http.dart' as http;
 import 'package:search_repo/presentation/widget/custom_animation.dart';
+
 import '../http_mocks.dart';
 import '../mock_data.dart';
 
@@ -24,8 +25,12 @@ void main() {
         ProviderScope(
           overrides: [
             httpClientProvider.overrideWithValue(mockClient),
-            watchRepoProvider.overrideWithValue(AsyncValue.error(
-                "エラーメッセージ", StackTrace.fromString('Fake stack trace'))),
+            watchRepoProvider.overrideWithValue(
+              AsyncValue.error(
+                "エラーメッセージ",
+                StackTrace.fromString('Fake stack trace'),
+              ),
+            ),
           ],
           child: const MaterialApp(
             home: ListPage(),
@@ -72,10 +77,14 @@ void main() {
         ProviderScope(
           overrides: [
             httpClientProvider.overrideWithValue(mockClient),
-            watchRepoProvider.overrideWithValue(const AsyncData(RepoModel(
-              items: [],
-              totalCount: 0,
-            ))),
+            watchRepoProvider.overrideWithValue(
+              const AsyncData(
+                RepoModel(
+                  items: [],
+                  totalCount: 0,
+                ),
+              ),
+            ),
           ],
           child: const MaterialApp(
             home: ListPage(),

@@ -371,10 +371,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "5668e6d3dbcb2d0dfa25f7567554b88c57e1e3f3c440b672b24d4a9477017d5b"
+      sha256: "4b58412b92bd7d588f904425ef6d41a017da1f097e5e9428d2c27d275777e16e"
       url: "https://pub.dev"
     source: hosted
-    version: "10.1.2"
+    version: "11.1.1"
   graphs:
     dependency: transitive
     description:
@@ -440,7 +440,7 @@ packages:
     source: hosted
     version: "0.6.7"
   json_annotation:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: json_annotation
       sha256: b10a7b2ff83d83c777edba3c6a0f97045ddadd56c944e1a23a3fdf43a1bf4467
@@ -448,7 +448,7 @@ packages:
     source: hosted
     version: "4.8.1"
   json_serializable:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: json_serializable
       sha256: aa1f5a8912615733e0fdc7a02af03308933c93235bdc8d50d0b0c8a8ccb0b969

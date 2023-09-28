@@ -10,7 +10,7 @@ import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/application/types/sort_enum.dart';
-import 'package:search_repo/domain/types/repo/repo_model.dart';
+import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:tuple/tuple.dart';
 
 import '../../http_mocks.dart';

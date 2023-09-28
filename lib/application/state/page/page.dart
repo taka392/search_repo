@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 part 'page.g.dart';
 
 @Riverpod(keepAlive: true)
@@ -14,9 +15,5 @@ class PageNotifier extends _$PageNotifier {
 
   void refresh() {
     state = 1;
-  }
-
-  void save(int page) {
-    state = page;
   }
 }
