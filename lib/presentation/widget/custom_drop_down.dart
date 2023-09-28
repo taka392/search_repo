@@ -1,17 +1,16 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecases.dart';
 import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/application/types/sort_enum.dart';
 import 'package:search_repo/presentation/theme/fonts.dart';
-import 'package:tuple/tuple.dart';
 
 class CustomDropdown extends ConsumerWidget {
-  final ScrollController? scrollController;
-
-  const CustomDropdown({super.key, this.scrollController});
+  const CustomDropdown({
+    super.key,
+  });
 
   @visibleForTesting
   static final dropDown = UniqueKey();
@@ -78,11 +77,9 @@ class CustomDropdown extends ConsumerWidget {
       value: sort,
       items: items,
       onChanged: (value) {
-        final usecase =
-            ref.read(sortProvider(Tuple2(value!, scrollController!)));
+        final usecase = ref.read(sortProvider(value!));
         usecase.sort();
       },
-      isDense: false,
       borderRadius: BorderRadius.circular(20.0),
       underline: const SizedBox(),
       padding: const EdgeInsets.fromLTRB(30.0, 0, 0, 0),

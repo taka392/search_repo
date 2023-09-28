@@ -5,11 +5,12 @@ class CustomTextWidget extends StatelessWidget {
   final TextStyle textStyle;
   final int maxLine;
 
-  const CustomTextWidget(
-      {super.key,
-      required this.text,
-      required this.textStyle,
-      required this.maxLine});
+  const CustomTextWidget({
+    super.key,
+    required this.text,
+    required this.textStyle,
+    required this.maxLine,
+  });
 
   @override
   Widget build(BuildContext context) {

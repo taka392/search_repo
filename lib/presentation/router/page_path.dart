@@ -14,7 +14,7 @@ extension PagePath on PageId {
       case PageId.init:
         return '/init';
       case PageId.show:
-        return '/show';
+        return '/show/:id';
     }
   }
 }

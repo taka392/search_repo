@@ -4,12 +4,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecases.dart';
 import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
 import 'package:search_repo/presentation/theme/fonts.dart';
-import 'package:tuple/tuple.dart';
 
 class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
-  final ScrollController? scrollController;
-
-  const SearchAppBar({Key? key, this.scrollController}) : super(key: key);
+  const SearchAppBar({super.key});
 
   @visibleForTesting
   static final textFormField = UniqueKey();
@@ -22,7 +19,7 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //画面の横幅の値を取得
-    double screenWidth = MediaQuery.of(context).size.width * 0.9;
+    final double screenWidth = MediaQuery.of(context).size.width * 0.9;
     final textController = useTextEditingController();
     final locate = ref.watch(appLocalizationsProvider);
     return AppBar(
@@ -35,29 +32,32 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
             width: screenWidth,
             height: 36,
             child: TextFormField(
-                key: textFormField,
-                controller: textController,
-                style: CustomText.titleM,
-                decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                      key: clear,
-                      icon: const Icon(
-                        Icons.clear,
-                      ),
-                      onPressed: () {
-                        textController.clear();
-                      }),
-                  prefixIcon: const Icon(
-                    Icons.search,
+              key: textFormField,
+              controller: textController,
+              style: CustomText.titleM,
+              decoration: InputDecoration(
+                suffixIcon: IconButton(
+                  key: clear,
+                  icon: const Icon(
+                    Icons.clear,
                   ),
-                  hintText: locate.hintText,
+                  onPressed: () {
+                    textController.clear();
+                  },
                 ),
-                onFieldSubmitted: (searchText) async {
-                  //Tuple2を使用して、ProviderFamilyで引数を2つ受け取ることが可能に。
-                  final usecase = ref.watch(
-                      searchProvider(Tuple2(searchText, scrollController!)));
-                  await usecase.search();
-                }),
+                prefixIcon: const Icon(
+                  Icons.search,
+                ),
+                hintText: locate.hintText,
+              ),
+              onFieldSubmitted: (searchText) async {
+                //Tuple2を使用して、ProviderFamilyで引数を2つ受け取ることが可能に。
+                final usecase = ref.watch(
+                  searchProvider(searchText),
+                );
+                await usecase.search();
+              },
+            ),
           ),
         ),
       ),

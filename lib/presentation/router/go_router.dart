@@ -32,7 +32,7 @@ final goRouterProvider = Provider(
         path: PageId.show.path,
         name: PageId.show.routeName,
         pageBuilder: (context, state) => buildTransitionPage(
-          child: const ShowPage(),
+          child: ShowPage(data: state.pathParameters['id']!),
         ),
       ),
     ];

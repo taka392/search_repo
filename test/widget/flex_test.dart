@@ -25,7 +25,7 @@ void main() {
       ProviderScope(
         overrides: [
           httpClientProvider.overrideWithValue(mockClient),
-          watchRepoProvider.overrideWithValue(
+          asyncValueProvider.overrideWithValue(
             const AsyncData(
               RepoModel(
                 items: [],

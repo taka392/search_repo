@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:search_repo/application/state/infinite_scrolling.dart';
 import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
-import 'package:search_repo/application/state/scroll_controller.dart';
 import 'package:search_repo/application/types/screen_size.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/router/go_router.dart';
@@ -32,7 +32,7 @@ class RepoList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locate = ref.watch(appLocalizationsProvider);
-    final controller = ref.watch(scrollProvider);
+    final controller = ref.watch(infiniteScrollProvider);
     final screen = ScreenRef(context).watch(screenProvider);
 
     return Scaffold(
@@ -50,9 +50,7 @@ class RepoList extends ConsumerWidget {
                 textStyle: CustomText.titleM,
               ),
               const Spacer(),
-              CustomDropdown(
-                scrollController: controller,
-              ),
+              const CustomDropdown(),
               const SizedBox(
                 width: 30,
               ),
@@ -81,6 +79,7 @@ class RepoList extends ConsumerWidget {
                             final router = ref.read(goRouterProvider);
                             router.pushNamed(
                               PageId.show.routeName,
+                              pathParameters: {'id': repo.id.toString()},
                             );
                           },
                           key: iphoneKey,

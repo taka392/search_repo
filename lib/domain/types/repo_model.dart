@@ -18,11 +18,13 @@ class RepoModel with _$RepoModel {
 @freezed
 class ItemModel with _$ItemModel {
   const factory ItemModel({
-    @Default(0) int id,
+    required int id,
     @Default('') @JsonKey(name: 'full_name') String fullName,
     @Default('') String description,
     @Default(0) @JsonKey(name: 'stargazers_count') int stargazersCount,
+    @Default(0) @JsonKey(name: 'watchers_count') int watchersCount,
     @Default(0) @JsonKey(name: 'forks_count') int forksCount,
+    @Default(0) @JsonKey(name: 'open_issues_count') int openIssuesCount,
     @Default('') String language,
     required OwnerModel owner,
   }) = _ItemModel;

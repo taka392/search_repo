@@ -25,7 +25,7 @@ void main() {
         ProviderScope(
           overrides: [
             httpClientProvider.overrideWithValue(mockClient),
-            watchRepoProvider.overrideWithValue(
+            asyncValueProvider.overrideWithValue(
               AsyncValue.error(
                 "エラーメッセージ",
                 StackTrace.fromString('Fake stack trace'),
@@ -54,7 +54,7 @@ void main() {
         ProviderScope(
           overrides: [
             httpClientProvider.overrideWithValue(mockClient),
-            watchRepoProvider.overrideWithValue(const AsyncValue.loading()),
+            asyncValueProvider.overrideWithValue(const AsyncValue.loading()),
           ],
           child: const MaterialApp(
             home: ListPage(),
@@ -77,7 +77,7 @@ void main() {
         ProviderScope(
           overrides: [
             httpClientProvider.overrideWithValue(mockClient),
-            watchRepoProvider.overrideWithValue(
+            asyncValueProvider.overrideWithValue(
               const AsyncData(
                 RepoModel(
                   items: [],

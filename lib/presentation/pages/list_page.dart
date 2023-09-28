@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:search_repo/application/di/usecases.dart';
-import 'package:search_repo/application/state/infinite_scrolling.dart';
 import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
 import 'package:search_repo/presentation/widget/custom_animation.dart';
@@ -23,13 +22,9 @@ class ListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locate = ref.watch(appLocalizationsProvider);
-    final repoData = ref.watch(watchRepoProvider);
-    final controller = ref.watch(infiniteScrollProvider);
-
+    final repoData = ref.watch(asyncValueProvider);
     return Scaffold(
-      appBar: SearchAppBar(
-        scrollController: controller,
-      ),
+      appBar: const SearchAppBar(),
       body: repoData.when(
         error: (e, s) => CustomAnimation(
           imageUrl: 'assets/lottie/error.json',

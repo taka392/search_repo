@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:search_repo/application/di/repository.dart';
+import 'package:search_repo/application/state/infinite_scrolling.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
 import 'package:search_repo/application/state/search/search.dart';
@@ -11,7 +12,6 @@ import 'package:search_repo/application/usecase/refresh_usecase.dart';
 import 'package:search_repo/application/usecase/search_usecase.dart';
 import 'package:search_repo/application/usecase/sort_usecase.dart';
 import 'package:search_repo/application/usecase/test_usecase.dart';
-import 'package:tuple/tuple.dart';
 
 /// Add App
 //画面一番下までスクロールした際に発火するリポジトリ追加取得用のUsecaseです。
@@ -30,15 +30,14 @@ final addProvider =
 
 /// Search App
 //検索用のUsecaseです。
-final searchProvider =
-    Provider.family<SearchUsecase, Tuple2<String, ScrollController?>>(
+final searchProvider = Provider.family<SearchUsecase, String>(
   (ref, data) {
-    final text = data.item1;
-    final scrollController = data.item2;
+    final text = data;
     final searchNotifier = ref.watch(searchNotifierProvider.notifier);
     final repo = ref.watch(repositoryProvider);
     final repoNotifier = ref.watch(repoProvider.notifier);
     final pageNotifier = ref.watch(pageNotifierProvider.notifier);
+    final scrollController = ref.read(infiniteScrollProvider);
     return SearchUsecase(
       repo: repo,
       text: text,
@@ -71,14 +70,13 @@ final refreshProvider = Provider<RefreshUsecase>(
 
 /// Sort App
 //絞り込み用のUsecaseです。主にドロップダウンで使用します。
-final sortProvider =
-    Provider.family<SortUsecase, Tuple2<Sort, ScrollController?>>(
+final sortProvider = Provider.family<SortUsecase, Sort>(
   (ref, data) {
-    final value = data.item1;
-    final scrollController = data.item2;
+    final value = data;
     final repoNotifier = ref.read(repoProvider.notifier);
     final sortNotifier = ref.read(sortNotifierProvider.notifier);
     final repo = ref.watch(repositoryProvider);
+    final scrollController = ref.read(infiniteScrollProvider);
     return SortUsecase(
       repoNotifier: repoNotifier,
       sortNotifier: sortNotifier,

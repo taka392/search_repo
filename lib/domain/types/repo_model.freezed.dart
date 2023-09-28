@@ -193,8 +193,12 @@ mixin _$ItemModel {
   String get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'stargazers_count')
   int get stargazersCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'watchers_count')
+  int get watchersCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'forks_count')
   int get forksCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'open_issues_count')
+  int get openIssuesCount => throw _privateConstructorUsedError;
   String get language => throw _privateConstructorUsedError;
   OwnerModel get owner => throw _privateConstructorUsedError;
 
@@ -214,7 +218,9 @@ abstract class $ItemModelCopyWith<$Res> {
       @JsonKey(name: 'full_name') String fullName,
       String description,
       @JsonKey(name: 'stargazers_count') int stargazersCount,
+      @JsonKey(name: 'watchers_count') int watchersCount,
       @JsonKey(name: 'forks_count') int forksCount,
+      @JsonKey(name: 'open_issues_count') int openIssuesCount,
       String language,
       OwnerModel owner});
 
@@ -238,7 +244,9 @@ class _$ItemModelCopyWithImpl<$Res, $Val extends ItemModel>
     Object? fullName = null,
     Object? description = null,
     Object? stargazersCount = null,
+    Object? watchersCount = null,
     Object? forksCount = null,
+    Object? openIssuesCount = null,
     Object? language = null,
     Object? owner = null,
   }) {
@@ -259,9 +267,17 @@ class _$ItemModelCopyWithImpl<$Res, $Val extends ItemModel>
           ? _value.stargazersCount
           : stargazersCount // ignore: cast_nullable_to_non_nullable
               as int,
+      watchersCount: null == watchersCount
+          ? _value.watchersCount
+          : watchersCount // ignore: cast_nullable_to_non_nullable
+              as int,
       forksCount: null == forksCount
           ? _value.forksCount
           : forksCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      openIssuesCount: null == openIssuesCount
+          ? _value.openIssuesCount
+          : openIssuesCount // ignore: cast_nullable_to_non_nullable
               as int,
       language: null == language
           ? _value.language
@@ -295,7 +311,9 @@ abstract class _$$_ItemModelCopyWith<$Res> implements $ItemModelCopyWith<$Res> {
       @JsonKey(name: 'full_name') String fullName,
       String description,
       @JsonKey(name: 'stargazers_count') int stargazersCount,
+      @JsonKey(name: 'watchers_count') int watchersCount,
       @JsonKey(name: 'forks_count') int forksCount,
+      @JsonKey(name: 'open_issues_count') int openIssuesCount,
       String language,
       OwnerModel owner});
 
@@ -318,7 +336,9 @@ class __$$_ItemModelCopyWithImpl<$Res>
     Object? fullName = null,
     Object? description = null,
     Object? stargazersCount = null,
+    Object? watchersCount = null,
     Object? forksCount = null,
+    Object? openIssuesCount = null,
     Object? language = null,
     Object? owner = null,
   }) {
@@ -339,9 +359,17 @@ class __$$_ItemModelCopyWithImpl<$Res>
           ? _value.stargazersCount
           : stargazersCount // ignore: cast_nullable_to_non_nullable
               as int,
+      watchersCount: null == watchersCount
+          ? _value.watchersCount
+          : watchersCount // ignore: cast_nullable_to_non_nullable
+              as int,
       forksCount: null == forksCount
           ? _value.forksCount
           : forksCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      openIssuesCount: null == openIssuesCount
+          ? _value.openIssuesCount
+          : openIssuesCount // ignore: cast_nullable_to_non_nullable
               as int,
       language: null == language
           ? _value.language
@@ -359,11 +387,13 @@ class __$$_ItemModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ItemModel implements _ItemModel {
   const _$_ItemModel(
-      {this.id = 0,
+      {required this.id,
       @JsonKey(name: 'full_name') this.fullName = '',
       this.description = '',
       @JsonKey(name: 'stargazers_count') this.stargazersCount = 0,
+      @JsonKey(name: 'watchers_count') this.watchersCount = 0,
       @JsonKey(name: 'forks_count') this.forksCount = 0,
+      @JsonKey(name: 'open_issues_count') this.openIssuesCount = 0,
       this.language = '',
       required this.owner});
 
@@ -371,7 +401,6 @@ class _$_ItemModel implements _ItemModel {
       _$$_ItemModelFromJson(json);
 
   @override
-  @JsonKey()
   final int id;
   @override
   @JsonKey(name: 'full_name')
@@ -383,8 +412,14 @@ class _$_ItemModel implements _ItemModel {
   @JsonKey(name: 'stargazers_count')
   final int stargazersCount;
   @override
+  @JsonKey(name: 'watchers_count')
+  final int watchersCount;
+  @override
   @JsonKey(name: 'forks_count')
   final int forksCount;
+  @override
+  @JsonKey(name: 'open_issues_count')
+  final int openIssuesCount;
   @override
   @JsonKey()
   final String language;
@@ -393,7 +428,7 @@ class _$_ItemModel implements _ItemModel {
 
   @override
   String toString() {
-    return 'ItemModel(id: $id, fullName: $fullName, description: $description, stargazersCount: $stargazersCount, forksCount: $forksCount, language: $language, owner: $owner)';
+    return 'ItemModel(id: $id, fullName: $fullName, description: $description, stargazersCount: $stargazersCount, watchersCount: $watchersCount, forksCount: $forksCount, openIssuesCount: $openIssuesCount, language: $language, owner: $owner)';
   }
 
   @override
@@ -408,8 +443,12 @@ class _$_ItemModel implements _ItemModel {
                 other.description == description) &&
             (identical(other.stargazersCount, stargazersCount) ||
                 other.stargazersCount == stargazersCount) &&
+            (identical(other.watchersCount, watchersCount) ||
+                other.watchersCount == watchersCount) &&
             (identical(other.forksCount, forksCount) ||
                 other.forksCount == forksCount) &&
+            (identical(other.openIssuesCount, openIssuesCount) ||
+                other.openIssuesCount == openIssuesCount) &&
             (identical(other.language, language) ||
                 other.language == language) &&
             (identical(other.owner, owner) || other.owner == owner));
@@ -417,8 +456,17 @@ class _$_ItemModel implements _ItemModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, fullName, description,
-      stargazersCount, forksCount, language, owner);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      fullName,
+      description,
+      stargazersCount,
+      watchersCount,
+      forksCount,
+      openIssuesCount,
+      language,
+      owner);
 
   @JsonKey(ignore: true)
   @override
@@ -436,11 +484,13 @@ class _$_ItemModel implements _ItemModel {
 
 abstract class _ItemModel implements ItemModel {
   const factory _ItemModel(
-      {final int id,
+      {required final int id,
       @JsonKey(name: 'full_name') final String fullName,
       final String description,
       @JsonKey(name: 'stargazers_count') final int stargazersCount,
+      @JsonKey(name: 'watchers_count') final int watchersCount,
       @JsonKey(name: 'forks_count') final int forksCount,
+      @JsonKey(name: 'open_issues_count') final int openIssuesCount,
       final String language,
       required final OwnerModel owner}) = _$_ItemModel;
 
@@ -458,8 +508,14 @@ abstract class _ItemModel implements ItemModel {
   @JsonKey(name: 'stargazers_count')
   int get stargazersCount;
   @override
+  @JsonKey(name: 'watchers_count')
+  int get watchersCount;
+  @override
   @JsonKey(name: 'forks_count')
   int get forksCount;
+  @override
+  @JsonKey(name: 'open_issues_count')
+  int get openIssuesCount;
   @override
   String get language;
   @override
