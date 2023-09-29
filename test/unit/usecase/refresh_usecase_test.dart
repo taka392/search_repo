@@ -17,7 +17,7 @@ import '../../mock_data.dart';
 
 /// Usecaseのテスト
 void main() {
-  testWidgets('addUsecaseのテスト', (WidgetTester tester) async {
+  test('addUsecaseのテスト', () async {
     //clientが呼ばれた時、ステータスコード200,の偽データをセット
     final client = MockClient();
     const data = MockData.jsonMock;
@@ -42,17 +42,14 @@ void main() {
 
     //Page番号が更新されているかのチェック
     final int page = container.read(pageNotifierProvider);
-    await tester.pumpAndSettle();
     expect(page, 1);
 
     //Searchが更新されているかのチェック
     final String search = container.read(searchNotifierProvider);
-    await tester.pumpAndSettle();
     expect(search, "stars:>0");
 
     //Sort番号が更新されているかのチェック
     final Sort sort = container.read(sortNotifierProvider);
-    await tester.pumpAndSettle();
     expect(sort, Sort.empty);
   });
 }

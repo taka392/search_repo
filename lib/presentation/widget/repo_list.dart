@@ -32,7 +32,6 @@ class RepoList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locate = ref.watch(appLocalizationsProvider);
-    final controller = ref.watch(infiniteScrollProvider);
     final screen = ScreenRef(context).watch(screenProvider);
 
     return Scaffold(
@@ -61,7 +60,7 @@ class RepoList extends ConsumerWidget {
           ),
           Expanded(
             child: ListView.separated(
-              controller: controller,
+              controller: ref.watch(infiniteScrollProvider),
               itemCount: data!.items.length + 1,
               separatorBuilder: (BuildContext context, int index) =>
                   const Divider(

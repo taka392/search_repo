@@ -1,9 +1,10 @@
+// ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+import 'package:search_repo/application/interfaces/repo.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/application/types/sort_enum.dart';
-import 'package:search_repo/domain/interface.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 
 /// アプリの初期準備をする

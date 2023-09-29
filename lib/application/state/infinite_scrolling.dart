@@ -6,7 +6,7 @@ import 'package:search_repo/application/state/loading.dart';
 import 'package:search_repo/application/state/scroll_controller.dart';
 
 //ListView用のProvider
-final infiniteScrollProvider = Provider.autoDispose<ScrollController>((ref) {
+final infiniteScrollProvider = Provider<ScrollController>((ref) {
   final controller = ref.watch(scrollProvider);
   final isLoading = ref.watch(isLoadingProvider.notifier);
 
@@ -19,10 +19,8 @@ final infiniteScrollProvider = Provider.autoDispose<ScrollController>((ref) {
       isLoading.state = false;
     }
   });
-
   ref.onDispose(() {
     controller.dispose(); // コントローラーを解放
   });
-
   return controller;
 });

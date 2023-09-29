@@ -18,14 +18,13 @@ import '../../mock_data.dart';
 
 /// Usecaseのテスト
 void main() {
-  testWidgets('searchUsecaseのテスト', (WidgetTester tester) async {
+  test('searchUsecaseのテスト', () async {
     //clientが呼ばれた時、ステータスコード200,の偽データをセット
     final client = MockClient();
     const data = MockData.jsonMock;
     when(client.get(any)).thenAnswer((_) async => http.Response(data, 200));
     final Map<String, dynamic> map = json.decode(data) as Map<String, dynamic>;
     final RepoModel result = RepoModel.fromJson(map);
-
     //プロバイダーをオーバーライド
     final container = ProviderContainer(
       overrides: [
@@ -44,17 +43,14 @@ void main() {
 
     //Page番号が更新されてるかのテスト
     final int page = container.read(pageNotifierProvider);
-    await tester.pumpAndSettle();
     expect(page, 1);
 
     //Searchが更新されているかのチェック
     final String search = container.read(searchNotifierProvider);
-    await tester.pumpAndSettle();
     expect(search, "Rails");
 
     //Sort番号が維持されているかのチェック
     final Sort sort = container.read(sortNotifierProvider);
-    await tester.pumpAndSettle();
     expect(sort, Sort.forks);
   });
 }

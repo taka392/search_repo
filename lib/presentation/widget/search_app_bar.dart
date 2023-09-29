@@ -3,7 +3,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecases.dart';
 import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
+import 'package:search_repo/application/state/scroll_controller.dart';
 import 'package:search_repo/presentation/theme/fonts.dart';
+import 'package:tuple/tuple.dart';
 
 class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
   const SearchAppBar({super.key});
@@ -22,6 +24,7 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
     final double screenWidth = MediaQuery.of(context).size.width * 0.9;
     final textController = useTextEditingController();
     final locate = ref.watch(appLocalizationsProvider);
+    final scrollController = ref.watch(scrollProvider);
     return AppBar(
       automaticallyImplyLeading: false,
       bottom: PreferredSize(
@@ -51,9 +54,9 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
                 hintText: locate.hintText,
               ),
               onFieldSubmitted: (searchText) async {
-                //Tuple2を使用して、ProviderFamilyで引数を2つ受け取ることが可能に。
+                debugPrint(searchText);
                 final usecase = ref.watch(
-                  searchProvider(searchText),
+                  searchProvider(Tuple2(searchText, scrollController)),
                 );
                 await usecase.search();
               },

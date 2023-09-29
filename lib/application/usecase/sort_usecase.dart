@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:search_repo/application/interfaces/repo.dart';
+import 'package:search_repo/application/logic/animation.dart';
 import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/application/types/sort_enum.dart';
-import 'package:search_repo/domain/interface.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 
 /// アプリの初期準備をする
@@ -31,13 +32,7 @@ class SortUsecase {
     }
     //SortのState値を更新
     sortNotifier.save(data);
-
-    if (scrollController != null) {
-      await scrollController!.animateTo(
-        scrollController!.position.maxScrollExtent * 0,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
-    }
+    //スクロールアニメーション実行
+    AnimationUtil.scroll(scrollController, 0);
   }
 }

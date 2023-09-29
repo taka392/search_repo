@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:search_repo/application/interfaces/repo.dart';
+import 'package:search_repo/application/logic/animation.dart';
+import 'package:search_repo/application/logic/network.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_notifier.dart';
-import 'package:search_repo/domain/interface.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 
 /// アプリの初期準備をする
@@ -27,15 +29,10 @@ class AddUsecase {
     if (data is RepoModel) {
       await repoNotifier.add(data);
     }
+    Network.check();
     //ページ番号を更新
     pageNotifier.update();
     //スクロールアニメーションを実行
-    if (scrollController != null) {
-      await scrollController!.animateTo(
-        scrollController!.position.maxScrollExtent * 0.9,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
-    }
+    AnimationUtil.scroll(scrollController, 0.9);
   }
 }
