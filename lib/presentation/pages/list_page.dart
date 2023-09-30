@@ -26,19 +26,43 @@ class ListPage extends ConsumerWidget {
     return Scaffold(
       appBar: const SearchAppBar(),
       body: repoData.when(
-        error: (e, s) => CustomAnimation(
-          imageUrl: 'assets/lottie/error.json',
-          text: locate.error,
-          onRefresh: () async {
-            final usecase = ref.read(refreshProvider);
-            usecase.refresh();
-          },
-          key: errorKey,
-        ),
+        error: (e, s) {
+          ///ネットワークエラーの時の条件分岐
+          if (e == "ネットワークエラー") {
+            return CustomAnimation(
+              imageUrl: 'assets/lottie/error.json',
+              text: locate.net_error,
+              description1: locate.net_error_description1,
+              description2: locate.net_error_description2,
+              onReload: () async {
+                final usecase = ref.read(refreshProvider);
+                usecase.refresh();
+              },
+              hasFloating: true,
+              error: "$e",
+              stackTrace: "$s",
+              key: errorKey,
+            );
+          } else {
+            ///エラーの時の条件分岐
+            return CustomAnimation(
+              imageUrl: 'assets/lottie/error.json',
+              text: locate.error,
+              description1: "$e",
+              description2: "$s",
+              onReload: () async {
+                final usecase = ref.read(refreshProvider);
+                usecase.refresh();
+              },
+              hasFloating: true,
+              key: errorKey,
+            );
+          }
+        },
         loading: () => CustomAnimation(
           imageUrl: 'assets/lottie/loading.json',
           text: locate.searching,
-          onRefresh: () async {
+          onReload: () async {
             final usecase = ref.read(refreshProvider);
             usecase.refresh();
           },
@@ -49,7 +73,7 @@ class ListPage extends ConsumerWidget {
             return CustomAnimation(
               imageUrl: 'assets/lottie/not_found.json',
               text: locate.noHit,
-              onRefresh: () async {
+              onReload: () async {
                 final usecase = ref.read(refreshProvider);
                 usecase.refresh();
               },

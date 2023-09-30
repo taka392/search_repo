@@ -43,6 +43,8 @@ class SearchUsecase {
       pageNotifier.refresh();
     }
     //画面の1番上までスクロール
-    AnimationUtil.scroll(scrollController, 0);
+    if (scrollController != null) {
+      AnimationUtil.scroll(scrollController, 0);
+    }
   }
 }

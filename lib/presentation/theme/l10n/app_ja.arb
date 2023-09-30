@@ -8,6 +8,9 @@
   "help_wanted_issues": "Help wanted issues",
   "updated": "更新日",
   "searching": "検索中....",
-  "error": "エラーが発生しました",
+  "net_error": "ネットワークエラーが発生しました。",
+  "net_error_description1": "通信状況を確認の上",
+  "net_error_description2": "リロードボタンを押してください",
+  "error": "エラーが発生しました。",
   "noHit": "ヒットするリポジトリが見つかりませんでした"
 }

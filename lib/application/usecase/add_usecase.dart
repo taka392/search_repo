@@ -25,14 +25,21 @@ class AddUsecase {
   /// 一連の流れをまとめて実施する
   Future<void> add() async {
     //新しいリポジトリを取得
-    final data = await repo.addRepo();
-    if (data is RepoModel) {
-      await repoNotifier.add(data);
+    final isNetError = await Network.check();
+    if (isNetError) {
+      repoNotifier.errorText();
+    } else {
+      final data = await repo.addRepo();
+      if (data is RepoModel) {
+        await repoNotifier.add(data);
+      }
+      Network.check();
+      //ページ番号を更新
+      pageNotifier.update();
+      //スクロールアニメーションを実行
+      if (scrollController != null) {
+        AnimationUtil.scroll(scrollController, 0.9);
+      }
     }
-    Network.check();
-    //ページ番号を更新
-    pageNotifier.update();
-    //スクロールアニメーションを実行
-    AnimationUtil.scroll(scrollController, 0.9);
   }
 }

@@ -6,6 +6,7 @@ import 'package:search_repo/application/di/usecases.dart';
 import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
 import 'package:search_repo/presentation/router/go_router.dart';
 import 'package:search_repo/presentation/router/page_path.dart';
+import 'package:search_repo/presentation/widget/search_app_bar.dart';
 
 class InitPage extends HookConsumerWidget {
   const InitPage({super.key});
@@ -33,6 +34,7 @@ class InitPage extends HookConsumerWidget {
     );
 
     return Scaffold(
+      appBar: const SearchAppBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

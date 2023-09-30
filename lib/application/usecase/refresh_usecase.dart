@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:search_repo/application/interfaces/repo.dart';
+import 'package:search_repo/application/logic/network.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/application/state/search/search.dart';
@@ -23,16 +25,21 @@ class RefreshUsecase {
 
   /// 一連の流れをまとめて実施する
   Future<void> refresh() async {
-    //リポジトリを初期化
-    final data = await repo.refreshRepo();
-    if (data is RepoModel) {
-      repoNotifier.save(data);
+    final isNetError = await Network.check();
+    debugPrint(isNetError.toString());
+    if (isNetError) {
+      repoNotifier.errorText();
+    } else {
+      final data = await repo.refreshRepo();
+      if (data is RepoModel) {
+        repoNotifier.save(data);
+      }
+      //pageの初期化
+      pageNotifier.refresh();
+      //searchの初期化
+      searchNotifier.refresh();
+      //sortの初期化
+      sortNotifier.refresh();
     }
-    //pageの初期化
-    pageNotifier.refresh();
-    //searchの初期化
-    searchNotifier.refresh();
-    //sortの初期化
-    sortNotifier.refresh();
   }
 }

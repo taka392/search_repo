@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 
@@ -39,6 +40,7 @@ class RepoNotifier<T> extends StateNotifier<AsyncValue<T>> {
   void errorText() {
     final fakeStackTrace =
         StackTrace.fromString('Fake stack trace'); // ダミーのスタックトレースを生成
-    state = AsyncValue.error("エラーメッセージ", fakeStackTrace);
+    state = AsyncValue.error("ネットワークエラー", fakeStackTrace);
+    debugPrint(state.toString());
   }
 }

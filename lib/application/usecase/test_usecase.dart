@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
 import 'package:search_repo/application/interfaces/repo.dart';
+import 'package:search_repo/application/logic/network.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/application/state/search/search.dart';
@@ -24,13 +25,18 @@ class TestUsecase {
 
   /// 一連の流れをまとめて実施する
   Future<void> test(RepoModel data, int page, String search, Sort sort) async {
-    //テスト時にMockデータを代入し、stateに保存する。
-    repoNotifier.save(data);
-    //pageの初期化
-    pageNotifier.state = page;
-    //searchの初期化
-    searchNotifier.save(search);
-    //sortの初期化
-    sortNotifier.save(sort);
+    final isNetError = await Network.check();
+    if (isNetError) {
+      repoNotifier.errorText();
+    } else {
+      //テスト時にMockデータを代入し、stateに保存する。
+      repoNotifier.save(data);
+      //pageの初期化
+      pageNotifier.state = page;
+      //searchの初期化
+      searchNotifier.save(search);
+      //sortの初期化
+      sortNotifier.save(sort);
+    }
   }
 }

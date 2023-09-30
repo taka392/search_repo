@@ -23,7 +23,3 @@ class CustomText {
     fontFamily: CustomFont.general,
   );
 }
-
-class CustomRadius {
-  static BorderRadiusGeometry get dropDownRadius => BorderRadius.circular(8.0);
-}
