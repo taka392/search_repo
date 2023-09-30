@@ -45,7 +45,7 @@ class CustomDropdown extends ConsumerWidget {
         key: forks,
         value: Sort.forks,
         child: Text(
-          l10n.stars,
+          l10n.forks,
           style: CustomText.titleM,
         ),
       ),
