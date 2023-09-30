@@ -44,7 +44,7 @@ class SearchUsecase {
     }
     //画面の1番上までスクロール
     if (scrollController != null) {
-      AnimationUtil.scroll(scrollController, 0);
+      await AnimationUtil.scroll(scrollController, 0);
     }
   }
 }

@@ -40,7 +40,7 @@ class SortUsecase {
       sortNotifier.save(data);
       //スクロールアニメーション実行
       if (scrollController != null) {
-        AnimationUtil.scroll(scrollController, 0);
+        await AnimationUtil.scroll(scrollController, 0);
       }
     }
   }

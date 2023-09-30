@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:search_repo/application/interfaces/repo.dart';
 import 'package:search_repo/application/types/sort_enum.dart';
@@ -20,8 +21,7 @@ class RepoImpl implements Repo {
 
   @override
   Future getRepo() async {
-    final String sortValue =
-        (sort == Sort.empty) ? "" : sort.toString(); // Sort.emptyの場合、空文字列にする
+    final Object sortValue = (sort == Sort.empty) ? "" : sort;
     final response = await httpClient.get(
       Uri.parse(
         'https://api.github.com/search/repositories?q=$search&sort=$sortValue&page=$page&per_page=20',
@@ -40,8 +40,8 @@ class RepoImpl implements Repo {
   @override
   Future addRepo() async {
     final int nextPage = page + 1;
-    final String sortValue =
-        (sort == Sort.empty) ? "" : sort.toString(); // Sort.emptyの場合、空文字列にする
+    final Object sortValue = (sort == Sort.empty) ? "" : sort;
+    debugPrint(sortValue.toString());
     final response = await httpClient.get(
       Uri.parse(
         'https://api.github.com/search/repositories?q=$search&sort=$sortValue&page=$nextPage&per_page=20',

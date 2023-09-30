@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:search_repo/application/interfaces/repo.dart';
-import 'package:search_repo/application/logic/animation.dart';
 import 'package:search_repo/application/logic/network.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_notifier.dart';
@@ -36,10 +35,6 @@ class AddUsecase {
       Network.check();
       //ページ番号を更新
       pageNotifier.update();
-      //スクロールアニメーションを実行
-      if (scrollController != null) {
-        AnimationUtil.scroll(scrollController, 0.9);
-      }
     }
   }
 }

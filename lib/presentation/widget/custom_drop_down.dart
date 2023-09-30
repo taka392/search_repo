@@ -79,10 +79,10 @@ class CustomDropdown extends ConsumerWidget {
       key: dropDown,
       value: sort,
       items: items,
-      onChanged: (value) {
+      onChanged: (value) async {
         final usecase =
             ref.read(sortProvider(Tuple2(value!, scrollController)));
-        usecase.sort();
+        await usecase.sort();
       },
       borderRadius: BorderRadius.circular(20.0),
       underline: const SizedBox(),

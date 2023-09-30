@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:search_repo/application/di/usecases.dart';
 import 'package:search_repo/application/state/loading.dart';
+import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/scroll_controller.dart';
 
 //ListView用のProvider
@@ -16,11 +17,10 @@ final infiniteScrollProvider = Provider<ScrollController>((ref) {
       isLoading.state = true;
       final usecase = ref.read(addProvider(controller));
       await usecase.add();
+      final page = ref.read(pageNotifierProvider);
+      debugPrint(page.toString());
       isLoading.state = false;
     }
-  });
-  ref.onDispose(() {
-    controller.dispose(); // コントローラーを解放
   });
   return controller;
 });
