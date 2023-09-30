@@ -11,7 +11,7 @@ class Network {
       return true;
     } else {
       // ネットに接続されている時
-      debugPrint("ネットに接続");
+      debugPrint("ネットに接続成功");
       return false;
     }
   }

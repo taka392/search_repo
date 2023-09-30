@@ -18,7 +18,6 @@ final infiniteScrollProvider = Provider<ScrollController>((ref) {
       final usecase = ref.read(addProvider(controller));
       await usecase.add();
       final page = ref.read(pageNotifierProvider);
-      debugPrint(page.toString());
       isLoading.state = false;
     }
   });

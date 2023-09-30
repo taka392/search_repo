@@ -35,8 +35,6 @@ class AddUsecase {
       Network.check();
       //ページ番号を更新
       pageNotifier.update();
-      debugPrint("-----------------");
-      debugPrint(pageNotifier.state.toString());
     }
   }
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:search_repo/application/interfaces/repo.dart';
 import 'package:search_repo/application/logic/network.dart';
 import 'package:search_repo/application/state/page/page.dart';
@@ -26,7 +25,6 @@ class RefreshUsecase {
   /// 一連の流れをまとめて実施する
   Future<void> refresh() async {
     final isNetError = await Network.check();
-    debugPrint(isNetError.toString());
     if (isNetError) {
       repoNotifier.errorText();
     } else {

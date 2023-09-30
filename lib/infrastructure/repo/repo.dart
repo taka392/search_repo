@@ -22,8 +22,12 @@ class RepoImpl implements Repo {
   @override
   Future getRepo() async {
     final String sortState = change(sort);
+    String sortParams = "sort=$sortState";
+    if (sort == Sort.empty) {
+      sortParams = "";
+    }
     final apiUrl =
-        'https://api.github.com/search/repositories?q=$search&sort=$sortState&page=$page&per_page=20';
+        'https://api.github.com/search/repositories?q=$search&$sortParams&page=$page&per_page=20';
     final response = await httpClient.get(
       Uri.parse(apiUrl),
     );
@@ -43,8 +47,12 @@ class RepoImpl implements Repo {
     final int value = page;
     final int next = value + 1;
     final sortState = change(sort);
+    String sortParams = "sort=$sortState";
+    if (sort == Sort.empty) {
+      sortParams = "";
+    }
     final String apiUrl =
-        'https://api.github.com/search/repositories?q=$search&sort=$sortState&page=$next&per_page=20';
+        'https://api.github.com/search/repositories?q=$search&$sortParams&page=$next&per_page=20';
     debugPrint(apiUrl);
     final response = await httpClient.get(Uri.parse(apiUrl));
     if (response.statusCode == 200) {
@@ -102,8 +110,13 @@ class RepoImpl implements Repo {
 
   @override
   Future sortRepo(Sort data) async {
+    final String stringSort = change(data);
+    String sortParams = "sort=$stringSort";
+    if (data == Sort.empty) {
+      sortParams = "";
+    }
     final apiUrl =
-        'https://api.github.com/search/repositories?q=$search&sort=$data&page=$page&per_page=20';
+        'https://api.github.com/search/repositories?q=$search&$sortParams&page=$page&per_page=20';
     final response = await httpClient.get(
       Uri.parse(apiUrl),
     );
