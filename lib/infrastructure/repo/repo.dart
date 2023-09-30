@@ -21,12 +21,13 @@ class RepoImpl implements Repo {
 
   @override
   Future getRepo() async {
-    final Object sortValue = (sort == Sort.empty) ? "" : sort;
+    final String sortState = change(sort);
+    final apiUrl =
+        'https://api.github.com/search/repositories?q=$search&sort=$sortState&page=$page&per_page=20';
     final response = await httpClient.get(
-      Uri.parse(
-        'https://api.github.com/search/repositories?q=$search&sort=$sortValue&page=$page&per_page=20',
-      ),
+      Uri.parse(apiUrl),
     );
+    debugPrint(apiUrl);
     if (response.statusCode == 200) {
       final Map<String, dynamic> data =
           json.decode(response.body) as Map<String, dynamic>;
@@ -38,15 +39,14 @@ class RepoImpl implements Repo {
   }
 
   @override
-  Future addRepo() async {
-    final int nextPage = page + 1;
-    final Object sortValue = (sort == Sort.empty) ? "" : sort;
-    debugPrint(sortValue.toString());
-    final response = await httpClient.get(
-      Uri.parse(
-        'https://api.github.com/search/repositories?q=$search&sort=$sortValue&page=$nextPage&per_page=20',
-      ),
-    );
+  Future<RepoModel> addRepo() async {
+    final int value = page;
+    final int next = value + 1;
+    final sortState = change(sort);
+    final String apiUrl =
+        'https://api.github.com/search/repositories?q=$search&sort=$sortState&page=$next&per_page=20';
+    debugPrint(apiUrl);
+    final response = await httpClient.get(Uri.parse(apiUrl));
     if (response.statusCode == 200) {
       final Map<String, dynamic> data =
           json.decode(response.body) as Map<String, dynamic>;
@@ -60,11 +60,14 @@ class RepoImpl implements Repo {
   @override
   Future searchRepo(String text) async {
     const int initPage = 1;
+    final String apiUrl =
+        'https://api.github.com/search/repositories?q=$text&page=$initPage&per_page=20';
     final response = await httpClient.get(
       Uri.parse(
-        'https://api.github.com/search/repositories?q=$text&page=$initPage&per_page=20',
+        apiUrl,
       ),
     );
+    debugPrint(apiUrl);
     if (response.statusCode == 200) {
       final Map<String, dynamic> data =
           json.decode(response.body) as Map<String, dynamic>;
@@ -79,11 +82,14 @@ class RepoImpl implements Repo {
   Future refreshRepo() async {
     const int initPage = 1;
     const String initText = "stars:>0";
+    const String apiUrl =
+        'https://api.github.com/search/repositories?q=$initText&page=$initPage&per_page=20';
     final response = await httpClient.get(
       Uri.parse(
-        'https://api.github.com/search/repositories?q=$initText&page=$initPage&per_page=20',
+        apiUrl,
       ),
     );
+    debugPrint(apiUrl);
     if (response.statusCode == 200) {
       final Map<String, dynamic> data =
           json.decode(response.body) as Map<String, dynamic>;
@@ -96,11 +102,12 @@ class RepoImpl implements Repo {
 
   @override
   Future sortRepo(Sort data) async {
+    final apiUrl =
+        'https://api.github.com/search/repositories?q=$search&sort=$data&page=$page&per_page=20';
     final response = await httpClient.get(
-      Uri.parse(
-        'https://api.github.com/search/repositories?q=$search&sort=$data&page=$page&per_page=20',
-      ),
+      Uri.parse(apiUrl),
     );
+    debugPrint(apiUrl);
     if (response.statusCode == 200) {
       final Map<String, dynamic> data =
           json.decode(response.body) as Map<String, dynamic>;
