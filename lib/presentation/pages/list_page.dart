@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:search_repo/application/di/usecases.dart';
-import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
 import 'package:search_repo/presentation/widget/custom_animation.dart';
 import 'package:search_repo/presentation/widget/repo_list.dart';
@@ -21,7 +21,7 @@ class ListPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final locate = ref.watch(appLocalizationsProvider);
+    final l10n = AppLocalizations.of(context)!;
     final repoData = ref.watch(asyncValueProvider);
     return Scaffold(
       appBar: const SearchAppBar(),
@@ -31,9 +31,9 @@ class ListPage extends ConsumerWidget {
           if (e == "ネットワークエラー") {
             return CustomAnimation(
               imageUrl: 'assets/lottie/error.json',
-              text: locate.net_error,
-              description1: locate.net_error_description1,
-              description2: locate.net_error_description2,
+              text: l10n.net_error,
+              description1: l10n.net_error_description1,
+              description2: l10n.net_error_description2,
               onReload: () async {
                 final usecase = ref.read(refreshProvider);
                 usecase.refresh();
@@ -47,7 +47,7 @@ class ListPage extends ConsumerWidget {
             ///エラーの時の条件分岐
             return CustomAnimation(
               imageUrl: 'assets/lottie/error.json',
-              text: locate.error,
+              text: l10n.error,
               description1: "$e",
               description2: "$s",
               onReload: () async {
@@ -61,7 +61,7 @@ class ListPage extends ConsumerWidget {
         },
         loading: () => CustomAnimation(
           imageUrl: 'assets/lottie/loading.json',
-          text: locate.searching,
+          text: l10n.searching,
           onReload: () async {
             final usecase = ref.read(refreshProvider);
             usecase.refresh();
@@ -72,12 +72,12 @@ class ListPage extends ConsumerWidget {
           if (data.totalCount == 0) {
             return CustomAnimation(
               imageUrl: 'assets/lottie/not_found.json',
-              text: locate.noHit,
+              text: l10n.noHit,
               onReload: () async {
                 final usecase = ref.read(refreshProvider);
                 usecase.refresh();
               },
-              description1: locate.noHit_description,
+              description1: l10n.noHit_description,
               key: noHitKey,
             );
           } else {

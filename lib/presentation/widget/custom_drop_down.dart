@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/di/usecases.dart';
-import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
 import 'package:search_repo/application/state/scroll_controller.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/application/types/sort_enum.dart';
@@ -30,14 +30,14 @@ class CustomDropdown extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final sort = ref.watch(sortNotifierProvider);
-    final locate = ref.watch(appLocalizationsProvider);
     final scrollController = ref.watch(scrollProvider);
+    final l10n = AppLocalizations.of(context)!;
     final items = [
       DropdownMenuItem(
         key: stars,
         value: Sort.stars,
         child: Text(
-          locate.stars,
+          l10n.stars,
           style: CustomText.titleM,
         ),
       ),
@@ -45,7 +45,7 @@ class CustomDropdown extends ConsumerWidget {
         key: forks,
         value: Sort.forks,
         child: Text(
-          locate.forks,
+          l10n.stars,
           style: CustomText.titleM,
         ),
       ),
@@ -53,7 +53,7 @@ class CustomDropdown extends ConsumerWidget {
         key: help,
         value: Sort.helpWantedIssues,
         child: Text(
-          locate.help_wanted_issues,
+          l10n.help_wanted_issues,
           style: CustomText.titleM,
         ),
       ),
@@ -61,7 +61,7 @@ class CustomDropdown extends ConsumerWidget {
         key: update,
         value: Sort.updated,
         child: Text(
-          locate.updated,
+          l10n.updated,
           style: CustomText.titleM,
         ),
       ),
@@ -69,7 +69,7 @@ class CustomDropdown extends ConsumerWidget {
         key: empty,
         value: Sort.empty,
         child: Text(
-          locate.empty,
+          l10n.empty,
           style: CustomText.titleM,
         ),
       ),
