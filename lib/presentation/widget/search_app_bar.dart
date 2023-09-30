@@ -25,7 +25,6 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
     final textController = useTextEditingController();
     final locate = ref.watch(appLocalizationsProvider);
     final scrollController = ref.watch(scrollProvider);
-    final controller = ref.watch(scrollProvider);
     return AppBar(
       automaticallyImplyLeading: false,
       bottom: PreferredSize(

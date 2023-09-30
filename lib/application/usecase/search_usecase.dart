@@ -38,7 +38,6 @@ class SearchUsecase {
       //新しいrepoを取得
       if (data is RepoModel) {
         repoNotifier.save(data);
-        debugPrint(data.toString());
       }
       //SearchのStateを更新
       searchNotifier.update(text);
