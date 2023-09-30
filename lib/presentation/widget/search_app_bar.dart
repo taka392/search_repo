@@ -8,7 +8,9 @@ import 'package:search_repo/presentation/theme/fonts.dart';
 import 'package:tuple/tuple.dart';
 
 class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
-  const SearchAppBar({super.key});
+  const SearchAppBar({
+    super.key,
+  });
 
   @visibleForTesting
   static final textFormField = UniqueKey();
@@ -44,8 +46,10 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
                   icon: const Icon(
                     Icons.clear,
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     textController.clear();
+                    final usecase = ref.read(refreshProvider);
+                    await usecase.refresh();
                   },
                 ),
                 prefixIcon: const Icon(
