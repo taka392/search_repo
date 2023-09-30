@@ -1,5 +1,3 @@
-import 'dart:ui' as ui;
-
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -31,7 +29,7 @@ class App extends ConsumerWidget {
         Locale('en'), // English
         Locale('ja'), // 日本語
       ],
-      locale: const ui.Locale.fromSubtags(),
+      locale: DevicePreview.locale(context),
       //多言語対応のための記述
       theme: lightTheme,
       // ライト用テーマ
