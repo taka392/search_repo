@@ -4,7 +4,8 @@ class CustomTextWidget extends StatelessWidget {
   final String text;
   final TextStyle textStyle;
   final int? maxLine;
-  final double? maxWidth; // 追加: テキストの横幅を指定
+  final double? maxWidth;
+  final TextAlign? textAlign;
 
   const CustomTextWidget({
     super.key,
@@ -12,6 +13,7 @@ class CustomTextWidget extends StatelessWidget {
     required this.textStyle,
     this.maxLine,
     this.maxWidth,
+    this.textAlign = TextAlign.center,
   });
 
   @override
@@ -21,7 +23,7 @@ class CustomTextWidget extends StatelessWidget {
       style: textStyle,
       maxLines: maxLine,
       overflow: TextOverflow.ellipsis,
-      textAlign: TextAlign.center,
+      textAlign: textAlign,
     );
   }
 }

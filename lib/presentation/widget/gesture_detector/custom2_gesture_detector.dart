@@ -21,7 +21,7 @@ class Custom2GestureDetector extends StatelessWidget {
       child: ListTile(
         leading: CircleAvatar(
           radius: 40.0,
-          backgroundImage: NetworkImage(data.owner!.avatarUrl!),
+          backgroundImage: NetworkImage(data.owner.avatarUrl),
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +29,7 @@ class Custom2GestureDetector extends StatelessWidget {
             Row(
               children: [
                 CustomTextWidget(
-                  text: data.fullName!,
+                  text: data.fullName,
                   maxLine: 1,
                   textStyle: CustomText.titleMBold,
                 ),
@@ -56,9 +56,10 @@ class Custom2GestureDetector extends StatelessWidget {
               ],
             ),
             CustomTextWidget(
-              text: data.description!,
+              text: data.description,
               maxLine: 2,
               textStyle: CustomText.titleM,
+              textAlign: TextAlign.start,
             ),
           ],
         ),

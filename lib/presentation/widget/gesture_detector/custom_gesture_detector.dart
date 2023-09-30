@@ -35,9 +35,10 @@ class CustomGestureDetector extends StatelessWidget {
               height: 3,
             ),
             CustomTextWidget(
-              text: data.description!,
+              text: data.description,
               maxLine: 2,
               textStyle: CustomText.titleS,
+              textAlign: TextAlign.start,
             ),
             Container(
               height: 3,

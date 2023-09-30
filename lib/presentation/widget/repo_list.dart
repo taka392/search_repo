@@ -95,6 +95,8 @@ class RepoList extends ConsumerWidget {
                           },
                           key: elseKey,
                         );
+                } else if (index < 20) {
+                  return const SizedBox();
                 } else {
                   return const Center(
                     child: CupertinoActivityIndicator(
