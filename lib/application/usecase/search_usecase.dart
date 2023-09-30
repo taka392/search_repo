@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks, avoid_dynamic_calls
+
 import 'package:flutter/cupertino.dart';
 import 'package:search_repo/application/interfaces/repo.dart';
 import 'package:search_repo/application/logic/animation.dart';
@@ -27,24 +29,34 @@ class SearchUsecase {
 
   /// 一連の流れをまとめて実施する
   Future<void> search() async {
+    final data = await repo.searchRepo(text);
     //ネットワークの接続状況を確認
     final isNetError = await Network.check();
     if (isNetError) {
       repoNotifier.errorText();
     } else {
-      final data = await repo.searchRepo(text);
       //新しいrepoを取得
       if (data is RepoModel) {
         repoNotifier.save(data);
+        debugPrint(data.toString());
       }
       //SearchのStateを更新
       searchNotifier.update(text);
       //page番号を初期化
       pageNotifier.refresh();
-    }
-    //画面の1番上までスクロール
-    if (scrollController != null) {
-      await AnimationUtil.scroll(scrollController, 0);
+
+      //dataの値をチェック
+      const noFind = "totalCount: 0";
+      bool checkItemCount(String data, String keyword) {
+        return data.contains(keyword);
+      }
+
+      //ListViewにScrollControllerが入っているか判定。
+      final bool value = checkItemCount(data.toString(), noFind);
+      //画面の1番上までスクロール
+      if (scrollController != null && !value) {
+        await AnimationUtil.scroll(scrollController, 0);
+      }
     }
   }
 }

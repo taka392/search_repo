@@ -77,6 +77,7 @@ class ListPage extends ConsumerWidget {
                 final usecase = ref.read(refreshProvider);
                 usecase.refresh();
               },
+              description1: locate.noHit_description,
               key: noHitKey,
             );
           } else {
