@@ -29,7 +29,7 @@ class SortUsecase {
   /// 一連の流れをまとめて実施する
   Future<void> sort() async {
     //ネットワークの接続状況を確認
-    if (connectivity != ConnectivityResult.none) {
+    if (connectivity == ConnectivityResult.none) {
       repoNotifier.errorText();
     } else {
       //選択されたテキストで新しいリポジトリを取得

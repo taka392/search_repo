@@ -40,8 +40,6 @@ class ListPage extends ConsumerWidget {
                 usecase.refresh();
               },
               hasFloating: true,
-              error: "$e",
-              stackTrace: "$s",
               key: errorKey,
             );
           } else {

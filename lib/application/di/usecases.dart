@@ -6,15 +6,9 @@ import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
-import 'package:search_repo/application/types/sort_enum.dart';
-import 'package:search_repo/application/usecase/add_usecase.dart';
 import 'package:search_repo/application/usecase/refresh_usecase.dart';
-import 'package:search_repo/application/usecase/search_usecase.dart';
-import 'package:search_repo/application/usecase/sort_usecase.dart';
-import 'package:search_repo/application/usecase/test_usecase.dart';
-import 'package:tuple/tuple.dart';
 
-/// Add App
+/*/// Add App
 //画面一番下までスクロールした際に発火するリポジトリ追加取得用のUsecaseです。
 final loadMoreProvider =
     Provider.family<AddUsecase, ScrollController?>((ref, scrollController) {
@@ -29,9 +23,9 @@ final loadMoreProvider =
     pageNotifier: pageNotifier,
     connectivity: connectivity,
   );
-});
+});*/
 
-/// Search App
+/*/// Search App
 //検索用のUsecaseです。
 final searchProvider =
     Provider.family<SearchUsecase, Tuple2<String, ScrollController?>>(
@@ -42,7 +36,7 @@ final searchProvider =
     final repo = ref.watch(repositoryProvider);
     final repoNotifier = ref.watch(repoProvider.notifier);
     final pageNotifier = ref.watch(pageNotifierProvider.notifier);
-    final connectivity = ref.watch(checkConnectivity);
+    final connectivity = ref.watch(networkProvider);
     return SearchUsecase(
       repo: repo,
       text: text,
@@ -53,7 +47,7 @@ final searchProvider =
       connectivity: connectivity,
     );
   },
-);
+);*/
 
 /// Refresh App
 //リフレッシュ処理用のUsecaseです。
@@ -64,7 +58,7 @@ final refreshProvider = Provider<RefreshUsecase>(
     final sortNotifier = ref.watch(sortNotifierProvider.notifier);
     final pageNotifier = ref.watch(pageNotifierProvider.notifier);
     final repo = ref.watch(repositoryProvider);
-    final connectivity = ref.watch(checkConnectivity);
+    final connectivity = ref.watch(networkProvider);
     debugPrint(connectivity.toString());
     return RefreshUsecase(
       pageNotifier: pageNotifier,
@@ -77,6 +71,7 @@ final refreshProvider = Provider<RefreshUsecase>(
   },
 );
 
+/*
 /// Sort App
 //絞り込み用のUsecaseです。主にドロップダウンで使用します。
 final sortProvider =
@@ -119,3 +114,4 @@ final testProvider = Provider<TestUsecase>(
     );
   },
 );
+*/

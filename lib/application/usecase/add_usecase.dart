@@ -17,16 +17,16 @@ class AddUsecase {
 
   final Repo repo;
   final RepoNotifier repoNotifier;
-  final ConnectivityResult connectivity;
 
   //ListViewにセットしたScrollControllerのインスタンスを取得。
   final ScrollController? scrollController;
   final PageNotifier pageNotifier;
+  final ConnectivityResult connectivity;
 
   /// 一連の流れをまとめて実施する
   Future<void> add() async {
     //新しいリポジトリを取得
-    if (connectivity != ConnectivityResult.none) {
+    if (connectivity == ConnectivityResult.none) {
       repoNotifier.errorText();
     } else {
       final data = await repo.addRepo();

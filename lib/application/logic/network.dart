@@ -1,15 +1,21 @@
 import 'package:connectivity/connectivity.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final checkConnectivity = Provider<ConnectivityResult>((ref) {
-  final asyncValue = ref.watch(asyncConnectivity);
-  if (asyncValue.value != null) {
-    return asyncValue.value!;
-  }
-  return ConnectivityResult.none; // デフォルト値を設定（接続が確認できない場合）
+final networkProvider = Provider<Network>((ref) {
+  return Network();
 });
 
-final asyncConnectivity = FutureProvider<ConnectivityResult>((ref) async {
-  final connectivityResult = await Connectivity().checkConnectivity();
-  return connectivityResult;
-});
+class Network {
+  Future<bool> check() async {
+    final connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      debugPrint("ネットに接続失敗");
+      return true;
+    } else {
+      // ネットに接続されている時
+      debugPrint("ネットに接続成功");
+      return false;
+    }
+  }
+}

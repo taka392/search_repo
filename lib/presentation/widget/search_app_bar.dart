@@ -58,10 +58,10 @@ class SearchAppBar extends HookConsumerWidget implements PreferredSizeWidget {
                 hintText: l10n.hintText,
               ),
               onFieldSubmitted: (searchText) async {
-                final usecase = ref.watch(
+/*                final usecase = ref.watch(
                   searchProvider(Tuple2(searchText, scrollController)),
                 );
-                await usecase.search();
+                await usecase.search();*/
               },
             ),
           ),
