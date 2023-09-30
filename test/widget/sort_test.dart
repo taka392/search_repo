@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 import 'package:search_repo/application/state/http_client.dart';
-import 'package:http/http.dart' as http;
 import 'package:search_repo/presentation/widget/custom_drop_down.dart';
+
 import '../http_mocks.dart';
 import '../mock_data.dart';
 
@@ -18,7 +19,6 @@ void main() {
 
     // モッククライアントの設定
     when(mockClient.get(any)).thenAnswer((_) async => http.Response(data, 200));
-
 
     await tester.pumpWidget(
       ProviderScope(
@@ -39,10 +39,12 @@ void main() {
 
     //初期値がベストマッチになっているか。
     expect(
-        find.descendant(
-            of: find.byKey(CustomDropdown.dropDown),
-            matching: find.text("ベストマッチ")),
-        findsOneWidget);
+      find.descendant(
+        of: find.byKey(CustomDropdown.dropDown),
+        matching: find.text("ベストマッチ"),
+      ),
+      findsOneWidget,
+    );
 
     // ドロップダウンをタップ
     await tester.tap(dropDown);

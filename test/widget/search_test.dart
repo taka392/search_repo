@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 import 'package:search_repo/application/state/http_client.dart';
-import 'package:http/http.dart' as http;
 import 'package:search_repo/presentation/widget/search_app_bar.dart';
+
 import '../http_mocks.dart';
 import '../mock_data.dart';
 
