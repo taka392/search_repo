@@ -18,6 +18,7 @@ import '../../mock_data.dart';
 
 /// Usecaseのテスト
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   test('searchUsecaseのテスト', () async {
     //clientが呼ばれた時、ステータスコード200,の偽データをセット
     final client = MockClient();

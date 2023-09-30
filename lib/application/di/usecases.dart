@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:search_repo/application/di/repository.dart';
+import 'package:search_repo/application/logic/network.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
 import 'package:search_repo/application/state/search/search.dart';
@@ -15,16 +16,18 @@ import 'package:tuple/tuple.dart';
 
 /// Add App
 //画面一番下までスクロールした際に発火するリポジトリ追加取得用のUsecaseです。
-final addProvider =
+final loadMoreProvider =
     Provider.family<AddUsecase, ScrollController?>((ref, scrollController) {
   final pageNotifier = ref.watch(pageNotifierProvider.notifier);
   final repo = ref.watch(repositoryProvider);
   final repoNotifier = ref.watch(repoProvider.notifier);
+  final connectivity = ref.watch(checkConnectivity);
   return AddUsecase(
     repo: repo,
     repoNotifier: repoNotifier,
     scrollController: scrollController,
     pageNotifier: pageNotifier,
+    connectivity: connectivity,
   );
 });
 
@@ -39,6 +42,7 @@ final searchProvider =
     final repo = ref.watch(repositoryProvider);
     final repoNotifier = ref.watch(repoProvider.notifier);
     final pageNotifier = ref.watch(pageNotifierProvider.notifier);
+    final connectivity = ref.watch(checkConnectivity);
     return SearchUsecase(
       repo: repo,
       text: text,
@@ -46,6 +50,7 @@ final searchProvider =
       repoNotifier: repoNotifier,
       pageNotifier: pageNotifier,
       scrollController: scrollController,
+      connectivity: connectivity,
     );
   },
 );
@@ -59,12 +64,15 @@ final refreshProvider = Provider<RefreshUsecase>(
     final sortNotifier = ref.watch(sortNotifierProvider.notifier);
     final pageNotifier = ref.watch(pageNotifierProvider.notifier);
     final repo = ref.watch(repositoryProvider);
+    final connectivity = ref.watch(checkConnectivity);
+    debugPrint(connectivity.toString());
     return RefreshUsecase(
       pageNotifier: pageNotifier,
       repoNotifier: repoNotifier,
       searchNotifier: searchNotifier,
       sortNotifier: sortNotifier,
       repo: repo,
+      connectivity: connectivity,
     );
   },
 );
@@ -79,12 +87,14 @@ final sortProvider =
     final repoNotifier = ref.watch(repoProvider.notifier);
     final sortNotifier = ref.watch(sortNotifierProvider.notifier);
     final repo = ref.watch(repositoryProvider);
+    final connectivity = ref.watch(checkConnectivity);
     return SortUsecase(
       repoNotifier: repoNotifier,
       sortNotifier: sortNotifier,
       repo: repo,
       data: value,
       scrollController: scrollController,
+      connectivity: connectivity,
     );
   },
 );
@@ -98,12 +108,14 @@ final testProvider = Provider<TestUsecase>(
     final sortNotifier = ref.watch(sortNotifierProvider.notifier);
     final pageNotifier = ref.watch(pageNotifierProvider.notifier);
     final repo = ref.watch(repositoryProvider);
+    final connectivity = ref.watch(checkConnectivity);
     return TestUsecase(
       pageNotifier: pageNotifier,
       repoNotifier: repoNotifier,
       searchNotifier: searchNotifier,
       sortNotifier: sortNotifier,
       repo: repo,
+      connectivity: connectivity,
     );
   },
 );

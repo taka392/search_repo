@@ -38,7 +38,7 @@ void main() {
     testUsecase.test(result, 3, "Flutter", Sort.forks);
 
     //addUseCaseを実行
-    final addUseCase = container.read(addProvider(null));
+    final addUseCase = container.read(loadMoreProvider(null));
     await addUseCase.add();
 
     //Page番号が更新されているかのチェック

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
@@ -17,6 +18,7 @@ import '../../mock_data.dart';
 
 /// Usecaseのテスト
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   test('addUsecaseのテスト', () async {
     //clientが呼ばれた時、ステータスコード200,の偽データをセット
     final client = MockClient();
@@ -24,6 +26,11 @@ void main() {
     when(client.get(any)).thenAnswer((_) async => http.Response(data, 200));
     final Map<String, dynamic> map = json.decode(data) as Map<String, dynamic>;
     final RepoModel result = RepoModel.fromJson(map);
+
+    // モックの設定
+    final mockConnectivity = Connectivity();
+    when(mockConnectivity.checkConnectivity())
+        .thenAnswer((_) async => ConnectivityResult.mobile);
 
     //プロバイダーをオーバーライド
     final container = ProviderContainer(

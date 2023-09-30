@@ -14,7 +14,7 @@ final infiniteScrollProvider = Provider<ScrollController>((ref) {
     if (!isLoading.state &&
         controller.position.pixels == controller.position.maxScrollExtent) {
       isLoading.state = true;
-      final usecase = ref.read(addProvider(controller));
+      final usecase = ref.read(loadMoreProvider(controller));
       await usecase.add();
       isLoading.state = false;
     }

@@ -1,5 +1,6 @@
+import 'package:connectivity/connectivity.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:search_repo/application/interfaces/repo.dart';
-import 'package:search_repo/application/logic/network.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/application/state/search/search.dart';
@@ -14,6 +15,7 @@ class RefreshUsecase {
     required this.searchNotifier,
     required this.sortNotifier,
     required this.repo,
+    required this.connectivity,
   });
 
   final PageNotifier pageNotifier;
@@ -21,13 +23,14 @@ class RefreshUsecase {
   final SearchNotifier searchNotifier;
   final SortNotifier sortNotifier;
   final Repo repo;
+  final ConnectivityResult connectivity;
 
   /// 一連の流れをまとめて実施する
   Future<void> refresh() async {
-    final isNetError = await Network.check();
-    if (isNetError) {
+    if (connectivity != ConnectivityResult.none) {
       repoNotifier.errorText();
     } else {
+      debugPrint("dd");
       final data = await repo.refreshRepo();
       if (data is RepoModel) {
         repoNotifier.save(data);
