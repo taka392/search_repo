@@ -7,7 +7,11 @@
   "empty": "best match",
   "help_wanted_issues": "help wanted issues",
   "updated": "updated",
-  "searching": "searching.....",
-  "error": "an error has occurred.",
-  "noHit": "no hit repositories found"
+  "searching": "searching",
+  "net_error": "A network error has occurred",
+  "net_error_description1": "Please check the communication status",
+  "net_error_description2": "and press the reload button",
+  "error": "An error has occurred",
+  "noHit": "no hit repositories found",
+  "noHit_description": "Please change the search word and try again"
 }

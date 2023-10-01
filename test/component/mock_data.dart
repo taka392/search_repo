@@ -1,4 +1,4 @@
-class MockData{
+class MockData {
   static const String jsonMock = '''
   {
   "total_count": 573491,

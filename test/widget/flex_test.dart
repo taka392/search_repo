@@ -1,51 +1,51 @@
-import 'package:flutter_test/flutter_test.dart';
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mockito/mockito.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:search_repo/application/di/internet.dart';
 import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
 import 'package:search_repo/application/types/screen_size.dart';
-import 'package:search_repo/domain/types/repo/repo_model.dart';
+import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/pages/list_page.dart';
-import 'package:http/http.dart' as http;
 import 'package:search_repo/presentation/widget/repo_list.dart';
-import '../http_mocks.dart';
-import '../mock_data.dart';
+
+import '../component/http_mocks.dart';
+import '../component/interfaces/internet.dart';
+import '../component/test_widget.dart';
 
 ///ListPageで実装したレスポンシブデザインが適切に動作するかのテスト
 void main() {
-  testWidgets('フレックステスト', (WidgetTester tester) async {
-    const data = MockData.jsonMock;
+  testWidgets('レスポンシブのテスト', (WidgetTester tester) async {
     final mockClient = MockClient();
-    // 空文字を送信するとリクエストはせず、エラーメッセージを表示する
-    when(mockClient.get(any)).thenAnswer((_) async => http.Response(data, 200));
 
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [
-          httpClientProvider.overrideWithValue(mockClient),
-          watchRepoProvider.overrideWithValue(const AsyncData(RepoModel(
-            items: [],
-            totalCount: 0,
-          ))),
-        ],
-        child: const MaterialApp(
-          home: ListPage(),
-          // Other necessary configurations
+    final override1 = httpClientProvider.overrideWithValue(mockClient);
+    final override2 = internetProvider.overrideWithValue(FakeInternetImpl());
+    final override3 = asyncValueProvider.overrideWithValue(
+      const AsyncData(
+        RepoModel(
+          items: [],
+          totalCount: 0,
         ),
       ),
     );
-    await tester.pump();
-    await tester.pump();
-
-    ///スマホの場合とタブレット、デスクトップの場合で指定のWidgetが表示されているかの検証
-    // ignore: unrelated_type_equality_checks
+    const int status = 200;
+    const locale = Locale("ja");
+    const widget = ListPage();
+    final testWidget = TestWidget(
+      override1: override1,
+      override2: override2,
+      override3: override3,
+      status: status,
+      locale: locale,
+      widget: widget,
+    );
+    await testWidget.pumpWidget(tester);
     if (ScreenSizeClass.phone == 320) {
       await tester.pump();
       expect(find.byKey(RepoList.iphoneKey), findsOneWidget);
-      // ignore: unrelated_type_equality_checks
     } else if (ScreenSizeClass.tablet == 600 ||
-        // ignore: unrelated_type_equality_checks
         ScreenSizeClass.desktop == 1000) {
       await tester.pump();
       expect(find.byKey(RepoList.elseKey), findsOneWidget);

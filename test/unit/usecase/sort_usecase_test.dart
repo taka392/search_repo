@@ -1,33 +1,39 @@
 import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
+import 'package:search_repo/application/di/internet.dart';
 import 'package:search_repo/application/di/usecases.dart';
 import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
-import 'package:search_repo/domain/types/repo/repo_model.dart';
 import 'package:search_repo/application/types/sort_enum.dart';
+import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:tuple/tuple.dart';
-import '../../http_mocks.dart';
-import '../../mock_data.dart';
+
+import '../../component/http_mocks.dart';
+import '../../component/interfaces/internet.dart';
+import '../../component/mock_data.dart';
 
 /// Usecaseのテスト
 void main() {
-  testWidgets('addUsecaseのテスト', (WidgetTester tester) async {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  test('addUsecaseのテスト', () async {
     //clientが呼ばれた時、ステータスコード200,の偽データをセット
     final client = MockClient();
     const data = MockData.jsonMock;
     when(client.get(any)).thenAnswer((_) async => http.Response(data, 200));
-
-    final RepoModel result = RepoModel.fromJson(json.decode(data));
+    final Map<String, dynamic> map = json.decode(data) as Map<String, dynamic>;
+    final RepoModel result = RepoModel.fromJson(map);
 
     //プロバイダーをオーバーライド
     final container = ProviderContainer(
       overrides: [
         httpClientProvider.overrideWithValue(client),
+        internetProvider.overrideWithValue(FakeInternetImpl()),
       ],
     );
 
@@ -37,22 +43,19 @@ void main() {
 
     //sortUseCaseを実行
     final searchUseCase =
-        container.read(sortProvider((const Tuple2(Sort.stars, null))));
+        container.read(sortProvider(const Tuple2(Sort.stars, null)));
     await searchUseCase.sort();
 
     //Page番号が維持されてるかのテスト
-    int page = container.read(pageNotifierProvider);
-    await tester.pumpAndSettle();
+    final int page = container.read(pageNotifierProvider);
     expect(page, 3);
 
     //Searchが維持されているかのテスト
-    String search = container.read(searchNotifierProvider);
-    await tester.pumpAndSettle();
+    final String search = container.read(searchNotifierProvider);
     expect(search, "Flutter");
 
     //Sort番号が更新されているかのテスト
-    Sort sort = container.read(sortNotifierProvider);
-    await tester.pumpAndSettle();
+    final Sort sort = container.read(sortNotifierProvider);
     expect(sort, Sort.stars);
   });
 }

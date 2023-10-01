@@ -8,11 +8,13 @@ jobs:
     name: Check the source code
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2.3.0
+      - uses: actions/checkout@v2
+      - uses: kuhnroyal/flutter-fvm-config-action@v1
+        id: fvm-config-action
+      - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.13.2'
-          channel: "stable"
+          flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+          channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
       #freezedの生成
       - name: freezed
         run: flutter pub run build_runner build --delete-conflicting-outputs

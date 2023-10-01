@@ -43,10 +43,5 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-#fvmをgit管理下から除外
-.fvm/flutter_sdk
-.pubspec.lock
-
-#freezedを除外
-*.freezed.dart
 *.g.dart
+*.freezed.dart

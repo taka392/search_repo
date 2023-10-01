@@ -8,5 +8,4 @@ enum ScreenSizeClass {
 
   /// パソコン
   desktop,
-
 }

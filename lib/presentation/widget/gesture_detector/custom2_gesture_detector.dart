@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:search_repo/domain/types/item/item_model.dart';
+import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/theme/fonts.dart';
 import 'package:search_repo/presentation/widget/custom_text.dart';
 
@@ -25,10 +25,8 @@ class Custom2GestureDetector extends StatelessWidget {
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CustomTextWidget(
                   text: data.fullName,
@@ -61,6 +59,7 @@ class Custom2GestureDetector extends StatelessWidget {
               text: data.description,
               maxLine: 2,
               textStyle: CustomText.titleM,
+              textAlign: TextAlign.start,
             ),
           ],
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:search_repo/application/types/screen_size.dart';
+
 /// 画面サイズの設定値
 const screenProvider = ScreenProvider(
   designWidth: 390, // iPhone14の幅をデザイン基準にする
@@ -10,7 +11,6 @@ const screenProvider = ScreenProvider(
     ScreenSizeClass.desktop: 1000,
   },
 );
-
 
 /// Screen Data
 class Screen<SizeClass> {
@@ -60,17 +60,17 @@ class ScreenRef {
 
   /// ref.watch(provider)
   Screen<SizeClass> watch<SizeClass>(
-      ScreenProvider<SizeClass> provider,
-      ) {
+    ScreenProvider<SizeClass> provider,
+  ) {
     // 全ての画面サイズクラス (ブレークポイントが大きい順)
     final sizeClasses = provider.breakpoints.entries.toList();
     sizeClasses.sort(
-          (a, b) => b.value.compareTo(a.value),
+      (a, b) => b.value.compareTo(a.value),
     );
     final size = MediaQuery.of(context).size;
 
     final sizeClass = sizeClasses.firstWhere(
-          (it) => size.width > it.value,
+      (it) => size.width > it.value,
       orElse: () => throw 'unsupported screen size',
     );
     final ratioToDesignW = size.width / provider.designWidth;

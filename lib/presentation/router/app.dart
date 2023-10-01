@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/state/them_model.dart';
 import 'package:search_repo/presentation/router/go_router.dart';
-import 'package:search_repo/presentation/theme/them_data/dark_them.dart';
-import 'package:search_repo/presentation/theme/them_data/light_them.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:search_repo/presentation/theme/theme_data/dark_them.dart';
+import 'package:search_repo/presentation/theme/theme_data/light_them.dart';
 
 /// アプリ本体
 class App extends ConsumerWidget {
@@ -29,6 +29,7 @@ class App extends ConsumerWidget {
         Locale('en'), // English
         Locale('ja'), // 日本語
       ],
+      locale: DevicePreview.locale(context),
       //多言語対応のための記述
       theme: lightTheme,
       // ライト用テーマ

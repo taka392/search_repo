@@ -6,35 +6,42 @@ version: 1.0.0+1
 environment:
   sdk: '>=3.0.6 <4.0.0'
 dependencies:
-  freezed_annotation:
+  connectivity:
+  device_preview:
   flutter:
     sdk: flutter
   flutter_hooks:
-  flutter_riverpod:
-  http: ^1.1.0
-  riverpod_annotation: ^2.1.2
   flutter_localizations:
     sdk: flutter
-  intl:
-  lottie:
-  hooks_riverpod: ^2.3.8
-  device_preview:
+  flutter_riverpod:
+  freezed_annotation:
   go_router:
+  hooks_riverpod: ^2.3.8
+  http: ^1.1.0
+  intl:
+  json_annotation: ^4.8.1
+  json_serializable:
+  lottie:
+  riverpod_annotation: ^2.1.2
   shared_preferences:
   tuple:
   url_launcher:
+
+
 dev_dependencies:
+  build_runner: ^2.4.6
+  envied_generator:
   flutter_driver:
     sdk: flutter
-  freezed:
-  build_runner: ^2.4.6
-  json_serializable:
+  flutter_lints:
   flutter_test:
     sdk: flutter
-  flutter_lints:
-  riverpod_generator:
-  envied_generator:
+  freezed:
+  lint:
   mockito: ^5.4.2
+  riverpod_generator:
+
+
 
 
 flutter:

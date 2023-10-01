@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:search_repo/application/di/usecases.dart';
-import 'package:search_repo/application/state/l10n/applocalizatons_provider.dart';
-import 'package:search_repo/application/state/loading.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
-import 'package:search_repo/application/state/scroll_controller.dart';
 import 'package:search_repo/presentation/widget/custom_animation.dart';
 import 'package:search_repo/presentation/widget/repo_list.dart';
 import 'package:search_repo/presentation/widget/search_app_bar.dart';
 
-class ListPage extends HookConsumerWidget {
-  const ListPage({Key? key}) : super(key: key);
+class ListPage extends ConsumerWidget {
+  const ListPage({super.key});
 
   @visibleForTesting
   static final loadingKey = UniqueKey();
@@ -24,47 +21,46 @@ class ListPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final locate = ref.watch(appLocalizationsProvider);
-    final repoData = ref.watch(watchRepoProvider);
-    final controller = ref.watch(scrollProvider);
-    final isLoading = ref.watch(isLoadingProvider.notifier);
-
-    void scroll() async {
-      if (!isLoading.state &&
-          controller.position.pixels == controller.position.maxScrollExtent) {
-        isLoading.state=true;
-        final usecase = ref.read(addProvider(controller));
-        await usecase.add();
-        isLoading.state=false;
-      }
-    }
-
-    useEffect(() {
-      controller.addListener(scroll);
-      return () {
-        controller.removeListener(scroll);
-      };
-    }, []);
-
-
+    final l10n = AppLocalizations.of(context)!;
+    final repoData = ref.watch(asyncValueProvider);
     return Scaffold(
-      appBar: SearchAppBar(
-        scrollController: controller,
-      ),
+      appBar: const SearchAppBar(),
       body: repoData.when(
-        error: (e, s) => CustomAnimation(
-          imageUrl: 'assets/lottie/error.json',
-          text: locate.error,
-          onRefresh: () async {
-            final usecase = ref.read(refreshProvider);
-            usecase.refresh();
-          },
-          key: errorKey,
-        ),
+        error: (e, s) {
+          ///ネットワークエラーの時の条件分岐
+          if (e == "ネットワークエラー") {
+            return CustomAnimation(
+              imageUrl: 'assets/lottie/error.json',
+              text: l10n.net_error,
+              description1: l10n.net_error_description1,
+              description2: l10n.net_error_description2,
+              onReload: () async {
+                final usecase = ref.read(refreshProvider);
+                usecase.refresh();
+              },
+              hasFloating: true,
+              key: errorKey,
+            );
+          } else {
+            ///エラーの時の条件分岐
+            return CustomAnimation(
+              imageUrl: 'assets/lottie/error.json',
+              text: l10n.error,
+              description1: "$e",
+              description2: "$s",
+              onReload: () async {
+                final usecase = ref.read(refreshProvider);
+                usecase.refresh();
+              },
+              hasFloating: true,
+              key: errorKey,
+            );
+          }
+        },
         loading: () => CustomAnimation(
           imageUrl: 'assets/lottie/loading.json',
-          text: locate.searching,
-          onRefresh: () async {
+          text: l10n.searching,
+          onReload: () async {
             final usecase = ref.read(refreshProvider);
             usecase.refresh();
           },
@@ -74,11 +70,12 @@ class ListPage extends HookConsumerWidget {
           if (data.totalCount == 0) {
             return CustomAnimation(
               imageUrl: 'assets/lottie/not_found.json',
-              text: locate.noHit,
-              onRefresh: () async {
+              text: l10n.noHit,
+              onReload: () async {
                 final usecase = ref.read(refreshProvider);
                 usecase.refresh();
               },
+              description1: l10n.noHit_description,
               key: noHitKey,
             );
           } else {

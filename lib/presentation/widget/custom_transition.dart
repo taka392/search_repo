@@ -1,3 +1,5 @@
+// ignore_for_file: use_named_constants
+
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,6 +13,6 @@ CustomTransitionPage<T> buildTransitionPage<T>({
       return child;
     },
     //millisecondsを0にすることで、画面遷移のアニメーションを無効化
-    transitionDuration: const Duration(milliseconds: 0),
+    transitionDuration: const Duration(),
   );
 }
