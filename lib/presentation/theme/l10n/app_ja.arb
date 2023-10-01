@@ -1,0 +1,17 @@
+{
+  "@@locale": "ja",
+  "hintText": "リポジトリ名を入力してください",
+  "cases": "件",
+  "stars": "スター",
+  "forks": "フォーク",
+  "empty": "ベストマッチ",
+  "help_wanted_issues": "ヘルプが必要な問題数",
+  "updated": "更新日",
+  "searching": "検索中",
+  "net_error": "ネットワークエラーが発生しました。",
+  "net_error_description1": "通信状況を確認の上",
+  "net_error_description2": "リロードボタンを押してください",
+  "error": "エラーが発生しました。",
+  "noHit": "ヒットするリポジトリが見つかりませんでした",
+  "noHit_description": "検索ワードを変更してお試しください"
+}
