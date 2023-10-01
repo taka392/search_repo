@@ -5,27 +5,25 @@ import 'package:search_repo/application/state/them_model.dart';
 
 /// Themのテスト
 void main() {
-  group('Error,Loading,Emptyのテスト', () {
-    test('DarkThemテーマが反映されているかのテスト', () async {
-      const fakeThemeMode = ThemeMode.dark;
-      final container = ProviderContainer(
-        overrides: [
-          themeModeProvider.overrideWithValue(fakeThemeMode),
-        ],
-      );
-      final currentThemeMode = container.read(themeModeProvider);
-      expect(currentThemeMode, ThemeMode.dark);
-    });
+  test('DarkThemテーマが反映されているかのテスト', () async {
+    const fakeThemeMode = ThemeMode.dark;
+    final container = ProviderContainer(
+      overrides: [
+        themeModeProvider.overrideWithValue(fakeThemeMode),
+      ],
+    );
+    final currentThemeMode = container.read(themeModeProvider);
+    expect(currentThemeMode, ThemeMode.dark);
+  });
 
-    test('LightThemテーマが反映されているかのテスト', () async {
-      const fakeThemeMode = ThemeMode.light;
-      final container = ProviderContainer(
-        overrides: [
-          themeModeProvider.overrideWithValue(fakeThemeMode),
-        ],
-      );
-      final currentThemeMode = container.read(themeModeProvider);
-      expect(currentThemeMode, ThemeMode.light);
-    });
+  test('LightThemテーマが反映されているかのテスト', () async {
+    const fakeThemeMode = ThemeMode.light;
+    final container = ProviderContainer(
+      overrides: [
+        themeModeProvider.overrideWithValue(fakeThemeMode),
+      ],
+    );
+    final currentThemeMode = container.read(themeModeProvider);
+    expect(currentThemeMode, ThemeMode.light);
   });
 }

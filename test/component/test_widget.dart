@@ -13,6 +13,7 @@ class TestWidget {
   final Override? override1;
   final Override? override2;
   final Override? override3;
+  final MockClient? mockClient;
   final int status;
   final Locale locale;
   final Widget widget;
@@ -21,6 +22,7 @@ class TestWidget {
     this.override1,
     this.override2,
     this.override3,
+    this.mockClient,
     required this.status,
     required this.locale,
     required this.widget,
@@ -28,16 +30,18 @@ class TestWidget {
 
   Future<void> pumpWidget(WidgetTester tester) async {
     const data = MockData.jsonMock;
-    final mockClient = MockClient();
     //空文字を送信するとリクエストはせず、エラーメッセージを表示する
-    when(mockClient.get(any))
-        .thenAnswer((_) async => http.Response(data, status));
+
+    if (mockClient != null) {
+      when(mockClient!.get(any))
+          .thenAnswer((_) async => http.Response(data, status));
+    }
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          override1!,
-          override2!,
-          override3!,
+          if (override1 != null) override1!,
+          if (override2 != null) override2!,
+          if (override3 != null) override3!,
         ],
         child: MaterialApp(
           localizationsDelegates: const [
