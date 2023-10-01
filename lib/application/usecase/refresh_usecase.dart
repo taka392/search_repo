@@ -1,5 +1,5 @@
+import 'package:search_repo/application/interfaces/internet.dart';
 import 'package:search_repo/application/interfaces/repo.dart';
-import 'package:search_repo/application/logic/network.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_notifier.dart';
 import 'package:search_repo/application/state/search/search.dart';
@@ -22,12 +22,12 @@ class RefreshUsecase {
   final SearchNotifier searchNotifier;
   final SortNotifier sortNotifier;
   final Repo repo;
-  final Network connectivity;
+  final Internet connectivity;
 
   /// 一連の流れをまとめて実施する
   Future<void> refresh() async {
-    final checkNet = await connectivity.check();
-    if (checkNet) {
+    final bool isNetError = await connectivity.check();
+    if (isNetError) {
       repoNotifier.errorText();
     } else {
       final data = await repo.refreshRepo();

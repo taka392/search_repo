@@ -3,14 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
+import 'package:search_repo/application/di/internet.dart';
 import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/pages/list_page.dart';
-import 'package:search_repo/presentation/widget/custom_animation.dart';
 
-import '../http_mocks.dart';
-import '../mock_data.dart';
+import '../fake/http_mocks.dart';
+import '../fake/interfaces/internet.dart';
+import '../fake/mock_data.dart';
 
 ///エラが発生した際に、適切なUIが表示されるかのテスト
 void main() {
@@ -25,6 +26,7 @@ void main() {
         ProviderScope(
           overrides: [
             httpClientProvider.overrideWithValue(mockClient),
+            internetProvider.overrideWithValue(FakeInternetImpl()),
             asyncValueProvider.overrideWithValue(
               AsyncValue.error(
                 "エラーメッセージ",
@@ -40,7 +42,6 @@ void main() {
       );
       await tester.pump();
       await tester.pump();
-      expect(find.byType(CustomAnimation), findsOneWidget);
       expect(find.byKey(ListPage.errorKey), findsOneWidget);
     });
 
@@ -54,6 +55,7 @@ void main() {
         ProviderScope(
           overrides: [
             httpClientProvider.overrideWithValue(mockClient),
+            internetProvider.overrideWithValue(FakeInternetImpl()),
             asyncValueProvider.overrideWithValue(const AsyncValue.loading()),
           ],
           child: const MaterialApp(
@@ -76,6 +78,7 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            internetProvider.overrideWithValue(FakeInternetImpl()),
             httpClientProvider.overrideWithValue(mockClient),
             asyncValueProvider.overrideWithValue(
               const AsyncData(

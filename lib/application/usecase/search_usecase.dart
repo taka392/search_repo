@@ -1,7 +1,7 @@
 // ignore_for_file: unrelated_type_equality_checks, avoid_dynamic_calls
 
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:search_repo/application/interfaces/internet.dart';
 import 'package:search_repo/application/interfaces/repo.dart';
 import 'package:search_repo/application/logic/animation.dart';
 import 'package:search_repo/application/state/page/page.dart';
@@ -27,13 +27,14 @@ class SearchUsecase {
   final RepoNotifier repoNotifier;
   final PageNotifier pageNotifier;
   final ScrollController? scrollController;
-  final ConnectivityResult connectivity;
+  final Internet connectivity;
 
   /// 一連の流れをまとめて実施する
   Future<void> search() async {
     final data = await repo.searchRepo(text);
+    final bool isNetError = await connectivity.check();
     //ネットワークの接続状況を確認
-    if (connectivity != ConnectivityResult.none) {
+    if (isNetError) {
       repoNotifier.errorText();
     } else {
       //新しいrepoを取得

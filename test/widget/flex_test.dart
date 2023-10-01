@@ -10,8 +10,8 @@ import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/pages/list_page.dart';
 import 'package:search_repo/presentation/widget/repo_list.dart';
 
-import '../http_mocks.dart';
-import '../mock_data.dart';
+import '../fake/http_mocks.dart';
+import '../fake/mock_data.dart';
 
 ///ListPageで実装したレスポンシブデザインが適切に動作するかのテスト
 void main() {

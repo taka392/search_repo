@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:search_repo/application/state/infinite_scrolling.dart';
+import 'package:search_repo/application/state/l10n.dart';
 import 'package:search_repo/application/types/screen_size.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:search_repo/presentation/router/go_router.dart';
@@ -32,7 +32,7 @@ class RepoList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final screen = ScreenRef(context).watch(screenProvider);
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = ref.watch(appLocalizationsProvider(context));
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

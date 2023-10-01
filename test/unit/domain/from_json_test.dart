@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 
-import '../../mock_data.dart';
+import '../../fake/mock_data.dart';
 
 void main() {
   test('fromJsonの変換テスト', () async {

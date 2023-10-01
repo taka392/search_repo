@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
+import 'package:search_repo/application/di/internet.dart';
 import 'package:search_repo/application/di/usecases.dart';
 import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/application/state/page/page.dart';
@@ -13,8 +13,9 @@ import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/application/types/sort_enum.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 
-import '../../http_mocks.dart';
-import '../../mock_data.dart';
+import '../../fake/http_mocks.dart';
+import '../../fake/interfaces/internet.dart';
+import '../../fake/mock_data.dart';
 
 /// Usecaseのテスト
 void main() {
@@ -27,15 +28,11 @@ void main() {
     final Map<String, dynamic> map = json.decode(data) as Map<String, dynamic>;
     final RepoModel result = RepoModel.fromJson(map);
 
-    // モックの設定
-    final mockConnectivity = Connectivity();
-    when(mockConnectivity.checkConnectivity())
-        .thenAnswer((_) async => ConnectivityResult.mobile);
-
     //プロバイダーをオーバーライド
     final container = ProviderContainer(
       overrides: [
         httpClientProvider.overrideWithValue(client),
+        internetProvider.overrideWithValue(FakeInternetImpl()),
       ],
     );
 

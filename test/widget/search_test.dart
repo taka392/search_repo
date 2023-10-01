@@ -6,8 +6,8 @@ import 'package:mockito/mockito.dart';
 import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/presentation/widget/search_app_bar.dart';
 
-import '../http_mocks.dart';
-import '../mock_data.dart';
+import '../fake/http_mocks.dart';
+import '../fake/mock_data.dart';
 
 ///エラが発生した際に、適切なUIが表示されるかのテスト
 void main() {

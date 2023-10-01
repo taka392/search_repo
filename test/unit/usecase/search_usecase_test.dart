@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
+import 'package:search_repo/application/di/internet.dart';
 import 'package:search_repo/application/di/usecases.dart';
 import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/application/state/page/page.dart';
@@ -13,8 +14,9 @@ import 'package:search_repo/application/types/sort_enum.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 import 'package:tuple/tuple.dart';
 
-import '../../http_mocks.dart';
-import '../../mock_data.dart';
+import '../../fake/http_mocks.dart';
+import '../../fake/interfaces/internet.dart';
+import '../../fake/mock_data.dart';
 
 /// Usecaseのテスト
 void main() {
@@ -30,6 +32,7 @@ void main() {
     final container = ProviderContainer(
       overrides: [
         httpClientProvider.overrideWithValue(client),
+        internetProvider.overrideWithValue(FakeInternetImpl()),
       ],
     );
 

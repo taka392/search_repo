@@ -43,7 +43,7 @@ class RepoImpl implements Repo {
   }
 
   @override
-  Future<RepoModel> addRepo() async {
+  Future addRepo() async {
     final int value = page;
     final int next = value + 1;
     final sortState = change(sort);

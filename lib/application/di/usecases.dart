@@ -1,31 +1,37 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:search_repo/application/di/internet.dart';
 import 'package:search_repo/application/di/repository.dart';
-import 'package:search_repo/application/logic/network.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
 import 'package:search_repo/application/state/search/search.dart';
 import 'package:search_repo/application/state/sort/sort.dart';
+import 'package:search_repo/application/types/sort_enum.dart';
+import 'package:search_repo/application/usecase/load_more_usecase.dart';
 import 'package:search_repo/application/usecase/refresh_usecase.dart';
+import 'package:search_repo/application/usecase/search_usecase.dart';
+import 'package:search_repo/application/usecase/sort_usecase.dart';
+import 'package:search_repo/application/usecase/test_usecase.dart';
+import 'package:tuple/tuple.dart';
 
-/*/// Add App
+/// loadMore App
 //画面一番下までスクロールした際に発火するリポジトリ追加取得用のUsecaseです。
-final loadMoreProvider =
-    Provider.family<AddUsecase, ScrollController?>((ref, scrollController) {
+final loadMoreProvider = Provider.family<LoadMoreUsecase, ScrollController?>(
+    (ref, scrollController) {
   final pageNotifier = ref.watch(pageNotifierProvider.notifier);
   final repo = ref.watch(repositoryProvider);
   final repoNotifier = ref.watch(repoProvider.notifier);
-  final connectivity = ref.watch(checkConnectivity);
-  return AddUsecase(
+  final connectivity = ref.watch(internetProvider);
+  return LoadMoreUsecase(
     repo: repo,
     repoNotifier: repoNotifier,
     scrollController: scrollController,
     pageNotifier: pageNotifier,
     connectivity: connectivity,
   );
-});*/
+});
 
-/*/// Search App
+/// Search App
 //検索用のUsecaseです。
 final searchProvider =
     Provider.family<SearchUsecase, Tuple2<String, ScrollController?>>(
@@ -36,7 +42,7 @@ final searchProvider =
     final repo = ref.watch(repositoryProvider);
     final repoNotifier = ref.watch(repoProvider.notifier);
     final pageNotifier = ref.watch(pageNotifierProvider.notifier);
-    final connectivity = ref.watch(networkProvider);
+    final connectivity = ref.watch(internetProvider);
     return SearchUsecase(
       repo: repo,
       text: text,
@@ -47,7 +53,7 @@ final searchProvider =
       connectivity: connectivity,
     );
   },
-);*/
+);
 
 /// Refresh App
 //リフレッシュ処理用のUsecaseです。
@@ -58,8 +64,7 @@ final refreshProvider = Provider<RefreshUsecase>(
     final sortNotifier = ref.watch(sortNotifierProvider.notifier);
     final pageNotifier = ref.watch(pageNotifierProvider.notifier);
     final repo = ref.watch(repositoryProvider);
-    final connectivity = ref.watch(networkProvider);
-    debugPrint(connectivity.toString());
+    final connectivity = ref.watch(internetProvider);
     return RefreshUsecase(
       pageNotifier: pageNotifier,
       repoNotifier: repoNotifier,
@@ -71,7 +76,6 @@ final refreshProvider = Provider<RefreshUsecase>(
   },
 );
 
-/*
 /// Sort App
 //絞り込み用のUsecaseです。主にドロップダウンで使用します。
 final sortProvider =
@@ -82,7 +86,7 @@ final sortProvider =
     final repoNotifier = ref.watch(repoProvider.notifier);
     final sortNotifier = ref.watch(sortNotifierProvider.notifier);
     final repo = ref.watch(repositoryProvider);
-    final connectivity = ref.watch(checkConnectivity);
+    final connectivity = ref.watch(internetProvider);
     return SortUsecase(
       repoNotifier: repoNotifier,
       sortNotifier: sortNotifier,
@@ -103,7 +107,7 @@ final testProvider = Provider<TestUsecase>(
     final sortNotifier = ref.watch(sortNotifierProvider.notifier);
     final pageNotifier = ref.watch(pageNotifierProvider.notifier);
     final repo = ref.watch(repositoryProvider);
-    final connectivity = ref.watch(checkConnectivity);
+    final connectivity = ref.watch(internetProvider);
     return TestUsecase(
       pageNotifier: pageNotifier,
       repoNotifier: repoNotifier,
@@ -114,4 +118,3 @@ final testProvider = Provider<TestUsecase>(
     );
   },
 );
-*/

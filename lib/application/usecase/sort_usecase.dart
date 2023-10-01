@@ -1,5 +1,5 @@
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:search_repo/application/interfaces/internet.dart';
 import 'package:search_repo/application/interfaces/repo.dart';
 import 'package:search_repo/application/logic/animation.dart';
 import 'package:search_repo/application/state/repo/repo_notifier.dart';
@@ -24,12 +24,13 @@ class SortUsecase {
   final RepoNotifier repoNotifier;
   final Sort data;
   final ScrollController? scrollController;
-  final ConnectivityResult connectivity;
+  final Internet connectivity;
 
   /// 一連の流れをまとめて実施する
   Future<void> sort() async {
+    final bool isNetError = await connectivity.check();
     //ネットワークの接続状況を確認
-    if (connectivity == ConnectivityResult.none) {
+    if (isNetError) {
       repoNotifier.errorText();
     } else {
       //選択されたテキストで新しいリポジトリを取得

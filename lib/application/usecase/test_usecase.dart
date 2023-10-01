@@ -1,5 +1,5 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
-import 'package:connectivity/connectivity.dart';
+import 'package:search_repo/application/interfaces/internet.dart';
 import 'package:search_repo/application/interfaces/repo.dart';
 import 'package:search_repo/application/state/page/page.dart';
 import 'package:search_repo/application/state/repo/repo_notifier.dart';
@@ -23,11 +23,12 @@ class TestUsecase {
   final SearchNotifier searchNotifier;
   final SortNotifier sortNotifier;
   final Repo repo;
-  final ConnectivityResult connectivity;
+  final Internet connectivity;
 
   /// 一連の流れをまとめて実施する
   Future<void> test(RepoModel data, int page, String search, Sort sort) async {
-    if (connectivity != ConnectivityResult.none) {
+    final bool isNetError = await connectivity.check();
+    if (isNetError) {
       repoNotifier.errorText();
     } else {
       //テスト時にMockデータを代入し、stateに保存する。
