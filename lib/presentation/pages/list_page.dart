@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:search_repo/application/di/usecases.dart';
-import 'package:search_repo/application/state/l10n.dart';
 import 'package:search_repo/application/state/repo/repo_provider.dart';
 import 'package:search_repo/presentation/widget/custom_animation.dart';
 import 'package:search_repo/presentation/widget/repo_list.dart';
@@ -21,7 +21,7 @@ class ListPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(appLocalizationsProvider(context));
+    final l10n = AppLocalizations.of(context)!;
     final repoData = ref.watch(asyncValueProvider);
     return Scaffold(
       appBar: const SearchAppBar(),

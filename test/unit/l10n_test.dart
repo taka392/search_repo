@@ -8,8 +8,8 @@ import 'package:mockito/mockito.dart';
 import 'package:search_repo/application/state/http_client.dart';
 import 'package:search_repo/presentation/pages/init_page.dart';
 
-import '../fake/http_mocks.dart';
-import '../fake/mock_data.dart';
+import '../component/http_mocks.dart';
+import '../component/mock_data.dart';
 
 //
 void main() {

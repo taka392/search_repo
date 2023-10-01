@@ -13,9 +13,9 @@ import 'package:search_repo/application/state/sort/sort.dart';
 import 'package:search_repo/application/types/sort_enum.dart';
 import 'package:search_repo/domain/types/repo_model.dart';
 
-import '../../fake/http_mocks.dart';
-import '../../fake/interfaces/internet.dart';
-import '../../fake/mock_data.dart';
+import '../../component/http_mocks.dart';
+import '../../component/interfaces/internet.dart';
+import '../../component/mock_data.dart';
 
 /// Usecaseのテスト
 void main() {
